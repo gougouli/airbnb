@@ -6,8 +6,10 @@ use App\AccomodationList;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-$router = new App\Router($_GET['url']);
-
+$url = $_GET['url'];
+$url = explode("/",trim($url, "/"));
+$page = isset($url['0']) ? $url['0'] : "/";
+$parameter = isset($url['1']) ? $url['1'] : "";
 
 $loader = new FilesystemLoader('../App/views/page/');
 $twig = new Environment($loader, [
@@ -16,23 +18,14 @@ $twig = new Environment($loader, [
 
 $accomodationList = new AccomodationList();
 
-$router->get("/", function() use ($accomodationList, $twig) {
-    echo $twig->render("home.twig", [
-        "accomodations_top" => $accomodationList->getTop(10),
-        "accomodations_random" => $accomodationList->getRandom(10)
-
-    ]);
-});
-
-
-$router->get("/login", function() use ($twig) {
-    echo $twig->render("login.twig", [
+if($page == "login"){
+    echo $twig->render("login.twig",[
         "errors" => getErrors(),
-        "valuefield" => getFieldsValue()
+        "values" => getFieldsValue()
     ]);
-});
-
-$router->get("/register", function() use ($twig) {
-    echo $twig->render("register.twig");
-});
-$router->run();
+}elseif($page == "register"){
+    echo $twig->render("register.twig",[
+        "errors" => getErrors(),
+        "values" => getFieldsValue()
+    ]);
+}
