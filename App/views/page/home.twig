@@ -1,0 +1,74 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sacado - Accueil{% endblock %}
+
+{% block css%}
+     <link rel="stylesheet" href="/css/home.css">
+{% endblock %}
+
+{% block nav %}
+{% if session.email %}
+     <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
+     <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
+     <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/reserve">Reserver un séjour</a></li>
+{% else %}
+     <li><a class="nav-item nav-link" href="/host" class="modal-js">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/reserve">Reserver un séjour</a></li>
+     <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
+     <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
+{% endif %}
+{% if session.email %}
+     <li><a class="nav-item nav-link" href="/logout">Se déconnecter</a></li>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="js/carousel.js" charset="utf-8"></script>
+<script src="js/home.js" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+     <div class="container">
+          <div class="row mb-5 mt-5 ">
+               <div class="col-md-12 bg-light p-3 rounded">
+                    <form>
+                         <div class="form-row">
+                              <div class="col">
+                                   <label for="place">Où</label>
+                                   <input type="text" id="place" class="form-control" placeholder="Partout">
+                              </div>
+                              <div class="col">
+                                   <label for="from">Arrivée</label>
+                                   <input type="date" id="from" class="form-control" placeholder="First name">
+                              </div>
+                              <div class="col">
+                                   <label for="to">Retour</label>
+                                   <input type="date" id="to" class="form-control" placeholder="Last name">
+                              </div>
+                              <div class="col">
+                                   <label for="people">Voyageurs</label>
+                                   <input type="number" id="people" class="form-control" placeholder="Last name">
+                              </div>
+                              <div class="col">
+                                   <label style="opacity: 0;"for="">.</label>
+                                   <input type="submit"  class="form-control" placeholder="Last name">
+                              </div>
+                         </div>
+                    </form>
+               </div>
+          </div>
+          <div class="row">
+          {% for accomodation in accomodations_random %}
+               <figure class="accomodation-item">
+                    <a href="/reserve/{{ accomodation.link }}">
+                         <img src="img/house-5.jpg" alt="" class="border border-white ">
+                         <figcaption class="info">
+                              <h6>{{ accomodation.place }} - {{ accomodation.price }}€ / nuit</h6>
+                         </figcaption>
+                    </a>
+               </figure>
+          {% endfor %}
+          </div>
+     </div>
+{% endblock %}

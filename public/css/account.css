@@ -1,0 +1,60 @@
+textarea {resize: none;width: 550px;height: 150px;word-break: break-all;}
+label {font-size:22px;}
+img {margin: 0;width: 100px;}
+p {word-break: break-all;}
+nav {position: absolute;}
+body {background: url('../img/background3.jpg');display: flex;flex-direction: column;}
+footer {position: relative;bottom:-150px;width: 100%}
+.inv {background-color: rgb(0,0,0,0);border: 0;display: inherit;}
+
+.account {background-size: cover;background-attachment: fixed;padding-top: 100px;}
+
+.account figure {margin: 0;}
+.account .top {color:white;width: 100%;left:0;display: flex;justify-content: space-between;}
+.account .top .profil {margin-top: 40px;margin-left: 100px;width: 200px;box-sizing: border-box;display: flex;flex-direction: column;align-items: center;}
+.account .top .profil .picture img {width: 140px;border-radius: 70px;}
+.account .top .profil label {margin: 20px 0 ;}
+.account .top .settings {display: flex;justify-content: center;margin-right: 200px;font-size: 19px;display: flex;flex-direction: column;}
+.account .top .info-user {display: flex;align-items: center;}
+.account .top .username {display: flex;flex-direction: column;text-align: center;margin-right: 5px;}
+.account .top .username label {margin: 0;}
+
+.account .top input {margin-top: 5px;font-size: 17px;}
+
+
+.account .bottom {background-color: #24232B;margin-top:30px;display: flex;justify-content: space-between;padding: 10px 30px;color:white;font-family: 'Alata';}
+
+.account .bottom .info {padding: 50px 50px;width: 30%;margin: 50px 0 0 100px;}
+.account .bottom .info .item {display: flex;justify-content: space-between;}
+.account .bottom .info p {word-break: keep-all;padding-left: 20px;}
+
+.account .bottom .acco {width: 530px;}
+.account .bottom .acco .title {margin: 0 10px;display: flex;align-items: center;justify-content: space-between;}
+.account .bottom .acco .title h3 {margin: 0 0 5px 0;;}
+.account .bottom .acco .list .item {display: flex;flex-wrap: wrap;justify-content: center;}
+.account .bottom .acco .list .item img {width: 250px;border-radius: 10px;margin: 5px;transition: all 0.2s;}
+.account .bottom .acco .list .item a:hover img {filter: brightness(0.7);}
+.account .bottom .acco .list .item figcaption {text-align: center;padding: 0;color:white;}
+.account .bottom .acco .list .move {display: flex;justify-content: center;}
+.account .bottom .acco .list .move .circle {margin: 0 5px;height: 16px;width: 16px;background-color: white;border-radius: 8px;}
+.account .bottom .acco .list .move .circle:hover {background-color: red;}
+.account .edit-button {width: 100%;display: flex;justify-content: center;align-items: center;margin: 25px 0;}
+.account .edit-button button {font-size: 18px;border: solid 1px rgb(0, 59, 92);background-color: white;color:rgb(0, 59, 92);padding: 10px 20px;border-radius: 12px;cursor: pointer;}
+.account .edit-button button:hover {color:white;border-color:white;background-color: rgb(0, 59, 92);}
+.account .edit-button button:focus {outline: none;border-color:orange;}
+
+.edit-button {display: flex;flex-direction: column;}
+.state_message {opacity: 0;border-radius: 10px;padding: 5 10px;border: solid 1px black;margin: 10px 0 ;}
+
+@media all and (max-width: 1200px){
+     .account .top {flex-direction: column;align-items: center;margin: 20px 0;}
+     .account .top .profil, .account .top .settings {margin:0;text-align: center;}
+     .account .top .settings > * {margin: 5px 0;}
+     .account .bottom .acco {width: 100%;}
+     .account .bottom {flex-direction: column;margin:0;}
+     .account .bottom .info {padding: 0;width: 100%;margin:0;}
+     .account .bottom .acco .list .item img {width: 100%;}
+     .account .bottom .info .item {display: none;}
+     .account .bottom .info p {padding:0;}
+     textarea {resize: none;width: 100%;height: 150px;word-break: break-all;}
+}

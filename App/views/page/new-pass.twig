@@ -1,0 +1,50 @@
+{% extends "../default.twig" %}
+{% block title %}Sacado - Mot de passe oublié{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/new-pass.css">
+{% endblock %}
+
+{% block content %}
+<main>
+     <aside class="modal" id="new-pass" role="dialog" style="opacity:1">
+          <div class="modal-wrapper js-modal-stop">
+               <div class="modal-body">
+                    <div class="close">
+                         <!--<a href="#" class="js-modal-close"><i class="fas fa-times"></i></a>-->
+                    </div>
+                    <section class="left">
+                         <section class="title">
+                              <i class="fas fa-user fa-5x"></i>
+                              <h2>Nouveau mot de passe</h2>
+                         </section>
+                         <form class="form-new-pass form-log" method="post">
+                              <input type="hidden" id="token" value="{{ token }}">
+                              <fieldset class="input_field password">
+                                   <label>Mot de passe</label>
+                                   <input type="password" id="pass3"><button class="show-password"><i class="fas fa-eye"></i></button>
+                              </fieldset>
+                              <fieldset class="input_field repassword">
+                                   <label>Mot de passe à confirmer</label>
+                                   <input type="password" id="repass3"><button class="show-password"><i class="fas fa-eye"></i></button>
+                              </fieldset>
+                              <fieldset class="input_field submit">
+                                   <button style="width:250px;" type="submit">Modifier le mot de passe</button>
+                              </fieldset>
+                              <p class="state_message">0</p>
+
+                         </form>
+                    </section>
+                    <section class="right">
+                         <div class="cover">
+                              <h3>Vous n'avez pas de <br>compte ?</h3>
+                              <h4>Alors ne perdez pas une seconde, retournez sur la page d'accueil pour vous inscrire !</h4>
+                              <a class="register-adjust" href="/home">Page d'accueil</a>
+                         </div>
+                    </section>
+               </div>
+          </div>
+     </aside>
+</main>
+{% endblock %}

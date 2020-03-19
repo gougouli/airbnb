@@ -1,0 +1,49 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sacado - Réserver un séjour{% endblock %}
+
+{% block css%}
+<link rel="stylesheet" href="/css/reserve.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+{% endblock %}
+
+{% block nav %}
+<li><a href="/">Accueil</a></li>
+
+{% if session.email %}
+     <li><a href="account">Mon compte</a></li>
+     <li><a href="/myreserve">Mes réservations</a></li>
+     <li><a href="host">Devenir hote</a></li>
+{% else %}
+     <li><a href="#login" class="modal-js">Devenez Hote</a></li>
+     <li><a href="#login" class="modal-js">Connexion</a></li>
+     <li><a href="#register" class="modal-js">Inscription</a></li>
+{% endif %}
+{% if session.email %}
+<li><a href="/logout">Se déconnecter</a></li>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<script src="/js/maps.js" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+<main>
+     <div class="left">
+          <div class="filter">
+
+          </div>
+          <div class="item-list">
+
+          </div>
+     </div>
+     <div class="right">
+          <div id="map"></div>
+          <div class="info">
+
+          </div>
+     </div>
+</main>
+{% endblock %}

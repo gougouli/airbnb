@@ -1,0 +1,26 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sacado - Mes Réservations{% endblock %}
+
+{% block css%}{% endblock %}
+
+{% block nav %}
+<li><a href="/">Accueil</a></li>
+<li><a href="/account">Mon compte</a></li>
+<li><a href="/host">Devenez Hote</a></li>
+<li><a href="/reserve">Reserver un séjour</a></li>
+<li><a href="/logout">Se déconnecter</a></li>
+{% endblock %}
+
+{% block scripts %}{% endblock %}
+
+
+
+{% block content %}
+
+{% for reserve in reserves %}
+     {{ reserve.start_date }}
+     {{ loop.index	 }}
+{% endfor %}
+
+{% endblock %}
