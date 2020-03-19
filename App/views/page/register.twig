@@ -24,33 +24,39 @@
                         <i class="fas fa-user fa-5x"></i>
                         <h2>Création de votre compte</h2>
                     </section>
-                    <form class="form-register form-log" method="post">
+                    <form class="form-register form-log" action="" method="post">
                         <div class="username">
                             <fieldset class="input_field lname">
                                 <label>Nom</label>
-                                <input type="text" id="lname">
+                                <input type="text" id="lname" name="lname" value="{{ values.lname }}">
                             </fieldset>
                             <fieldset class="input_field fname">
                                 <label>Prénom</label>
-                                <input type="text" id="fname">
+                                <input type="text" id="fname" name="fname" value="{{ values.fname }}">
                             </fieldset>
                         </div>
                         <fieldset class="input_field email">
                             <label>Email</label>
-                            <input type="text" id="email">
+                            <input type="text" id="email" name="email" value="{{ values.email }}">
                         </fieldset>
                         <fieldset class="input_field password">
                             <label>Mot de passe</label>
-                            <input type="password" id="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
+                            <input type="password" id="pass" name="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
                         </fieldset>
                         <fieldset class="input_field repassword">
                             <label>Mot de passe à confirmer</label>
-                            <input type="password" id="repass"><button class="show-password"><i class="fas fa-eye"></i></button>
+                            <input type="password" id="repass" name="repass"><button class="show-password"><i class="fas fa-eye"></i></button>
                         </fieldset>
                         <fieldset class="input_field submit">
                             <button type="submit">S'inscrire</button>
                         </fieldset>
-                        <p class="state_message">0</p>
+                        {% if errors %}
+                            <div class="alert alert-danger">
+                                {% for error in errors %}
+                                    <li>Erreur: {{ error }}</li>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </form>
                 </section>
                 <section class="right">

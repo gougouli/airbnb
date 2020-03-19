@@ -1,18 +1,23 @@
 <?php
-
 use App\Mysql;
 
-function getErrors(){
-    if(isset($_SESSION['errors'])){
-        $errors =$_SESSION['errors'];
-        unset($_SESSION['errors']);
+
+function token($length) {
+    $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+    return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
+}
+function getMessage($type){
+    if(isset($_SESSION[$type])){
+        $errors = $_SESSION[$type];
+        $_SESSION[$type] = [];
         return $errors;
     }
     return FALSE;
 }
 
+
 function getFieldsValue(){
-    if(isset($_POST)){
+    if(!empty($_POST)){
         $values =$_POST;
         //unset($_POST);
         return $values;
