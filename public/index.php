@@ -87,7 +87,7 @@ elseif($page == "account"){
             "accomodations_personnal" => $accomodationList->getTop(6),
             "errors" => getMessage("errors"),
             "success" => getMessage("success"),
-            "session" => $_SESSION
+            "info" => getInfoUser($_SESSION['id'])
         ]);
     }else{
         header('Location: /');
