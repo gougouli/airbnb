@@ -24,7 +24,7 @@ nav {
 .modal-wrapper .loader_form {margin-left: 10px;width: 20px;animation: show 0.5s;display: none;}
 .modal-wrapper fieldset {padding:0;}
 input[type="text"],input[type="email"] {font-family: Arial;}
-
+p{margin-bottom: 0;}
 @keyframes show {from {opacity: 0;} to {opacity: 1;}}
 @keyframes hide {from {opacity: 1;} to {opacity: 0;}}
 
@@ -41,8 +41,8 @@ fieldset {border: none;padding:0;}
 .form-log .input_field textarea {resize: none;border:solid 2px rgb(0, 59, 92);height: 150px;}
 
 .form-log .submit, .form-log .keep {display: flex;align-items: center;width: auto;}
-.form-log .submit input[type="submit"] {height: 40px;margin:0;border-radius: 30px;border:solid 1px white;font-size: 17px;letter-spacing: 2px;font-family:Staatliches;color:white;padding: 10px 15px;width: 150px;transition: all 0.3s;background-color: rgba(0, 59, 92);}
-.form-log .submit input[type="submit"]:hover {border-color: rgba(0, 59, 92);cursor: pointer;background-color: white;color:rgba(0, 59, 92);}
+.form-log .submit input[type="submit"] {height: 40px;margin:0;border-radius: 30px;border:solid 1px white;font-size: 17px;letter-spacing: 2px;font-family:Staatliches;color:white;padding: 10px 15px;transition: all 0.3s;background-color: rgba(0, 59, 92);}
+.form-log .submit input[type="submit"]:hover {border-color: rgb(0, 59, 92);cursor: pointer;background-color: white;color:rgba(0, 59, 92);}
 .form-log .submit input[type="submit"]:focus {outline: none;}
 .form-log .keep {margin-top: 20px;display: block;}
 .form-log .keep input {width: 20px;}

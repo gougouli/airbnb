@@ -80,7 +80,11 @@ elseif($page == "logout"){
         header('Location: /');
     }
 }
-//====================== Partie Connexion / Incription / Deconnexion ======================
+//====================== FIN Partie Connexion / Incription / Deconnexion ======================
+
+
+
+//====================== DEBUT Partie ACCOUNT ======================
 elseif($page == "account"){
     if(isConnected()) {
         echo $twig->render("account.twig",[
@@ -92,9 +96,30 @@ elseif($page == "account"){
         header('Location: /');
     }
 }
+//====================== FIN Partie ACCOUNT ======================
 
 
+//====================== DEBUT Partie FORGOT PASS ======================
 
+elseif($page == "forgot-pass"){
+    if(!isConnected()) {
+        if(!empty($_POST['email'])){
+            $email = $_POST['email'];
+            forgotpass($email);
+        }
+        echo $twig->render("forgot-pass.twig",[
+            "errors" => getMessage("errors")
+        ]);
+
+    }else{
+        header('Location: /');
+    }
+}
+
+//====================== fin Partie FORGOT PASS ======================
+
+
+//====================== DEBUT Partie ACCUEIL ======================
 else{
     echo $twig->render("home.twig",[
         "accomodations_random" => $accomodationList->getRandom(10),
@@ -104,3 +129,4 @@ else{
         "session" => $_SESSION
     ]);
 }
+//====================== FIN Partie ACCUEIL ======================
