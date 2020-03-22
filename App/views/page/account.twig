@@ -19,6 +19,19 @@
 
 {% block content %}
 <div class="account">
+     <div class="container">
+          <div class="row">
+               {% if success %}
+                    <div class="alert alert-success col-12 text-center">
+                         {% for message in success %}
+                              <p>{{ message }}</p>
+                         {% endfor %}
+                    </div>
+               {% endif %}
+
+          </div>
+     </div>
+
      <form class="form-custom-info" method="post">
           <section class="top">
                <section class="profil">
@@ -64,7 +77,7 @@
                     </div>
                     <div class="list">
                          <div class="item">
-                              {% for acco in acco_perso|slice(0, 4) %}
+                              {% for acco in accomodations_personnal %}
                                    <a href="{{ acco.link }}">
                                         <figure>
                                              <img src="img/house-1.jpg" alt="">
@@ -74,10 +87,7 @@
                               {% endfor %}
                          </div>
                          <div class="move">
-                              {% for i in 1..(loop_size / 4) | round %}
-                                   <button id="{{ i }}" type="button" class="circle" name="button"></button>
-                              {% endfor %}
-                         </div>
+
                     </div>
                </section>
           </section>

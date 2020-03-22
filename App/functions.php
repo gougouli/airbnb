@@ -27,5 +27,25 @@ function getFieldsValue(){
 function validate($id): void{
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    $db->query("UPDATE user SET `isActive` = 1 WHERE `id` = '$id'");
+    $stmt = $db->prepare("UPDATE user SET isActive = 1 WHERE id = ?");
+    $stmt->execute([$id]);
+}
+function getAccomodationByUser($id){
+    $mysql = new Mysql();
+    $db = $mysql->dbConnect();
+    $stmt = $db->prepare("SELECT * FROM accomodation WHERE id_seller = ?");
+    $stmt->execute([$id]);
+    //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getInfoUser($id){
+    $mysql = new Mysql();
+    $db = $mysql->dbConnect();
+    $stmt = $db->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->execute([$id]);
+    $info = $stmt->fetch(PDO::FETCH_ASSOC);
+    $info['accomodation'] = getAccomodationByUser($id);
+    //var_dump($info);
+    return $info;
 }
