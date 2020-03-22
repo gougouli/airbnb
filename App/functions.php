@@ -15,7 +15,6 @@ function getMessage($type){
     return FALSE;
 }
 
-
 function getFieldsValue(){
     if(!empty($_POST)){
         $values =$_POST;

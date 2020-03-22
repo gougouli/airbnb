@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block nav %}
-{% if session.email %}
+{% if session.state %}
      <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
      <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
      <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
@@ -18,7 +18,7 @@
      <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
      <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
 {% endif %}
-{% if session.email %}
+{% if session.state %}
      <li><a class="nav-item nav-link" href="/logout">Se déconnecter</a></li>
 {% endif %}
 {% endblock %}
@@ -29,30 +29,37 @@
 {% endblock %}
 
 {% block content %}
+
      <div class="container">
           <div class="row mb-5 mt-5 ">
+               {% if success %}
+                    <div class="alert alert-success col-12 text-center">
+                         {% for message in success %}
+                              <p>{{ message }}</p>
+                         {% endfor %}
+                    </div>
+               {% endif %}
+               {% if errors %}
+                    <div class="alert alert-danger col-12 text-center">
+                         {% for message in errors %}
+                              <p>{{ message }}</p>
+                         {% endfor %}
+                    </div>
+               {% endif %}
                <div class="col-md-12 bg-light p-3 rounded">
-                    <form>
+                    <form method="get">
                          <div class="form-row">
-                              <div class="col-md-3 col-sm-12">
+                              <div class="col-md-5 col-sm-12">
                                    <label for="place">Où</label>
                                    <input type="text" id="place" class="form-control" placeholder="Partout">
                               </div>
-                              <div class="col-md-2 col-sm-3">
-                                   <label for="from">Arrivée</label>
-                                   <input type="date" id="from" class="form-control">
-                              </div>
-                              <div class="col-md-2 col-sm-3">
-                                   <label for="to">Retour</label>
-                                   <input type="date" id="to" class="form-control">
-                              </div>
-                              <div class="col-md-3 col-sm-3">
+                              <div class="col-md-5 col-sm-3">
                                    <label for="people">Voyageurs</label>
-                                   <input type="number" id="people" class="form-control" placeholder="Nombres de personnes" min="0">
+                                   <input type="number" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
                               </div>
                               <div class="col-md-2 col-sm-12">
                                    <label style="opacity: 0;"for="">.</label>
-                                   <input type="submit"  class="form-control" placeholder="Last name">
+                                   <button type="submit"  class="btn btn-success form-control" placeholder="Last name"><i class="fas fa-search"></i>  Rechercher </button>
                               </div>
                          </div>
                     </form>

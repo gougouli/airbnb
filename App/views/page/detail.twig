@@ -6,7 +6,7 @@
 
 {% block nav %}
 <li><a href="/">Accueil</a></li>
-{% if session.email %}
+{% if session.state %}
      <li><a href="/account">Mon compte</a></li>
      <li><a href="/myreserve">Mes réservations</a></li>
      <li><a href="/host">Devenir hote</a></li>
@@ -17,7 +17,7 @@
      <li><a href="#login" class="modal-js">Connexion</a></li>
      <li><a href="#register" class="modal-js">Inscription</a></li>
 {% endif %}
-{% if session.email %}
+{% if session.state %}
      <li><a href="/logout">Se déconnecter</a></li>
 {% endif %}
 {% endblock %}

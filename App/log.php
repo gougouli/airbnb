@@ -2,10 +2,12 @@
 
 use App\Mysql;
 
-function exist($email, $pass): int{
+function exist($email, $pass, $hash=1): int{
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    $pass = sha1($pass);
+    if($hash){
+        $pass = sha1($pass);
+    }
     $req = $db->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
     $req->execute([$email, $pass]);
     if($req->rowCount() == 1){
@@ -36,21 +38,33 @@ function getInfo($id){
 }
 
 function isConnected(): int{
-    if($_SESSION['state'] == "connected"){
+    if(isset($_SESSION['state']) && $_SESSION['state'] == "connected"){
         return 1;
     }
     return 0;
 }
 
-function connect(array $data, int $id): void{
+function disconnect(){
+    $_SESSION = [];
+    setcookie("email","");
+    setcookie("password","");
+    $_SESSION['success'] = [];
+    $_SESSION['success'][] = "Vous vous êtes bien déconnecté !";
+    header('Location: /');
+}
+function connect(array $data, int $id, $hash = 1): void{
     if(!isConnected()){
         $email = $data[0];
-        $pass = sha1($data[1]);
+        $pass = $data[1];
+        if($hash){
+            $pass = sha1($data[1]);
+        }
         if($data[2]){
             setcookie("email", $email, time() + 3600, '/');
             setcookie("password", $pass, time() + 3600, '/');
         }
         $_SESSION['state'] = "connected";
+        $_SESSION['success'][] = "Vous etes bien connecté !";
         $_SESSION['id'] = $id;
         header("Location:/account");
 
