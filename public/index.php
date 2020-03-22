@@ -82,7 +82,6 @@ elseif($page == "logout"){
 }
 //====================== Partie Connexion / Incription / Deconnexion ======================
 elseif($page == "account"){
-    //$_SESSION['success'] = ["youpi"];
     if(isConnected()) {
         echo $twig->render("account.twig",[
             "accomodations_personnal" => $accomodationList->getTop(6),
