@@ -84,7 +84,6 @@ elseif($page == "logout"){
 elseif($page == "account"){
     if(isConnected()) {
         echo $twig->render("account.twig",[
-            "accomodations_personnal" => $accomodationList->getTop(6),
             "errors" => getMessage("errors"),
             "success" => getMessage("success"),
             "info" => getInfoUser($_SESSION['id'])
