@@ -58,10 +58,11 @@ if(!empty($_POST)){
 //            echo "ok";
 //
 //        }else{
-            echo "coords"; var_dump($coords); echo "<br>";
-            echo "step1: ";var_dump($step1); echo "<br>";
-            echo "place_id: ";var_dump($place_id) ; echo "<br>";
-            echo "request: ";var_dump($request);  echo "<br>";
+//            echo $id_seller;
+//            echo "coords"; var_dump($coords); echo "<br>";
+//            echo "step1: ";var_dump($step1); echo "<br>";
+//            echo "place_id: ";var_dump($place_id) ; echo "<br>";
+//            echo "request: ";var_dump($request);  echo "<br>";
 
 //        }
     }else{$_SESSION['errors'][] = "votre mot de passe est incorrect !";return;}

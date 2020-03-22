@@ -58,6 +58,9 @@ function newAdress($country, $city, $address, $sub_address, $zip,$lat,$long){
     $req->execute([$country, $city, $address, $sub_address, $zip, $lat, $long]);
     return $req;
 }
+
+
+
 function getPlaceId($lat, $lon){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
@@ -92,8 +95,7 @@ function newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$
 
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    $req = $db->prepare("INSERT INTO place (title, content, size, id_seller, animal, handicap, breakfast, dinner, 
-                        single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $req = $db->prepare("INSERT INTO accomodation (title, content, size, id_seller, animal, handicap, breakfast, dinner, single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
     return $req;
 }
