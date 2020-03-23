@@ -3,10 +3,13 @@ main {border: solid 1px gray; border-radius: 15px;margin:15px 40px;box-shadow: 2
 main .left {border-right: 1px solid gray;width: 60%;display: flex;flex-direction: column;}
 main .left .filter {border-radius: 15px 0 0 0;border-bottom: 1px solid gray;height: 150px;width: 100%;}
 main .left .item-list {border-radius:  0 0 0 15px;height: 85%;width: 100%;box-sizing: border-box;}
-main .left .item-list .item {display: flex;background-color: red;margin: 5px 5px 10px 5px;padding: 5px 2px;}
-main .left .item-list .item .picture {border:solid 1px white; display: flex;align-items: center;}
-main .left .item-list .item .picture img {max-width: 200px;max-height: 250px;}
-main .left .item-list .item .text {margin: 5px;}
+main .left .item-list .item {background-color: gray; display: flex;margin: 5px 5px 10px 5px;padding: 5px 10px;border-radius: 5px;}
+main .left .item-list .item .picture { display: flex;align-items: center;}
+main .left .item-list .item .picture img {border:solid 1px white;max-width: 200px;max-height: 250px;}
+main .left .item-list .item .text {width:100%;margin: 5px;}
+main .left .item-list .item .text .price{width:100%;display: flex;justify-content: space-between;}
+main .left .item-list .item .text .desc{width: 80%;word-break: break-all;}
+main .left .item-list .item .text .button-link {width: 100%;margin-top: 10px;}
 
 main .right {display: flex;flex-direction: column;width: 40%;}
 main .right #map {width: 100%;height: 100%;border-bottom: 1px solid gray;}
