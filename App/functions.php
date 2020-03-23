@@ -38,6 +38,14 @@ function getAccomodationByUser($id){
     //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+function getAccomodationById($id){
+    $mysql = new Mysql();
+    $db = $mysql->dbConnect();
+    $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
+    $stmt->execute([$id]);
+    //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
 function getInfoUser($id, $acco = 1){
     $mysql = new Mysql();
