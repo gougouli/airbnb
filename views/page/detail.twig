@@ -25,54 +25,57 @@
 <div class="container">
      <div class="row mb-50 mt-50 col-12">
           <div class="card col-12">
-               <h1 class="card-title, text-center"> Hébergement </h1>
+               <h1 class="card-title, text-center"> {{acco.title}} </h1>
                <div class="col grosse-image">
                     <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">
-                    </div>
+               </div>
                </br>
                <div class="container">
                     <div class="row align-items-start">
                          <div class="col">
                               <img class="card-img-top1" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
+                              <div class="col">
+                                   <img class="card-img-top2" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
                                    <div class="col">
-                                        <img class="card-img-top2" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
-                                        <div class="col">
-                                             <img class="card-img-top3" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
-                                        </div>
+                                        <img class="card-img-top3" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
+                                   </div>
                                    <div class="card-body">
-                                   <div class="content">
-                                   <p class="font-weight-bold"> France - Lyon - 69007
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary float-right">Reserver</button> 
-</div>
-<p> Adresse : 16 chemin des ouillères </p>
-                         <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-    <h2 class="card-title">Description</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> </li>
-    <li class="list-group-item">
-    <h2 class="card-title">Sur place</h2>
-    <p>Heure d'arrivée :</p>
-    <p>Heure de départ :</p>
-    <p>Nombre de lit(s) :</p>
-    <p>Lit(s) simple(s) :</p>
-    <p>Lit(s) double(s) :</p>
-    </li>
-    <li class="list-group-item">
-    <h2 class="card-title">Points fort</h2>
-    <p>Animal :</p>
-    <p>Accès handicapé :</p>
-    <p>Petit déjeuner :</p>
-    <p>Diner :</p>
-    </li>
-    <li class="list-group-item">
-    <h2 class="card-title">L'hébergeur</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </li>
-  </ul>
+                                        <div class="content">
+                                             <p class="font-weight-bold"> {{acco.place.country}} - {{acco.place.city}} - {{acco.place.zip}} </p>
+                                             <button id="singlebutton" name="singlebutton" class="btn btn-primary float-right">Reserver</button> 
+                                        </div>
+                                        <p> {{acco.place.address}} </p>
+                                        <ul class="list-group list-group-flush">
+                                             <li class="list-group-item">
+                                                  <h2 class="card-title">Description</h2>
+                                                  <p> {{acco.content}} </p> 
+                                             </li>
+                                             <li class="list-group-item">
+                                                  <h2 class="card-title">Sur place</h2>
+                                                  <p>Heure d'arrivée : {{acco.hour_start}} </p>
+                                                  <p>Heure de départ : {{acco.hour_end}} </p>
+                                                  <p>Nombre de lit(s) : {{acco.size}} </p>
+                                                  <p>Lit(s) simple(s) : {{acco.single_bed}} </p>
+                                                  <p>Lit(s) double(s) : {{acco.double_bed}} </p>
+                                             </li>
+                                             <li class="list-group-item">
+                                                  <h2 class="card-title">Points fort</h2>
+                                                  <p>Animal : {% if acco.animal == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                  <p>Accès handicapé : {% if acco.handicap == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                  <p>Petit déjeuner : {% if acco.breakfast == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                  <p>Diner : {% if acco.dinner == 1 %} Oui {% else %} Non {% endif %} </p>
+                                             </li>
+                                             <li class="list-group-item">
+                                                  <h2 class="card-title">L'hébergeur</h2>
+                                                  <p> {{userinfo.fullname}} </p>
+                                                  <p> {{userinfo.email}} </p>
+                                                  <p> {{userinfo.bio}} </p>
+                                             </li>
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div>
                     </div>
                </div>
-          </div>
-     </div>
-</div>
 
 {% endblock %}
