@@ -1,0 +1,58 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sacado - Mot de passe oublié{% endblock %}
+
+{% block css%}<link rel="stylesheet" href="/css/form.css">{% endblock %}
+
+{% block nav %}
+    <li><a href="/">Accueil</a></li>
+    <li><a href="/host">Devenez Hote</a></li>
+    <li><a href="/reserve">Reserver un séjour</a></li>
+    <li><a href="/login">Connexion</a></li>
+    <li><a href="/register">Inscription</a></li>
+{% endblock %}
+
+
+{% block scripts %}
+    {#    <script src="js/account.js" charset="utf-8"></script>#}
+    {#    <script src="js/scroll.js" charset="utf-8"></script>#}
+{% endblock %}
+
+{% block content %}
+<div class="modal-log" id="forgot-pass" role="dialog" >
+    <div class="modal-wrapper" >
+        <div class="modal-body">
+            <section class="left">
+                <section class="title">
+                    <i class="fas fa-user fa-5x"></i>
+                    <h2>Mot de passe oublié</h2>
+                </section>
+                <form class="form-forgot-pass form-log" method="post">
+                    <fieldset class="input_field email">
+                        <label>Email</label>
+                        <input type="email" name="email" id="email">
+                    </fieldset>
+                    <fieldset class="input_field submit">
+                        <input type="submit" value="Envoyer l'email de récupération">
+                    </fieldset>
+                    <a class="sub_text" href="/login">Se connecter ? </a>
+                    {% if errors %}
+                        <div class="alert text-center alert-danger">
+                            {% for error in errors %}
+                                <p>Erreur: {{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </form>
+            </section>
+            <section class="right">
+                <div class="cover">
+                    <h3>Vous n'avez pas de compte ?</h3>
+                    <h4>Alors ne perdez pas une seconde, inscrivez-vous !</h4>
+                    <a class="register-adjust" href="/register">S'inscrire</a>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
