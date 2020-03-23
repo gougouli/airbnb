@@ -43,15 +43,22 @@ class AccomodationList{
     public function getByPlace($place){
         $mysql = new Mysql();
         $db = $mysql->dbConnect();
-        $req = $db->prepare("SELECT * FROM accomodation WHERE city = ?");
+        $req = $db->prepare("SELECT * FROM accomodation WHERE id_place IN (SELECT id FROM place WHERE city = ?)");
         $req->execute([$place]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
     function getByPeople($people){
         $mysql = new Mysql();
         $db = $mysql->dbConnect();
-        $req = $db->prepare("SELECT * FROM accomodation WHERE id IN (SELECT id FROM accomodation WHERE size >= $people ) ");
+        $req = $db->prepare("SELECT * FROM accomodation WHERE size >= ?");
         $req->execute([$people]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getByPlacePeople($where, $people){
+        $mysql = new Mysql();
+        $db = $mysql->dbConnect();
+        $req = $db->prepare("SELECT * FROM accomodation WHERE size >= ? INTERSECT SELECT * FROM accomodation WHERE id_place IN (SELECT id FROM place WHERE city = ?)");
+        $req->execute([$people, $where]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 }

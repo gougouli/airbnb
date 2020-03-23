@@ -46,15 +46,15 @@
                     </div>
                {% endif %}
                <div class="col-md-12 bg-light p-3 rounded">
-                    <form method="get">
+                    <form method="get" action="/list-detail">
                          <div class="form-row">
                               <div class="col-md-5 col-sm-12">
                                    <label for="place">Où</label>
-                                   <input type="text" id="place" class="form-control" placeholder="Partout">
+                                   <input type="text" name="pl" id="place" class="form-control" placeholder="Partout">
                               </div>
                               <div class="col-md-5 col-sm-3">
                                    <label for="people">Voyageurs</label>
-                                   <input type="number" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
+                                   <input type="number" name="pe" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
                               </div>
                               <div class="col-md-2 col-sm-12">
                                    <label style="opacity: 0;"for="">.</label>
