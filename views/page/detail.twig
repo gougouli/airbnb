@@ -1,24 +1,23 @@
 {% extends "../default.twig" %}
 
-{% block title %}Sacado - Hébergements{% endblock %}
+{% block title %}Sakado - Hébergements{% endblock %}
 
-{% block css%}<link rel="stylesheet" href="css/detail.css">{% endblock %}
+{% block css%}<link rel="stylesheet" href="/css/detail.css">{% endblock %}
 
 {% block nav %}
-<li><a href="/">Accueil</a></li>
 {% if session.state %}
-     <li><a href="/account">Mon compte</a></li>
-     <li><a href="/myreserve">Mes réservations</a></li>
-     <li><a href="/host">Devenir hote</a></li>
-     <li><a href="/list-detail">Reserver un séjour</a></li>
+     <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
+     <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
+     <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
 {% else %}
-     <li><a href="/login" >Devenez Hote</a></li>
-     <li><a href="/list-detail">Reserver un séjour</a></li>
-     <li><a href="/login">Connexion</a></li>
-     <li><a href="/register">Inscription</a></li>
+     <li><a class="nav-item nav-link" href="/host" class="modal-js">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+     <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
+     <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
 {% endif %}
 {% if session.state %}
-     <li><a href="/logout">Se déconnecter</a></li>
+     <li><a class="nav-item nav-link" href="/logout">Se déconnecter</a></li>
 {% endif %}
 {% endblock %}
 
@@ -27,24 +26,25 @@
      <div class="row mb-50 mt-50 col-12">
           <div class="card col-12">
                <h1 class="card-title, text-center"> Hébergement </h1>
-               <div class="col">
+               <div class="col grosse-image">
                     <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">
                     </div>
                </br>
                <div class="container">
                     <div class="row align-items-start">
                          <div class="col">
-                              <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
+                              <img class="card-img-top1" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
                                    <div class="col">
-                                        <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
+                                        <img class="card-img-top2" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
                                         <div class="col">
-                                             <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
+                                             <img class="card-img-top3" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">    </div>
                                         </div>
                                    <div class="card-body">
                                    <div class="content">
                                    <p class="font-weight-bold"> France - Lyon - 69007
     <button id="singlebutton" name="singlebutton" class="btn btn-primary float-right">Reserver</button> 
 </div>
+<p> Adresse : 16 chemin des ouillères </p>
                          <ul class="list-group list-group-flush">
     <li class="list-group-item">
     <h2 class="card-title">Description</h2>
