@@ -6,3 +6,5 @@ width: auto;
     display: flex;
     justify-content: center;
 }
+.sub_text {color: gray;font-size: 13px;}
+.Row {display: flex;}

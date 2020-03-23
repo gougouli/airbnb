@@ -5,6 +5,7 @@
 {% block css%}<link rel="stylesheet" href="/css/detail.css">{% endblock %}
 
 {% block nav %}
+     <li><a class="nav-item nav-link" href="/">Accueil</a></li>
 {% if session.state %}
      <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
      <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
@@ -51,25 +52,31 @@
                                                   <p> {{acco.content}} </p> 
                                              </li>
                                              <li class="list-group-item">
-                                                  <h2 class="card-title">Sur place</h2>
-                                                  <p>Heure d'arrivée : {{acco.hour_start}} </p>
-                                                  <p>Heure de départ : {{acco.hour_end}} </p>
-                                                  <p>Nombre de lit(s) : {{acco.size}} </p>
-                                                  <p>Lit(s) simple(s) : {{acco.single_bed}} </p>
-                                                  <p>Lit(s) double(s) : {{acco.double_bed}} </p>
+                                                  <h2 class="card-title">Sur place <span class="sub_text">Ce que nous proposons</span></h2>
+
+                                                  <div class="row">
+
+                                                       <div class="col-md-6">
+                                                            <p>Heure d'arrivée : {{acco.hour_start}} </p>
+                                                            <p>Heure de départ : {{acco.hour_end}} </p>
+                                                            <p>Nombre de lit(s) : {{acco.size}} </p>
+                                                            <p>Lit(s) simple(s) : {{acco.single_bed}} </p>
+                                                            <p>Lit(s) double(s) : {{acco.double_bed}} </p>
+                                                       </div>
+                                                       <div class="col-md-6">
+                                                            <p>Animal : {% if acco.animal == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                            <p>Accès handicapé : {% if acco.handicap == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                            <p>Petit déjeuner : {% if acco.breakfast == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                            <p>Diner : {% if acco.dinner == 1 %} Oui {% else %} Non {% endif %} </p>
+                                                       </div>
+                                                  </div>
+
                                              </li>
                                              <li class="list-group-item">
-                                                  <h2 class="card-title">Points fort</h2>
-                                                  <p>Animal : {% if acco.animal == 1 %} Oui {% else %} Non {% endif %}</p>
-                                                  <p>Accès handicapé : {% if acco.handicap == 1 %} Oui {% else %} Non {% endif %}</p>
-                                                  <p>Petit déjeuner : {% if acco.breakfast == 1 %} Oui {% else %} Non {% endif %}</p>
-                                                  <p>Diner : {% if acco.dinner == 1 %} Oui {% else %} Non {% endif %} </p>
-                                             </li>
-                                             <li class="list-group-item">
-                                                  <h2 class="card-title">L'hébergeur</h2>
-                                                  <p> {{userinfo.fullname}} </p>
-                                                  <p> {{userinfo.email}} </p>
-                                                  <p> {{userinfo.bio}} </p>
+                                                  <h2 class="card-title">L'hébergeur <span class="sub_text">Informations personnelles</span></h2>
+                                                  <p>Identité: {{userinfo.fullname}} </p>
+                                                  <p>Email: {{userinfo.email}} </p>
+                                                  <p>Description personnel:s {{userinfo.bio}} </p>
                                              </li>
                                         </ul>
                                    </div>
