@@ -29,13 +29,6 @@ function exist($email, $pass, $hash=1): int{
     }
     return 0;
 }
-function getInfo($id){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
-    $req = $db->prepare("SELECT * FROM user WHERE id = ?");
-    $req->execute([$id]);
-    return $req->fetchAll(PDO::FETCH_ASSOC);
-}
 
 function isConnected(): int{
     if(isset($_SESSION['state']) && $_SESSION['state'] == "connected"){

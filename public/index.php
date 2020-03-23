@@ -13,7 +13,7 @@ use Twig\Loader\FilesystemLoader;
 $url = $_GET['url'];
 $url = explode("/",trim($url, "/"));
 $page = isset($url['0']) ? $url['0'] : "/";
-$parameter = isset($url['1']) ? $url['1'] : "";
+$parameter = isset($url['1']) ? $url['1'] : FALSE;
 
 $loader = new FilesystemLoader('../App/views/page/');
 $twig = new Environment($loader, [
@@ -117,6 +117,24 @@ elseif($page == "forgot-pass"){
 
 //====================== fin Partie FORGOT PASS ======================
 
+//====================== DEBUT Partie NEW PASS ======================
+//http://localhost/new-pass/'.urlencode($id).'
+
+elseif($page == "new-pass"){
+    if(!isConnected() && $parameter) {
+        if(!empty($_POST['pass']) && !empty($_POST['repass'])){
+
+            $pass = $_POST['pass'];
+            $repass = $_POST['repass'];
+            $id = $_POST['idtoken'];
+            newpass($id, $pass,$repass);
+        }
+        echo $twig->render("new-pass.twig",[
+            "errors" => getMessage("errors"),
+            "id" => $parameter
+        ]);
+
+
 //====================== DEBUT Partie HOST ======================
 elseif($page == "host"){
     if(isConnected()) {
@@ -128,10 +146,11 @@ elseif($page == "host"){
         header('Location: /');
     }
 }
-//====================== FIN Partie HOST ======================
+
+//====================== fin Partie HOST ======================
 
 //====================== DEBUT Partie ACCUEIL ======================
->
+
 else{
     echo $twig->render("home.twig",[
         "accomodations_random" => $accomodationList->getRandom(10),

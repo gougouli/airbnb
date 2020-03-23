@@ -39,13 +39,15 @@ function getAccomodationByUser($id){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getInfoUser($id){
+function getInfoUser($id, $acco = 1){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
     $stmt = $db->prepare("SELECT * FROM user WHERE id = ?");
     $stmt->execute([$id]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
-    $info['accomodation'] = getAccomodationByUser($id);
+    if($acco){
+        $info['accomodation'] = getAccomodationByUser($id);
+    }
     //var_dump($info);
     return $info;
 }
@@ -137,6 +139,27 @@ Ceci est un mail automatique, merci de ne pas y répondre.';
         $req = $db->prepare("UPDATE user SET isActive = ? WHERE id = ?");
         $req->execute([3, $id]);
         $_SESSION['success'][] =  "La demande de changement de mot de passe a bien été effectuée.";
+        header('Location: /');
     }
-
 }
+
+function newpass($id, $pass, $repass){
+    $mysql = new Mysql();
+    $db = $mysql->dbConnect();
+    if(!empty($pass) && $pass == $repass){
+        $info = getInfoUser($id, 0);
+        if($info['isActive'] == 3){
+            $req = $db->prepare("UPDATE user SET password = ? WHERE id = ?");
+            $req->execute([sha1($pass), 1]);
+            validate($id);
+            $_SESSION['success'][] =  "Le mot de passe a bien été changé.";
+            header('Location: /');
+            return 1;
+        }else{
+            $_SESSION['errors'][] = "Votre compte n'a pas fait l'objet d'une demande de mot de passe.";
+        }
+    }else{
+        $_SESSION['errors'][] = "Les deux mots de passe ne correspondent pas.";
+    }
+}
+
