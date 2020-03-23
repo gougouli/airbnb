@@ -135,6 +135,21 @@ elseif($page == "new-pass") {
 }
 //====================== FIN Partie NEW PASS ======================
 
+//====================== DEBUT Partie detail ======================
+
+elseif($page == "detail") {
+    if ($parameter) {
+        echo $twig->render("detail.twig", [
+            "errors" => getMessage("errors"),
+            "id" => $parameter
+        ]);
+    }
+    else {
+        header("location:/");
+    }
+}
+//====================== FIN Partie detail ======================
+
 
 //====================== DEBUT Partie HOST ======================
 elseif($page == "host"){
@@ -150,6 +165,22 @@ elseif($page == "host"){
 }
 
 //====================== fin Partie HOST ======================
+
+
+
+//====================== DEBUT Partie NEW PASS ======================
+//http://localhost/new-pass/'.urlencode($id).'
+
+elseif($page == "list-detail") {
+    echo $twig->render("list-detail.twig", [
+        "errors" => getMessage("errors"),
+        "id" => $parameter,
+        "accolist" => getList()
+    ]);
+}
+//====================== FIN Partie NEW PASS ======================
+
+
 
 //====================== DEBUT Partie ACCUEIL ======================
 
