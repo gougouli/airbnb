@@ -14,7 +14,7 @@ $url = explode("/",trim($url, "/"));
 $page = isset($url['0']) ? $url['0'] : "/";
 $parameter = isset($url['1']) ? $url['1'] : FALSE;
 
-$loader = new FilesystemLoader('../App/views/page/');
+$loader = new FilesystemLoader('../views/page/');
 $twig = new Environment($loader, [
     'cache' => false //'../tmp',
 ]);
