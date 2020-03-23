@@ -38,11 +38,11 @@
                          <div class="form-row mt-4">
                               <div class="col-md-5 col-sm-12">
                                    <label for="place">Où</label>
-                                   <input type="text" name="pl" id="place" class="form-control" placeholder="Partout">
+                                   <input type="text" name="pl" id="place" class="form-control" value="{{ values.pl }}" placeholder="Partout">
                               </div>
                               <div class="col-md-5 col-sm-3">
                                    <label for="people">Voyageurs</label>
-                                   <input type="number" name="pe" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
+                                   <input type="number" name="pe" id="people" class="form-control" value="{{ values.pe }}" placeholder="Nombres de personnes" min="0" max="99999">
                               </div>
                               <div class="col-md-2 col-sm-12">
                                    <label style="opacity: 0;"for="">.</label>
@@ -55,25 +55,35 @@
 
      </div>
      <div class="item-list">
-          {% for acco in accolist %}
-               <div class="item">
-                    <div class="picture">
-                         <img src="img/4x2.png" alt="">
-                    </div>
-                    <div class="text">
-                         <div class="price">
-                              <p>{{ acco.infoplace.city }} - {{ acco.price }}</p>
-                              {% if acco.rating > 0 %}
-                                   <p>Note: {{ acco.rating }} / 5</p>
-                              {% else %}
-                                   <p>Pas encore noté</p>
-                              {% endif %}
+          {% if accolist is not empty  %}
+               {% for acco in accolist %}
+                    <div class="item">
+                         <div class="picture">
+                              <img src="img/4x2.png" alt="">
                          </div>
-                         <div class="desc">{{ acco.content }}</div>
-                         <div class="button-link text-center"><a href="/detail/{{ acco.id }}" class=" btn btn-primary">Voir l'hebergement</a></div>
+                         <div class="text">
+                              <div class="price">
+                                   <p>{{ acco.infoplace.city }} - {{ acco.price }}</p>
+                                   {% if acco.rating > 0 %}
+                                        <p>Note: {{ acco.rating }} / 5</p>
+                                   {% else %}
+                                        <p>Pas encore noté</p>
+                                   {% endif %}
+                              </div>
+                              <div class="desc">{{ acco.content }}</div>
+                              <div class="button-link text-center"><a href="/detail/{{ acco.id }}" class=" btn btn-primary">Voir l'hebergement</a></div>
+                         </div>
                     </div>
-               </div>
-          {% endfor %}
+               {% endfor %}
+          {% else %}
+          <div class="alert alert-danger">
+               <p>
+                    Vos recherches n'ont données aucun résultats.
+                    {% if values.pl %}Mot clé: {{ values.pl }}{% endif %}
+                    {% if values.pe %}Mot clé: {{ values.pe }}{% endif %}
+               </p>
+          </div>
+          {% endif %}
      </div>
 </div>
 <div class="right">

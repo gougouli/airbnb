@@ -174,14 +174,17 @@ elseif($page == "host"){
 //http://localhost/new-pass/'.urlencode($id).'
 
 elseif($page == "list-detail") {
-    if(isset($_POST)){
-        if(isset($_POST['pl'])){$where = $_POST['pl'];}else{$where=0;}
-        if(isset($_POST['pe'])){$people = $_POST['pe'];}else{$people=0;}
+    $where =$people= 0;
+
+    if(isset($_GET['pl']) || isset($_GET['pe'])){
+        if(isset($_GET['pl'])){$where = $_GET['pl'];}else{$where=0;}
+        if(isset($_GET['pe'])){$people = $_GET['pe'];}else{$people=0;}
     }
     echo $twig->render("list-detail.twig", [
         "errors" => getMessage("errors"),
         "id" => $parameter,
-        "accolist" => getList($where, $people)
+        "accolist" => getList($where, $people),
+        "values" => getFieldsValue()
     ]);
 }
 //====================== FIN Partie NEW PASS ======================
