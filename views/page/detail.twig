@@ -10,12 +10,12 @@
      <li><a href="/account">Mon compte</a></li>
      <li><a href="/myreserve">Mes réservations</a></li>
      <li><a href="/host">Devenir hote</a></li>
-     <li><a href="/reserve">Reserver un séjour</a></li>
+     <li><a href="/list-detail">Reserver un séjour</a></li>
 {% else %}
-     <li><a href="#login" class="modal-js">Devenez Hote</a></li>
-     <li><a href="/reserve">Reserver un séjour</a></li>
-     <li><a href="#login" class="modal-js">Connexion</a></li>
-     <li><a href="#register" class="modal-js">Inscription</a></li>
+     <li><a href="/login" >Devenez Hote</a></li>
+     <li><a href="/list-detail">Reserver un séjour</a></li>
+     <li><a href="/login">Connexion</a></li>
+     <li><a href="/register">Inscription</a></li>
 {% endif %}
 {% if session.state %}
      <li><a href="/logout">Se déconnecter</a></li>

@@ -14,7 +14,7 @@ $url = explode("/",trim($url, "/"));
 $page = isset($url['0']) ? $url['0'] : "/";
 $parameter = isset($url['1']) ? $url['1'] : FALSE;
 
-$loader = new FilesystemLoader('../App/views/page/');
+$loader = new FilesystemLoader('../views/page/');
 $twig = new Environment($loader, [
     'cache' => false //'../tmp',
 ]);
@@ -166,10 +166,26 @@ elseif($page == "host"){
 
 //====================== fin Partie HOST ======================
 
+
+
+//====================== DEBUT Partie NEW PASS ======================
+//http://localhost/new-pass/'.urlencode($id).'
+
+elseif($page == "list-detail") {
+    echo $twig->render("list-detail.twig", [
+        "errors" => getMessage("errors"),
+        "id" => $parameter,
+        "accolist" => getList()
+    ]);
+}
+//====================== FIN Partie NEW PASS ======================
+
+
+
 //====================== DEBUT Partie ACCUEIL ======================
 
-else{
-    echo $twig->render("home.twig",[
+else {
+    echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
         "errors" => getMessage("errors"),

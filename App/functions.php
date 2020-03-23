@@ -18,7 +18,6 @@ function getMessage($type){
 function getFieldsValue(){
     if(!empty($_POST)){
         $values =$_POST;
-        //unset($_POST);
         return $values;
     }
     return FALSE;
@@ -30,6 +29,7 @@ function validate($id): void{
     $stmt = $db->prepare("UPDATE users SET isActive = 1 WHERE id = ?");
     $stmt->execute([$id]);
 }
+
 function getAccomodationByUser($id){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
@@ -55,7 +55,6 @@ function getInfoUser($id, $acco = 1){
 function newAdress($country, $city, $address, $sub_address, $zip,$lat,$long){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    //$req = $db->prepare("INSERT INTO place SET country = ?, city = ?, address = ?, sub_address = ?, zip = ?,lat = ?, lon = ?");
     $req = $db->prepare("INSERT INTO place (country, city, address, sub_address, zip, lat, lon) VALUES (?,?,?,?,?,?,?)");
     $req->execute([$country, $city, $address, $sub_address, $zip, $lat, $long]);
     return $req;
@@ -76,9 +75,8 @@ function getPlaceId($lat, $lon){
 function getCoords($address, $city, $zip){
     //https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q=7+place+de+la+resistance+vourles+69390&format=json
     $url = 'https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q='.$address .'+'.$city.'+'.$zip.'&format=json';
-    //echo "$url";
     $page ='';
-    $fh = fopen($url,'r') or die($php_errormsg);
+    $fh = fopen($url,'r') or die("Erreur avec API");
     while (! feof($fh)) { $page .= fread($fh,1048576); }
     fclose($fh);
     $test1 = explode('"lat":"', $page);
@@ -162,4 +160,25 @@ function newpass($id, $pass, $repass){
         $_SESSION['errors'][] = "Les deux mots de passe ne correspondent pas.";
     }
 }
+function getPlaceInfoById($id){
+    $mysql = new Mysql();
+    $db = $mysql->dbConnect();
+    $stmt = $db->prepare("SELECT * FROM place WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
+function getList($where = 0, $place = 0){
+    if(!$where && !$place){
+        $list = new \App\AccomodationList();
+        $listHouse = $list->getAll();
+        $newList= [];
+        foreach ($listHouse as $house){
+            $info = getPlaceInfoById($house['id_place']);
+            $house['infoplace'] = $info;
+            $newList[] = $house;
+
+        }
+    }
+    return $newList;
+}
