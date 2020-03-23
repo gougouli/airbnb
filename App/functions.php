@@ -1,4 +1,6 @@
 <?php
+
+use App\AccomodationList;
 use App\Mysql;
 
 
@@ -46,7 +48,8 @@ function getInfoUser($id, $acco = 1){
     $stmt->execute([$id]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
     if($acco){
-        $info['accomodation'] = getAccomodationByUser($id);
+        $accolist = new AccomodationList();
+        $info['accomodation'] = $accolist->getBySeller($id);
     }
     //var_dump($info);
     return $info;
@@ -168,17 +171,23 @@ function getPlaceInfoById($id){
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function getList($where = 0, $place = 0){
-    if(!$where && !$place){
-        $list = new \App\AccomodationList();
+function getList($where = 0, $people = 0){
+    $list = new AccomodationList();
+    if($people){
+        $listHouse = $list->getByPeople($where);
+    }elseif($where){
+        $listHouse = $list->getByPlace($where);
+    }else{
         $listHouse = $list->getAll();
-        $newList= [];
-        foreach ($listHouse as $house){
-            $info = getPlaceInfoById($house['id_place']);
-            $house['infoplace'] = $info;
-            $newList[] = $house;
+    }
 
-        }
+    $newList= [];
+    foreach ($listHouse as $house){
+        $info = getPlaceInfoById($house['id_place']);
+        $house['infoplace'] = $info;
+        $newList[] = $house;
+
     }
     return $newList;
 }
+

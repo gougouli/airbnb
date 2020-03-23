@@ -172,10 +172,11 @@ elseif($page == "host"){
 //http://localhost/new-pass/'.urlencode($id).'
 
 elseif($page == "list-detail") {
+    if(isset())
     echo $twig->render("list-detail.twig", [
         "errors" => getMessage("errors"),
         "id" => $parameter,
-        "accolist" => getList()
+        "accolist" => getList($where, $people);
     ]);
 }
 //====================== FIN Partie NEW PASS ======================
