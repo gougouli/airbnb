@@ -18,7 +18,6 @@ function getMessage($type){
 function getFieldsValue(){
     if(!empty($_POST)){
         $values =$_POST;
-        //unset($_POST);
         return $values;
     }
     return FALSE;
@@ -55,7 +54,6 @@ function getInfoUser($id, $acco = 1){
 function newAdress($country, $city, $address, $sub_address, $zip,$lat,$long){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    //$req = $db->prepare("INSERT INTO place SET country = ?, city = ?, address = ?, sub_address = ?, zip = ?,lat = ?, lon = ?");
     $req = $db->prepare("INSERT INTO place (country, city, address, sub_address, zip, lat, lon) VALUES (?,?,?,?,?,?,?)");
     $req->execute([$country, $city, $address, $sub_address, $zip, $lat, $long]);
     return $req;
@@ -76,7 +74,6 @@ function getPlaceId($lat, $lon){
 function getCoords($address, $city, $zip){
     //https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q=7+place+de+la+resistance+vourles+69390&format=json
     $url = 'https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q='.$address .'+'.$city.'+'.$zip.'&format=json';
-    //echo "$url";
     $page ='';
     $fh = fopen($url,'r') or die($php_errormsg);
     while (! feof($fh)) { $page .= fread($fh,1048576); }
