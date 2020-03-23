@@ -135,6 +135,21 @@ elseif($page == "new-pass") {
 }
 //====================== FIN Partie NEW PASS ======================
 
+//====================== DEBUT Partie detail ======================
+
+elseif($page == "detail") {
+    if ($parameter) {
+        echo $twig->render("detail.twig", [
+            "errors" => getMessage("errors"),
+            "id" => $parameter
+        ]);
+    }
+    else {
+        header("location:/");
+    }
+}
+//====================== FIN Partie detail ======================
+
 
 //====================== DEBUT Partie HOST ======================
 elseif($page == "host"){
