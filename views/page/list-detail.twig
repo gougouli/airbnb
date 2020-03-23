@@ -56,11 +56,11 @@
      </div>
      <div class="item-list">
           {% for acco in accolist %}
-               <div class="mt-2 bg-primary col-md-12 ">
-                    <div class="row justify-content-between">
-                         <p class="text-left col-md-2 bg-light font-weight-bold">{{ acco.title }} - {{ acco.price }}€</p>
-                         <p class="text-right col-md-2 bg-light font-weight-bold">{{ acco.rating }} / 5</p>
+               <div class="item">
+                    <div class="picture">
+                         <img src="img/4x2.png" alt="">
                     </div>
+                    <div class="text">{{ acco.infoplace.city }} - {{ acco.price }}</div>
                </div>
           {% endfor %}
      </div>

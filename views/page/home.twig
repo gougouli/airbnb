@@ -11,10 +11,10 @@
      <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
      <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
      <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
-     <li><a class="nav-item nav-link" href="/reserve">Reserver un séjour</a></li>
+     <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
 {% else %}
      <li><a class="nav-item nav-link" href="/host" class="modal-js">Devenez Hote</a></li>
-     <li><a class="nav-item nav-link" href="/reserve">Reserver un séjour</a></li>
+     <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
      <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
      <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
 {% endif %}
@@ -68,7 +68,7 @@
           <div class="row">
           {% for accomodation in accomodations_random %}
                <figure class="accomodation-item">
-                    <a href="/reserve/{{ accomodation.link }}">
+                    <a href="/list-detail/{{ accomodation.link }}">
                          <img src="img/house-5.jpg" alt="" class="border border-white ">
                          <figcaption class="info">
                               <h6>{{ accomodation.place }} - {{ accomodation.price }}€ / nuit</h6>

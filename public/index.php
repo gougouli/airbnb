@@ -184,12 +184,12 @@ elseif($page == "list-detail") {
 
 //====================== DEBUT Partie ACCUEIL ======================
 
-else{
-    echo $twig->render("home.twig",[
+else {
+    echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
         "errors" => getMessage("errors"),
         "success" => getMessage("success"),
     ]);
-
+}
 //====================== FIN Partie ACCUEIL ======================
