@@ -29,6 +29,7 @@ function validate($id): void{
     $stmt = $db->prepare("UPDATE users SET isActive = 1 WHERE id = ?");
     $stmt->execute([$id]);
 }
+
 function getAccomodationByUser($id){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
