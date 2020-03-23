@@ -1,5 +1,5 @@
 header nav {position: relative;background-color: rgb(0, 59, 92);border-bottom: 2px solid white;}
-main {border: solid 1px gray; border-radius: 15px;margin:15px 40px;box-shadow: 2px 2px 7px black;display: flex;}
+main {border: solid 1px gray; border-radius: 15px;margin:15px 40px;box-shadow: 2px 2px 7px black;display: flex;min-height: 75%;}
 main .left {border-right: 1px solid gray;width: 60%;display: flex;flex-direction: column;}
 main .left .filter {border-radius: 15px 0 0 0;border-bottom: 1px solid gray;height: 150px;width: 100%;}
 main .left .item-list {border-radius:  0 0 0 15px;height: 85%;width: 100%;box-sizing: border-box;}

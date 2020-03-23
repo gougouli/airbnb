@@ -57,7 +57,7 @@ class AccomodationList{
     function getByPlacePeople($where, $people){
         $mysql = new Mysql();
         $db = $mysql->dbConnect();
-        $req = $db->prepare("SELECT * FROM accomodation WHERE size >= ? INTERSECT SELECT * FROM accomodation WHERE id_place IN (SELECT id FROM place WHERE city = ?)");
+        $req = $db->prepare("SELECT id FROM accomodation WHERE size >= ? INTERSECT SELECT id FROM accomodation WHERE id_place IN (SELECT id FROM place WHERE city = ?)");
         $req->execute([$people, $where]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
