@@ -60,10 +60,10 @@
                                              </li>
                                              <li class="list-group-item">
                                                   <h2 class="card-title">Points fort</h2>
-                                                  <p>Animal : {{acco.animal}} </p>
-                                                  <p>Accès handicapé : {{acco.handicap}} </p>
-                                                  <p>Petit déjeuner : {{acco.breakfast}} </p>
-                                                  <p>Diner : {{acco.dinner}} </p>
+                                                  <p>Animal : {% if acco.animal == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                  <p>Accès handicapé : {% if acco.handicap == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                  <p>Petit déjeuner : {% if acco.breakfast == 1 %} Oui {% else %} Non {% endif %}</p>
+                                                  <p>Diner : {% if acco.dinner == 1 %} Oui {% else %} Non {% endif %} </p>
                                              </li>
                                              <li class="list-group-item">
                                                   <h2 class="card-title">L'hébergeur</h2>
