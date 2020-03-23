@@ -151,6 +151,22 @@ elseif($page == "host"){
 
 //====================== fin Partie HOST ======================
 
+
+
+//====================== DEBUT Partie NEW PASS ======================
+//http://localhost/new-pass/'.urlencode($id).'
+
+elseif($page == "list-detail") {
+    echo $twig->render("list-detail.twig", [
+        "errors" => getMessage("errors"),
+        "id" => $parameter,
+        "accolist" => getList()
+    ]);
+}
+//====================== FIN Partie NEW PASS ======================
+
+
+
 //====================== DEBUT Partie ACCUEIL ======================
 
 else{
