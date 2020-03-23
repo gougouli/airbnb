@@ -43,8 +43,10 @@ function getAccomodationById($id){
     $db = $mysql->dbConnect();
     $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
     $stmt->execute([$id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result['place'] = getPlaceInfoById($id);
     //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
 }
 
 function getInfoUser($id, $acco = 1){

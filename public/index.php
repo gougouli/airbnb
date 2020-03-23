@@ -142,7 +142,6 @@ elseif($page == "detail") {
         echo $twig->render("detail.twig", [
             "acco" => getAccomodationById($parameter),
             "errors" => getMessage("errors"),
-            "id" => $parameter
         ]);
     }
     else {
