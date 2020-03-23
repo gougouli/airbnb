@@ -3,6 +3,8 @@ session_start();
 require_once "../vendor/autoload.php";
 require_once "../App/functions.php";
 require_once "../App/log.php";
+require_once "../App/create_acco.php";
+
 use App\AccomodationList;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -18,7 +20,7 @@ $twig = new Environment($loader, [
     'cache' => false //'../tmp',
 ]);
 
-//$twig->addGlobal('session', $_SESSION);
+$twig->addGlobal('session', $_SESSION);
 //$twig->addGlobal('server', $_SERVER);
 
 $accomodationList = new AccomodationList();
@@ -82,8 +84,6 @@ elseif($page == "logout"){
 }
 //====================== FIN Partie Connexion / Incription / Deconnexion ======================
 
-
-
 //====================== DEBUT Partie ACCOUNT ======================
 elseif($page == "account"){
     if(isConnected()) {
@@ -97,7 +97,6 @@ elseif($page == "account"){
     }
 }
 //====================== FIN Partie ACCOUNT ======================
-
 
 //====================== DEBUT Partie FORGOT PASS ======================
 
@@ -135,22 +134,29 @@ elseif($page == "new-pass"){
             "id" => $parameter
         ]);
 
+
+//====================== DEBUT Partie HOST ======================
+elseif($page == "host"){
+    if(isConnected()) {
+        echo $twig->render("host.twig",[
+            "errors" => getMessage("errors"),
+            "success" => getMessage("success"),
+        ]);
     }else{
         header('Location: /');
     }
 }
 
-//====================== fin Partie FORGOT PASS ======================
-
+//====================== fin Partie HOST ======================
 
 //====================== DEBUT Partie ACCUEIL ======================
+
 else{
     echo $twig->render("home.twig",[
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
         "errors" => getMessage("errors"),
         "success" => getMessage("success"),
-        "session" => $_SESSION
     ]);
 }
 //====================== FIN Partie ACCUEIL ======================
