@@ -160,5 +160,5 @@ else{
         "errors" => getMessage("errors"),
         "success" => getMessage("success"),
     ]);
-}
+
 //====================== FIN Partie ACCUEIL ======================
