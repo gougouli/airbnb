@@ -3,7 +3,6 @@ session_start();
 require_once "../vendor/autoload.php";
 require_once "../App/functions.php";
 require_once "../App/log.php";
-require_once "../App/create_acco.php";
 
 use App\AccomodationList;
 use Twig\Environment;
@@ -120,23 +119,26 @@ elseif($page == "forgot-pass"){
 //====================== DEBUT Partie NEW PASS ======================
 //http://localhost/new-pass/'.urlencode($id).'
 
-elseif($page == "new-pass"){
-    if(!isConnected() && $parameter) {
-        if(!empty($_POST['pass']) && !empty($_POST['repass'])){
-
+elseif($page == "new-pass") {
+    if (!isConnected() && $parameter) {
+        if (!empty($_POST['pass']) && !empty($_POST['repass'])) {
             $pass = $_POST['pass'];
             $repass = $_POST['repass'];
             $id = $_POST['idtoken'];
-            newpass($id, $pass,$repass);
+            newpass($id, $pass, $repass);
         }
-        echo $twig->render("new-pass.twig",[
+        echo $twig->render("new-pass.twig", [
             "errors" => getMessage("errors"),
             "id" => $parameter
         ]);
+    }
+}
+//====================== FIN Partie NEW PASS ======================
 
 
 //====================== DEBUT Partie HOST ======================
 elseif($page == "host"){
+    require_once "../App/create_acco.php";
     if(isConnected()) {
         echo $twig->render("host.twig",[
             "errors" => getMessage("errors"),

@@ -8,7 +8,7 @@ function exist($email, $pass, $hash=1): int{
     if($hash){
         $pass = sha1($pass);
     }
-    $req = $db->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
+    $req = $db->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
     $req->execute([$email, $pass]);
     if($req->rowCount() == 1){
         $req = $req->fetch();
@@ -97,13 +97,13 @@ function register($last, $first, $email, $pass, $repass): int{
         if (!preg_match('#^(?=.*[A-Z])(?=.*[0-9])(?=.*\W)#', $pass)) {$_SESSION['errors'][] =  "Votre mot de passe n'est pas conforme. Il doit comporter $nbr caractères dont une majuscule, un chiffre et un caractère spécial.";}
         if($pass != $repass){$_SESSION['errors'][] =  "Vos mot de passe ne correspondent pas.";}
         if(empty($_SESSION['errors'])){
-            $reqmail = $db->prepare("SELECT * FROM user WHERE email = ?");
+            $reqmail = $db->prepare("SELECT * FROM users WHERE email = ?");
             $reqmail->execute([$email]);
             if($reqmail->rowCount() == 0){
                 $fullname = $lname . " " . $fname;
                 $pass = sha1($pass);
                 $token = token(30);
-                $req = $db->prepare("INSERT INTO user SET fullname = ?, email = ?, password = ?, token_activation = ?");
+                $req = $db->prepare("INSERT INTO users SET fullname = ?, email = ?, password = ?, token_activation = ?");
                 $req = $req->execute([$fullname, $email, $pass, $token]);
 
                 // Préparation du mail contenant le lien d'activation

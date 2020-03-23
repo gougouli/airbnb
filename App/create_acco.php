@@ -2,7 +2,6 @@
 
 use App\Mysql;
 
-var_dump($_POST);
 if(!empty($_POST)){
 
     $id_seller = $_POST['id_seller'];
@@ -47,23 +46,13 @@ if(!empty($_POST)){
 
     $pdo = new Mysql();
     $db = $pdo->dbConnect();
-    $req = $db->prepare("SELECT * FROM user WHERE id = ? AND password = ?");
+    $req = $db->prepare("SELECT * FROM users WHERE id = ? AND password = ?");
     $req->execute([$id_seller, sha1($password)]);
     if($req->rowCount() == 1){
         $coords = getCoords($address, $city, $zip);
-        $step1 = newAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
+        newAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
         $place_id = getPlaceId($coords[0],$coords[1]);
-        $request = newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
-//        if($step1 && $place_id && $request){
-//            echo "ok";
-//
-//        }else{
-//            echo $id_seller;
-//            echo "coords"; var_dump($coords); echo "<br>";
-//            echo "step1: ";var_dump($step1); echo "<br>";
-//            echo "place_id: ";var_dump($place_id) ; echo "<br>";
-//            echo "request: ";var_dump($request);  echo "<br>";
-
-//        }
-    }else{$_SESSION['errors'][] = "votre mot de passe est incorrect !";return;}
+        newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
+        $_SESSION['success'][] = "Votre hebergement a bien été crée !";
+    }else{$_SESSION['errors'][] = "votre mot de passe est incorrect !";}
 }

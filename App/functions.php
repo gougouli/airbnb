@@ -27,7 +27,7 @@ function getFieldsValue(){
 function validate($id): void{
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    $stmt = $db->prepare("UPDATE user SET isActive = 1 WHERE id = ?");
+    $stmt = $db->prepare("UPDATE users SET isActive = 1 WHERE id = ?");
     $stmt->execute([$id]);
 }
 function getAccomodationByUser($id){
@@ -42,7 +42,7 @@ function getAccomodationByUser($id){
 function getInfoUser($id, $acco = 1){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
-    $stmt = $db->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
     $stmt->execute([$id]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
     if($acco){
@@ -106,7 +106,7 @@ function forgotpass($email){
     $mysql = new Mysql();
     $db = $mysql->dbConnect();
     if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){$_SESSION['errors'][] = "Votre email est incorrect.";return;}
-    $req = $db->prepare("SELECT * FROM user WHERE email = ?");
+    $req = $db->prepare("SELECT * FROM users WHERE email = ?");
     $req->execute([$email]);
     if($req->rowCount() != 1){$_SESSION['errors'][] = "Ce compte n'existe pas.";return;}
     $req = $req->fetch();
@@ -136,7 +136,7 @@ http://localhost/new-pass/'.urlencode($id).'
 Ceci est un mail automatique, merci de ne pas y répondre.';
 
         mail($destinataire, $sujet, $message) ; // Envoi du mail
-        $req = $db->prepare("UPDATE user SET isActive = ? WHERE id = ?");
+        $req = $db->prepare("UPDATE users SET isActive = ? WHERE id = ?");
         $req->execute([3, $id]);
         $_SESSION['success'][] =  "La demande de changement de mot de passe a bien été effectuée.";
         header('Location: /');
@@ -149,8 +149,8 @@ function newpass($id, $pass, $repass){
     if(!empty($pass) && $pass == $repass){
         $info = getInfoUser($id, 0);
         if($info['isActive'] == 3){
-            $req = $db->prepare("UPDATE user SET password = ? WHERE id = ?");
-            $req->execute([sha1($pass), 1]);
+            $req = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $req->execute([sha1($pass), $id]);
             validate($id);
             $_SESSION['success'][] =  "Le mot de passe a bien été changé.";
             header('Location: /');
