@@ -139,9 +139,11 @@ elseif($page == "new-pass") {
 
 elseif($page == "detail") {
     if ($parameter) {
+        $infoAcco = getAccomodationById($parameter);
         echo $twig->render("detail.twig", [
+            "acco" => $infoAcco,
             "errors" => getMessage("errors"),
-            "id" => $parameter
+            "userinfo" => getInfoUser($infoAcco['id_seller'])
         ]);
     }
     else {

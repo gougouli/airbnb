@@ -1,6 +1,6 @@
 {% extends "../default.twig" %}
 
-{% block title %}Sacado - Accueil{% endblock %}
+{% block title %}Sakado - Accueil{% endblock %}
 
 {% block css%}
      <link rel="stylesheet" href="/css/home.css">
@@ -13,7 +13,7 @@
      <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
      <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
 {% else %}
-     <li><a class="nav-item nav-link" href="/host" class="modal-js">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/login">Devenez Hote</a></li>
      <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
      <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
      <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
@@ -70,7 +70,7 @@
                     <a href="/list-detail/{{ accomodation.link }}">
                          <img src="img/house-5.jpg" alt="" class="border border-white ">
                          <figcaption class="info">
-                              <h6>{{ accomodation.place }} - {{ accomodation.price }}€ / nuit</h6>
+                              <h6>{{ accomodation.place.city }} - {{ accomodation.price }}€ / nuit / pers.</h6>
                          </figcaption>
                     </a>
                </figure>
