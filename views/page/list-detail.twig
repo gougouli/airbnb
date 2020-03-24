@@ -63,7 +63,7 @@
                          </div>
                          <div class="text">
                               <div class="price">
-                                   <p>{{ acco.infoplace.city }} - {{ acco.price }}</p>
+                                   <p>{{ acco.infoplace.city }} - {{ acco.price }} €</p>
                                    {% if acco.rating > 0 %}
                                         <p>Note: {{ acco.rating }} / 5</p>
                                    {% else %}
@@ -71,7 +71,10 @@
                                    {% endif %}
                               </div>
                               <div class="desc">{{ acco.content }}</div>
-                              <div class="button-link text-center"><a href="/detail/{{ acco.id }}" class=" btn btn-primary">Voir l'hebergement</a></div>
+                              <div class="button-link text-center bottom">
+                                   <p>Place: {{ acco.size }}</p>
+                                   <a href="/detail/{{ acco.id }}" class=" btn btn-primary">Voir l'hebergement</a>
+                              </div>
                          </div>
                     </div>
                {% endfor %}
