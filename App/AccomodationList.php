@@ -18,7 +18,13 @@ class AccomodationList{
         $mysql = new Mysql();
         $db = $mysql->dbConnect();
         $req = $db->query("SELECT * FROM accomodation ORDER BY rand() LIMIT $length");
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+        $results = $req->fetchAll(PDO::FETCH_ASSOC);
+        $newList = [];
+        foreach ($results as $result){
+            $result['place'] = getPlaceInfoById($result['id']);
+            $newList[] = $result;
+        }
+        return $newList;
     }
     public function getById(int $id): array{
         $mysql = new Mysql();
