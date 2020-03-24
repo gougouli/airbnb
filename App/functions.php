@@ -29,15 +29,13 @@ function getFieldsValue(){
 }
 
 function validate($id): void{
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("UPDATE users SET isActive = 1 WHERE id = ?");
     $stmt->execute([$id]);
 }
 
 function getAccomodationByUser($id){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("SELECT * FROM accomodation WHERE id_seller = ?");
     $stmt->execute([$id]);
     //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
@@ -55,8 +53,7 @@ function getAccomodationById($id){
 }
 
 function getInfoUser($id, $acco = 1){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
     $stmt->execute([$id]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -69,8 +66,7 @@ function getInfoUser($id, $acco = 1){
 }
 
 function newAdress($country, $city, $address, $sub_address, $zip,$lat,$long){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $req = $db->prepare("INSERT INTO place (country, city, address, sub_address, zip, lat, lon) VALUES (?,?,?,?,?,?,?)");
     $req->execute([$country, $city, $address, $sub_address, $zip, $lat, $long]);
     return $req;
@@ -79,8 +75,7 @@ function newAdress($country, $city, $address, $sub_address, $zip,$lat,$long){
 
 
 function getPlaceId($lat, $lon){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("SELECT * FROM place WHERE lat = $lat");
     $stmt->execute([$lat]);
 
@@ -108,17 +103,14 @@ function getCoords($address, $city, $zip){
 
 
 function newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end){
-
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $req = $db->prepare("INSERT INTO accomodation (title, content, size, id_seller, animal, handicap, breakfast, dinner, single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
     return $req;
 }
 
 function forgotpass($email){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){$_SESSION['errors'][] = "Votre email est incorrect.";return;}
     $req = $db->prepare("SELECT * FROM users WHERE email = ?");
     $req->execute([$email]);
@@ -158,8 +150,7 @@ Ceci est un mail automatique, merci de ne pas y répondre.';
 }
 
 function newpass($id, $pass, $repass){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     if(!empty($pass) && $pass == $repass){
         $info = getInfoUser($id, 0);
         if($info['isActive'] == 3){
@@ -177,8 +168,7 @@ function newpass($id, $pass, $repass){
     }
 }
 function getPlaceInfoById($id){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("SELECT * FROM place WHERE id = ?");
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);

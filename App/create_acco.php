@@ -43,9 +43,7 @@ if(!empty($_POST)){
     if($okey == "false"){$_SESSION['errors'][] = "vous n'avez pas valider les conditions de vente.";}
     if(empty($password)){$_SESSION['errors'][] = "vous n'avez pas écrit votre mot de passe.";}
 
-
-    $pdo = new Mysql();
-    $db = $pdo->dbConnect();
+    $db = Mysql::getInstance();
     $req = $db->prepare("SELECT * FROM users WHERE id = ? AND password = ?");
     $req->execute([$id_seller, sha1($password)]);
     if($req->rowCount() == 1){

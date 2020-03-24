@@ -9,9 +9,9 @@ main .left .item-list .item .picture img {border:solid 1px white;max-width: 200p
 main .left .item-list .item .text {width:100%;margin: 5px;}
 main .left .item-list .item .text .price{width:100%;display: flex;justify-content: space-between;}
 main .left .item-list .item .text .desc{width: 80%;word-break: break-all;}
-main .left .item-list .item .text .button-link {width: 100%;margin-top: 10px;}
-
+main .left .item-list .item .text .button-link {width: 100%;margin-top: 10px;display: flex;justify-content: space-between;}
 main .right {display: flex;flex-direction: column;width: 40%;}
 main .right #map {width: 100%;height: 100%;border-bottom: 1px solid gray;}
+
 
 

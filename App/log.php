@@ -3,8 +3,7 @@
 use App\Mysql;
 
 function exist($email, $pass, $hash=1): int{
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     if($hash){
         $pass = sha1($pass);
     }
@@ -79,8 +78,7 @@ function logout(): void{
 }
 
 function register($last, $first, $email, $pass, $repass): int{
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     if(!empty($_POST)){
         $nbr = 8;
         $lname = ucfirst(mb_strtolower($last, "UTF-8"));

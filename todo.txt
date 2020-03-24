@@ -1,1 +1,5 @@
 modification of information of account in account.twig without JS as possible in branch "account"
+table with image of different hebergment and user
+page reserve
+page annexe
+faire recherche recente: footer
