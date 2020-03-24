@@ -1,6 +1,11 @@
 modification of information of account in account.twig without JS as possible in branch "account"
 table with image of different hebergment and user
 page reserve
-page annexe
+page annexe:
+-   a propos (page de blabla)
+-   contribueurs (jsp encore)
+-   politique de confidentialité (lorem ipsum)
+-   contactez-nous (link -> help)
+-   carte (grosse map)
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
