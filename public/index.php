@@ -41,7 +41,6 @@ if($page == "login"){
                 if ($id = exist($_POST['email'], $_POST['pass'])) {
                     if(empty($_POST['keep_pass'])){
                         $keep = FALSE;
-                        echo "test";
                     }else{
                         $keep = true;
                     }
@@ -65,7 +64,6 @@ elseif($page == "register") {
                     header("Location: /");
                 }
             }
-            $_SESSION['errors'][] = "Vous n'avez pas renseigné tous les champs.";
         }
         echo $twig->render("register.twig", [
             "errors" => getMessage("errors"),

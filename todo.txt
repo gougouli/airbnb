@@ -5,7 +5,7 @@ page annexe:
 -   a propos (page de blabla)
 -   contribueurs (jsp encore)
 -   politique de confidentialité (lorem ipsum)
--   contactez-nous (link -> help)
+-   contactez-nous (link -> help) fait
 -   carte (grosse map)
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags

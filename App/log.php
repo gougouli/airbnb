@@ -91,7 +91,6 @@ function register($last, $first, $email, $pass, $repass): int{
         if(empty($fname)){$_SESSION['errors'][] = "Vous n'avez pas renseigné votre prénom.";}
         if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){$_SESSION['errors'][] =  "Votre email est incorrect.";}
         if(empty($pass)){$_SESSION['errors'][] =  "Vous n'avez pas noté votre mot de passe.";return 0;}
-        if(strlen($pass) < $nbr){$_SESSION['errors'][] =  "Votre mot de passe doit contenir au moins $nbr caractères dont une majuscule, un chiffre et un caractère spécial.";}
         if (!preg_match('#^(?=.*[A-Z])(?=.*[0-9])(?=.*\W)#', $pass)) {$_SESSION['errors'][] =  "Votre mot de passe n'est pas conforme. Il doit comporter $nbr caractères dont une majuscule, un chiffre et un caractère spécial.";}
         if($pass != $repass){$_SESSION['errors'][] =  "Vos mot de passe ne correspondent pas.";}
         if(empty($_SESSION['errors'])){
