@@ -190,6 +190,21 @@ elseif($page == "list-detail") {
 //====================== FIN Partie NEW PASS ======================
 
 
+//====================== DEBUT Partie help ======================
+
+elseif($page == "help") {
+    if(isset($_POST['email']) && isset($_POST['object']) && isset($_POST['message']) && isset($_POST['captcha'])){
+        sendMessageHelp($_POST['email'],$_POST['object'],$_POST['message'], $_POST['captcha']);
+        echo "test";
+    }
+    echo $twig->render("help.twig", [
+        "values" => getFieldsValue(),
+        "errors" => getMessage("errors"),
+        "success" => getMessage("success")
+    ]);
+}
+//====================== FIN Partie help ======================
+
 
 //====================== DEBUT Partie ACCUEIL ======================
 
