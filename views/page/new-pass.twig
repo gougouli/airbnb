@@ -1,9 +1,6 @@
-{% extends "../default.twig" %}
-{% block title %}Sakado - Mot de passe oublié{% endblock %}
+{% extends "../layout/form.twig" %}
 
-{% block css %}
-<link rel="stylesheet" href="/css/form.css">
-{% endblock %}
+{% block title %}Sakado - Mot de passe oublié{% endblock %}
 
 {% block nav %}
      <li><a href="/">Accueil</a></li>
@@ -13,46 +10,39 @@
      <li><a href="/register">Inscription</a></li>
 {% endblock %}
 
-{% block content %}
-<div class="modal-log" id="new-pass" role="dialog" >
-     <div class="modal-wrapper" >
-          <div class="modal-body">
-               <section class="left">
-                    <section class="title">
-                         <i class="fas fa-user fa-5x"></i>
-                         <h2>Nouveau mot de passe</h2>
-                    </section>
-                    <form class="form-new-pass form-log" method="post">
-                         <input type="hidden" name="idtoken" id="id" value="{{ id }}">
-                         <fieldset class="input_field password">
-                              <label>Mot de passe</label>
-                              <input type="password" name="pass" id="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
-                         </fieldset>
-                         <fieldset class="input_field repassword">
-                              <label>Mot de passe à confirmer</label>
-                              <input type="password" name="repass" id="repass"><button class="show-password"><i class="fas fa-eye"></i></button>
-                         </fieldset>
-                         <fieldset class="input_field submit">
-                              <input type="submit" value="Modifier le mot de passe">
-                         </fieldset>
-                         {% if errors %}
-                              <ul class="alert alert-danger">
-                                   {% for error in errors %}
-                                        <li>Erreur: {{ error }}</li>
-                                   {% endfor %}
-                              </ul>
-                         {% endif %}
-
-                    </form>
-               </section>
-               <section class="right">
-                    <div class="cover">
-                         <h3>Vous n'avez pas de <br>compte ?</h3>
-                         <h4>Alors ne perdez pas une seconde, retournez sur la page d'accueil pour vous inscrire !</h4>
-                         <a class="register-adjust" href="/">Page d'accueil</a>
-                    </div>
-               </section>
-          </div>
+{% block form %}
+<section class="left">
+     <section class="title">
+          <i class="fas fa-user fa-5x"></i>
+          <h2>Nouveau mot de passe</h2>
+     </section>
+     <form class="form-new-pass form-log" method="post">
+          <input type="hidden" name="idtoken" id="id" value="{{ id }}">
+          <fieldset class="input_field password">
+               <label>Mot de passe</label>
+               <input type="password" name="pass" id="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
+          </fieldset>
+          <fieldset class="input_field repassword">
+               <label>Mot de passe à confirmer</label>
+               <input type="password" name="repass" id="repass"><button class="show-password"><i class="fas fa-eye"></i></button>
+          </fieldset>
+          <fieldset class="input_field submit">
+               <input type="submit" value="Modifier le mot de passe">
+          </fieldset>
+          {% if errors %}
+               <ul class="alert alert-danger">
+                    {% for error in errors %}
+                         <li>Erreur: {{ error }}</li>
+                    {% endfor %}
+               </ul>
+          {% endif %}
+     </form>
+</section>
+<section class="right">
+     <div class="cover">
+          <h3>Vous n'avez pas de <br>compte ?</h3>
+          <h4>Alors ne perdez pas une seconde, retournez sur la page d'accueil pour vous inscrire !</h4>
+          <a class="register-adjust" href="/">Page d'accueil</a>
      </div>
-</div>
+</section>
 {% endblock %}

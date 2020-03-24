@@ -1,8 +1,7 @@
-{% extends "../default.twig" %}
+{% extends "../layout/form.twig" %}
 
 {% block title %}Sakado - Inscription{% endblock %}
 
-{% block css%}<link rel="stylesheet" href="/css/form.css">{% endblock %}
 {% block nav %}
     <li><a href="/">Accueil</a></li>
     <li><a href="/host">Devenez Hote</a></li>
@@ -10,64 +9,52 @@
     <li><a href="/login">Connexion</a></li>
 {% endblock %}
 
-{% block scripts %}
-    <script src="js/account.js" charset="utf-8"></script>
-    <script src="js/scroll.js" charset="utf-8"></script>
-{% endblock %}
-
-{% block content %}
-    <div class="modal-log" id="register" role="dialog">
-        <div class="modal-wrapper js-modal-stop">
-            <div class="modal-body">
-                <section class="left">
-                    <section class="title">
-                        <i class="fas fa-user fa-5x"></i>
-                        <h2>Création de votre compte</h2>
-                    </section>
-                    <form class="form-register form-log" action="" method="post">
-                        <div class="username">
-                            <fieldset class="input_field lname">
-                                <label>Nom</label>
-                                <input type="text" id="lname" name="lname" value="{{ values.lname }}">
-                            </fieldset>
-                            <fieldset class="input_field fname">
-                                <label>Prénom</label>
-                                <input type="text" id="fname" name="fname" value="{{ values.fname }}">
-                            </fieldset>
-                        </div>
-                        <fieldset class="input_field email">
-                            <label>Email</label>
-                            <input type="text" id="email" name="email" value="{{ values.email }}">
-                        </fieldset>
-                        <fieldset class="input_field password">
-                            <label>Mot de passe</label>
-                            <input type="password" id="pass" name="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
-                        </fieldset>
-                        <fieldset class="input_field repassword">
-                            <label>Mot de passe à confirmer</label>
-                            <input type="password" id="repass" name="repass"><button class="show-password"><i class="fas fa-eye"></i></button>
-                        </fieldset>
-                        <fieldset class="input_field submit">
-                            <button type="submit">S'inscrire</button>
-                        </fieldset>
-                        {% if errors %}
-                            <div class="alert alert-danger">
-                                {% for error in errors %}
-                                    <li>Erreur: {{ error }}</li>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </form>
-                </section>
-                <section class="right">
-                    <div class="cover">
-                        <h3>Vous avez déjà un compte ?</h3>
-                        <h4>Alors ne perdez pas une seconde, connectez-vous !</h4>
-                        <a class="register-adjust" href="/login">Se connecter</a>
-                    </div>
-                </section>
-
-            </div>
+{% block form %}
+<section class="left">
+    <section class="title">
+        <i class="fas fa-user fa-5x"></i>
+        <h2>Création de votre compte</h2>
+    </section>
+    <form class="form-register form-log" action="" method="post">
+        <div class="username">
+            <fieldset class="input_field lname">
+                <label>Nom</label>
+                <input type="text" id="lname" name="lname" value="{{ values.lname }}">
+            </fieldset>
+            <fieldset class="input_field fname">
+                <label>Prénom</label>
+                <input type="text" id="fname" name="fname" value="{{ values.fname }}">
+            </fieldset>
         </div>
+        <fieldset class="input_field email">
+            <label>Email</label>
+            <input type="text" id="email" name="email" value="{{ values.email }}">
+        </fieldset>
+        <fieldset class="input_field password">
+            <label>Mot de passe</label>
+            <input type="password" id="pass" name="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
+        </fieldset>
+        <fieldset class="input_field repassword">
+            <label>Mot de passe à confirmer</label>
+            <input type="password" id="repass" name="repass"><button class="show-password"><i class="fas fa-eye"></i></button>
+        </fieldset>
+        <fieldset class="input_field submit">
+            <button type="submit">S'inscrire</button>
+        </fieldset>
+        {% if errors %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                    <li>Erreur: {{ error }}</li>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </form>
+</section>
+<section class="right">
+    <div class="cover">
+        <h3>Vous avez déjà un compte ?</h3>
+        <h4>Alors ne perdez pas une seconde, connectez-vous !</h4>
+        <a class="register-adjust" href="/login">Se connecter</a>
     </div>
+</section>
 {% endblock %}
