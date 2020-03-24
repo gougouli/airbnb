@@ -1,8 +1,6 @@
-{% extends "../default.twig" %}
+{% extends "../layout/form.twig" %}
 
 {% block title %}Sakado - Connexion{% endblock %}
-
-{% block css%}<link rel="stylesheet" href="/css/form.css">{% endblock %}
 
 {% block nav %}
     <li><a href="/">Accueil</a></li>
@@ -12,56 +10,45 @@
 {% endblock %}
 
 
-{% block scripts %}
-{#    <script src="js/account.js" charset="utf-8"></script>#}
-{#    <script src="js/scroll.js" charset="utf-8"></script>#}
-{% endblock %}
-
-{% block content %}
-<div class="modal-log" id="login" role="dialog" >
-    <div class="modal-wrapper" >
-        <div class="modal-body">
-            <section class="left">
-                <section class="title">
-                    <i class="fas fa-user fa-7x"></i>
-                    <h2>Accès à votre compte</h2>
-                </section>
-                <form class="form-login form-log" action="" method="post">
-                    <fieldset class="input_field email">
-                        <label for="">Email</label>
-                        <input type="email" name="email" id="email" value="{{ values.email }}">
-                    </fieldset>
-                    <fieldset class="input_field password">
-                        <label for="">Mot de passe</label>
-                        <input type="password" name="pass" id="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
-                    </fieldset>
-                    <fieldset class="input_field keep">
-                        <input type="checkbox" name="keep_pass" id="keep_pass"><label for="keep_pass">Mémoriser le mot de passe</label>
-                    </fieldset>
-                    <fieldset class="input_field submit">
-                        <input type="submit" value="Se connecter">
+{% block form %}
+<section class="left">
+    <section class="title">
+        <i class="fas fa-user fa-7x"></i>
+        <h2>Accès à votre compte</h2>
+    </section>
+    <form class="form-login form-log" action="" method="post">
+        <fieldset class="input_field email">
+            <label for="">Email</label>
+            <input type="email" name="email" id="email" value="{{ values.email }}">
+        </fieldset>
+        <fieldset class="input_field password">
+            <label for="">Mot de passe</label>
+            <input type="password" name="pass" id="pass"><button class="show-password"><i class="fas fa-eye"></i></button>
+        </fieldset>
+        <fieldset class="input_field keep">
+            <input type="checkbox" name="keep_pass" id="keep_pass"><label for="keep_pass">Mémoriser le mot de passe</label>
+        </fieldset>
+        <fieldset class="input_field submit">
+            <input type="submit" value="Se connecter">
 {#                            <button type="submit" name="button">Se connecter</button>#}
-                    </fieldset>
-                    <a class="sub_text" href="/forgot-pass">Mot de passe oublié ? </a>
-                    {% if errors %}
-                    <div class="alert alert-danger">
-                        {% for error in errors %}
-                            <li>Erreur: {{ error }}</li>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-
-                    <!--<p>Vous n'avez pas encore de compte ? <a href="/register">Inscrivez-vous</a>.</p>-->
-                </form>
-            </section>
-            <section class="right">
-                <div class="cover">
-                    <h3>Vous êtes nouveau  ?</h3>
-                    <h4>Alors ne perdez pas une seconde, inscrivez-vous !</h4>
-                    <a href="/register">S'inscrire</a>
-                </div>
-            </section>
+        </fieldset>
+        <a class="sub_text" href="/forgot-pass">Mot de passe oublié ? </a>
+        {% if errors %}
+        <div class="alert alert-danger">
+            {% for error in errors %}
+                <li>Erreur: {{ error }}</li>
+            {% endfor %}
         </div>
+        {% endif %}
+
+        <!--<p>Vous n'avez pas encore de compte ? <a href="/register">Inscrivez-vous</a>.</p>-->
+    </form>
+</section>
+<section class="right">
+    <div class="cover">
+        <h3>Vous êtes nouveau  ?</h3>
+        <h4>Alors ne perdez pas une seconde, inscrivez-vous !</h4>
+        <a href="/register">S'inscrire</a>
     </div>
-</div>
+</section>
 {% endblock %}

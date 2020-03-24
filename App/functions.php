@@ -42,8 +42,7 @@ function getAccomodationByUser($id){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 function getAccomodationById($id){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
     $stmt->execute([$id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -196,3 +195,38 @@ function getList($where = 0, $people = 0){
     return $newList;
 }
 
+function sendMessageHelp($email, $object, $message, $captcha){
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){$_SESSION['errors'][] = "Votre email est incorrect.";}
+    if(empty($object)){$_SESSION['errors'][] = "Vous n'avez pas noté l'objet de votre message";}
+    if(strlen($object) > 50){$_SESSION['errors'][] = "L'objet de votre message de doit pas contenir plus de 50 caractères";}
+    if(empty($message)){$_SESSION['errors'][] = "Vous n'avez pas écrit de message.";}
+    if(strlen($message) < 100){$_SESSION['errors'][] = "Votre message doit contenir au moins 100 caractères.";}
+    if(empty($captcha)){$_SESSION['errors'][] = "Vous n'avez pas validé le recaptcha.";}
+    if(empty($_SESSION['errors'])){
+        $object_UTI = utf8_decode("Accusé d'envoi du mail au support du site.");
+        $message_UTI = utf8_decode($message);
+
+        $destinataireSUP = "gougouli69@outlook.fr";
+        $enteteSUP = utf8_decode("Message Support: ($object)");
+
+        $todaySUP = date('d/m/Y - H\hi\ms\s');
+        //$entete = "From: verification@m2si-developpement.com" ;
+
+        // Le lien d'activation est composé du login(log) et de la clé(cle)
+
+        $messageSUP = utf8_decode("
+     -> Date: $todaySUP;\n	
+     -> Email de provenance: $email;
+     -> Message reçu:
+     $message_UTI\n
+     -> Fin du message.
+     -> Mail automatique du site Web. Ne pas répondre.");
+
+        $message_UTI = utf8_decode("Votre message:\n $message_UTI");
+
+        mail($destinataireSUP, $enteteSUP, $messageSUP) ; // Envoi du mail au support
+        mail($email, $object_UTI, $message_UTI) ; // Envoi du mail a l'envoyer du mail  ++++++++++++ BUG +++++++++++++
+        $_SESSION['success'][] = "Votre message a bien été envoyé.";
+    }
+
+}
