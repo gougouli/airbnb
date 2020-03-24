@@ -42,8 +42,7 @@ function getAccomodationByUser($id){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 function getAccomodationById($id){
-    $mysql = new Mysql();
-    $db = $mysql->dbConnect();
+    $db = Mysql::getInstance();
     $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
     $stmt->execute([$id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);

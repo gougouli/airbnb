@@ -3,3 +3,4 @@ table with image of different hebergment and user
 page reserve
 page annexe
 faire recherche recente: footer
+Recherche par tag, nouvelle table avec des tags

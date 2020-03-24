@@ -32,7 +32,8 @@ class Mysql extends PDO{
 
         return self::$instance;
     }
-    public function query($query)
+
+    public function query($query, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = array())
     {
         return $this->PDOInstance->query($query);
     }
