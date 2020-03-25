@@ -5,9 +5,10 @@ require_once "../App/functions.php";
 require_once "../App/log.php";
 
 use App\AccomodationList;
-use App\Token;
+use App\Session;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+
 
 $url = $_GET['url'];
 $url = explode("/",trim($url, "/"));
@@ -23,8 +24,9 @@ $twig->addGlobal('session', $_SESSION);
 //$twig->addGlobal('server', $_SERVER);
 
 $accomodationList = new AccomodationList();
+$session = new Session();
 
-if(!isConnected()){
+if(!$session->isConnected()){
     if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
         if ($id = exist($_COOKIE['email'], $_COOKIE['password'], 0)) {
             $data=[$_COOKIE['email'], $_COOKIE['password'], 1];
@@ -35,7 +37,7 @@ if(!isConnected()){
 
 //====================== DEBUT Partie Connexion / Incription / Deconnexion ======================
 if($page == "login"){
-    if(!isConnected()){
+    if(!$session->isConnected()){
         if(!empty($_POST)) {
             if (isset($_POST['email']) && isset($_POST['pass'])) {
                 if ($id = exist($_POST['email'], $_POST['pass'])) {
@@ -50,14 +52,14 @@ if($page == "login"){
             }
         }
         echo $twig->render("login.twig",[
-            "errors" => getMessage("errors"),
+            "errors" => $session->$session->getMessage("errors"),
             "values" => getFieldsValue()
         ]);
     }
 
 }
 elseif($page == "register") {
-    if(!isConnected()){
+    if(!$session->isConnected()){
         if (!empty($_POST)) {
             if (isset($_POST['lname']) && isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['repass'])) {
                 if (register($_POST['lname'], $_POST['fname'], $_POST['email'], $_POST['pass'], $_POST['repass'])) {
@@ -66,15 +68,15 @@ elseif($page == "register") {
             }
         }
         echo $twig->render("register.twig", [
-            "errors" => getMessage("errors"),
+            "errors" => $session->getMessage("errors"),
             "values" => getFieldsValue()
         ]);
     }
 
 }
 elseif($page == "logout"){
-    if(isConnected()) {
-        disconnect();
+    if($session->isConnected()) {
+        $session->disconnect();
     }else{
         header('Location: /');
     }
@@ -83,10 +85,10 @@ elseif($page == "logout"){
 
 //====================== DEBUT Partie ACCOUNT ======================
 elseif($page == "account"){
-    if(isConnected()) {
+    if($session->isConnected()) {
         echo $twig->render("account.twig",[
-            "errors" => getMessage("errors"),
-            "success" => getMessage("success"),
+            "errors" => $session->getMessage("errors"),
+            "success" => $session->getMessage("success"),
             "info" => getInfoUser($_SESSION['id'])
         ]);
     }else{
@@ -98,13 +100,13 @@ elseif($page == "account"){
 //====================== DEBUT Partie FORGOT PASS ======================
 
 elseif($page == "forgot-pass"){
-    if(!isConnected()) {
+    if(!$session->isConnected()) {
         if(!empty($_POST['email'])){
             $email = $_POST['email'];
             forgotpass($email);
         }
         echo $twig->render("forgot-pass.twig",[
-            "errors" => getMessage("errors")
+            "errors" => $session->getMessage("errors")
         ]);
 
     }else{
@@ -118,7 +120,7 @@ elseif($page == "forgot-pass"){
 //http://localhost/new-pass/'.urlencode($id).'
 
 elseif($page == "new-pass") {
-    if (!isConnected() && $parameter) {
+    if (!$session->isConnected() && $parameter) {
         if (!empty($_POST['pass']) && !empty($_POST['repass'])) {
             $pass = $_POST['pass'];
             $repass = $_POST['repass'];
@@ -126,7 +128,7 @@ elseif($page == "new-pass") {
             newpass($id, $pass, $repass);
         }
         echo $twig->render("new-pass.twig", [
-            "errors" => getMessage("errors"),
+            "errors" => $session->getMessage("errors"),
             "id" => $parameter
         ]);
     }
@@ -140,7 +142,7 @@ elseif($page == "detail") {
         $infoAcco = getAccomodationById($parameter);
         echo $twig->render("detail.twig", [
             "acco" => $infoAcco,
-            "errors" => getMessage("errors"),
+            "errors" => $session->getMessage("errors"),
             "userinfo" => getInfoUser($infoAcco['id_seller'])
         ]);
     }
@@ -154,10 +156,10 @@ elseif($page == "detail") {
 //====================== DEBUT Partie HOST ======================
 elseif($page == "host"){
     require_once "../App/create_acco.php";
-    if(isConnected()) {
+    if($session->isConnected()) {
         echo $twig->render("host.twig",[
-            "errors" => getMessage("errors"),
-            "success" => getMessage("success"),
+            "errors" => $session->getMessage("errors"),
+            "success" => $session->getMessage("success"),
         ]);
     }else{
         header('Location: /');
@@ -179,7 +181,7 @@ elseif($page == "list-detail") {
         if(isset($_GET['pe'])){$people = $_GET['pe'];}else{$people=0;}
     }
     echo $twig->render("list-detail.twig", [
-        "errors" => getMessage("errors"),
+        "errors" => $session->getMessage("errors"),
         "id" => $parameter,
         "accolist" => getList($where, $people),
         "values" => getFieldsValue()
@@ -197,8 +199,8 @@ elseif($page == "help") {
     }
     echo $twig->render("help.twig", [
         "values" => getFieldsValue(),
-        "errors" => getMessage("errors"),
-        "success" => getMessage("success")
+        "errors" => $session->getMessage("errors"),
+        "success" => $session->getMessage("success")
     ]);
 }
 //====================== FIN Partie help ======================
@@ -210,8 +212,8 @@ else {
     echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
-        "errors" => getMessage("errors"),
-        "success" => getMessage("success"),
+        "errors" => $session->getMessage("errors"),
+        "success" => $session->getMessage("success"),
     ]);
 }
 //====================== FIN Partie ACCUEIL ======================

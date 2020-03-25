@@ -30,21 +30,9 @@ function exist($email, $pass, $hash=1): int{
     return 0;
 }
 
-function isConnected(): int{
-    if(isset($_SESSION['state']) && $_SESSION['state'] == "connected"){
-        return 1;
-    }
-    return 0;
-}
 
-function disconnect(){
-    $_SESSION = [];
-    setcookie("email","");
-    setcookie("password","");
-    $_SESSION['success'] = [];
-    $_SESSION['success'][] = "Vous vous êtes bien déconnecté !";
-    header('Location: /');
-}
+
+
 function connect(array $data, int $id, $hash = 1): void{
     if(!isConnected()){
         $email = $data[0];
