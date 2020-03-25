@@ -29,5 +29,6 @@ class Session
         $_SESSION['success'] = [];
         $_SESSION['success'][] = "Vous vous êtes bien déconnecté !";
         header('Location: /');
+        exit("Redirection désactivé sur votre navigateur.");
     }
 }

@@ -23,7 +23,7 @@ function validate($id): void{
 
 function getAccomodationByUser($id){
     $db = Mysql::getInstance();
-    $stmt = $db->prepare("SELECT * FROM accomodation WHERE id_seller = ?");
+    $stmt = $db->prepare("SELECT * FROM gaccomodation WHERE id_seller = ?");
     $stmt->execute([$id]);
     //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -51,12 +51,7 @@ function getInfoUser($id, $acco = 1){
     return $info;
 }
 
-function newAdress($country, $city, $address, $sub_address, $zip,$lat,$long){
-    $db = Mysql::getInstance();
-    $req = $db->prepare("INSERT INTO place (country, city, address, sub_address, zip, lat, lon) VALUES (?,?,?,?,?,?,?)");
-    $req->execute([$country, $city, $address, $sub_address, $zip, $lat, $long]);
-    return $req;
-}
+
 
 
 
@@ -68,23 +63,6 @@ function getPlaceId($lat, $lon){
     $stmt = $stmt->fetch();
     return $stmt['id'];
 
-}
-function getCoords($address, $city, $zip){
-    //https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q=7+place+de+la+resistance+vourles+69390&format=json
-    $url = 'https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q='.$address .'+'.$city.'+'.$zip.'&format=json';
-    $page ='';
-    $fh = fopen($url,'r') or die("Erreur avec API");
-    while (! feof($fh)) { $page .= fread($fh,1048576); }
-    fclose($fh);
-    $test1 = explode('"lat":"', $page);
-    $coords = explode(",", $test1[1]);
-    $lat = trim($coords[0],'"');
-
-    $long = $coords[1];
-    $long= trim(str_replace('"lon":"', "", $long),'"');
-    $coords=[$lat,$long];
-    //var_dump($coords);
-    return $coords;
 }
 
 
@@ -153,12 +131,7 @@ function newpass($id, $pass, $repass){
         $_SESSION['errors'][] = "Les deux mots de passe ne correspondent pas.";
     }
 }
-function getPlaceInfoById($id){
-    $db = Mysql::getInstance();
-    $stmt = $db->prepare("SELECT * FROM place WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+
 
 function getList($where = 0, $people = 0){
     $list = new AccomodationList();

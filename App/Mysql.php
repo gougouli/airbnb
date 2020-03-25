@@ -37,10 +37,12 @@ class Mysql extends PDO{
     {
         return $this->PDOInstance->query($query);
     }
+
     public function prepare($query, $options = NULL)
     {
         return $this->PDOInstance->prepare($query);
     }
+
     public function execute($query)
     {
         return $this->PDOInstance->execute($query);
