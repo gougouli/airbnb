@@ -5,9 +5,9 @@ require_once "../App/functions.php";
 require_once "../App/log.php";
 
 use App\AccomodationList;
+use App\Token;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-
 
 $url = $_GET['url'];
 $url = explode("/",trim($url, "/"));

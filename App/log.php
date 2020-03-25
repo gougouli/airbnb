@@ -1,6 +1,7 @@
 <?php
 
 use App\Mysql;
+use App\Token;
 
 function exist($email, $pass, $hash=1): int{
     $db = Mysql::getInstance();
@@ -99,9 +100,9 @@ function register($last, $first, $email, $pass, $repass): int{
             if($reqmail->rowCount() == 0){
                 $fullname = $lname . " " . $fname;
                 $pass = sha1($pass);
-                $token = token(30);
+                $token = new Token(30);
                 $req = $db->prepare("INSERT INTO users SET fullname = ?, email = ?, password = ?, token_activation = ?");
-                $req = $req->execute([$fullname, $email, $pass, $token]);
+                $req->execute([$fullname, $email, $pass, $token]);
 
                 // Préparation du mail contenant le lien d'activation
                 $destinataire = $email;
