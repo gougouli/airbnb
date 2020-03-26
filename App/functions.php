@@ -3,11 +3,11 @@
 use App\AccomodationList;
 use App\Mysql;
 
-
-function token($length) {
-    $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-    return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
-}
+//
+//function token($length) {
+//    $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+//    return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
+//}
 function getMessage($type){
     if(isset($_SESSION[$type])){
         $errors = $_SESSION[$type];

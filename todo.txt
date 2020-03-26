@@ -5,7 +5,14 @@ page annexe:
 -   a propos (page de blabla)
 -   contribueurs (jsp encore)
 -   politique de confidentialité (lorem ipsum)
--   contactez-nous (link -> help)
+-   contactez-nous (link -> help) fait
 -   carte (grosse map)
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
+faire que des fichier classe
+
+
+faire un fichier class pour les session genre, isConnected alors a chaque fois je dois instancie un ojbjet pour creer et genre faire
+$session = new Session
+$session->Isconnected() ?
+Psk du coup vaut mieux faire un isConnected() simple qui retourne l'etat de la session non

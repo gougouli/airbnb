@@ -5,9 +5,9 @@ require_once "../App/functions.php";
 require_once "../App/log.php";
 
 use App\AccomodationList;
+use App\Token;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-
 
 $url = $_GET['url'];
 $url = explode("/",trim($url, "/"));
@@ -41,7 +41,6 @@ if($page == "login"){
                 if ($id = exist($_POST['email'], $_POST['pass'])) {
                     if(empty($_POST['keep_pass'])){
                         $keep = FALSE;
-                        echo "test";
                     }else{
                         $keep = true;
                     }
@@ -65,7 +64,6 @@ elseif($page == "register") {
                     header("Location: /");
                 }
             }
-            $_SESSION['errors'][] = "Vous n'avez pas renseigné tous les champs.";
         }
         echo $twig->render("register.twig", [
             "errors" => getMessage("errors"),
