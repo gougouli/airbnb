@@ -1,14 +1,13 @@
 <?php
 session_start();
 require_once "../vendor/autoload.php";
-require_once "../App/functions.php";
-require_once "../App/log.php";
 
 use App\Accomodation;
 use App\AccomodationList;
 use App\Form;
 use App\Session;
 use App\User;
+use App\Utils;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -29,6 +28,7 @@ $twig->addGlobal('session', $_SESSION);
 $accomodationList = new AccomodationList();
 $session = new Session();
 $user = new User();
+$utils = new Utils();
 
 if(!$session->isConnected()){
     if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
@@ -57,7 +57,7 @@ if($page == "login"){
         }
         echo $twig->render("login.twig",[
             "errors" => $session->getMessage("errors"),
-            "values" => getFieldsValue()
+            "values" => $utils->getFieldsValue()
         ]);
     }
 
@@ -74,7 +74,7 @@ elseif($page == "register") {
         }
         echo $twig->render("register.twig", [
             "errors" => $session->getMessage("errors"),
-            "values" => getFieldsValue()
+            "values" => $utils->getFieldsValue()
         ]);
     }
 
@@ -151,7 +151,7 @@ elseif($page == "detail") {
         echo $twig->render("detail.twig", [
             "acco" => $infoAcco,
             "errors" => $session->getMessage("errors"),
-            "userinfo" => getInfoUser($infoAcco['id_seller'])
+            "userinfo" => $user->getInfoUser($infoAcco['id_seller'])
         ]);
     }
     else {
@@ -191,8 +191,8 @@ elseif($page == "list-detail") {
     echo $twig->render("list-detail.twig", [
         "errors" => $session->getMessage("errors"),
         "id" => $parameter,
-        "accolist" => getList($where, $people),
-        "values" => getFieldsValue()
+        "accolist" => $accomodationList->getList($where, $people),
+        "values" => $utils->getFieldsValue()
     ]);
 }
 //====================== FIN Partie NEW PASS ======================
@@ -204,10 +204,10 @@ elseif($page == "help") {
     if(isset($_POST['email']) && isset($_POST['object']) && isset($_POST['message']) && isset($_POST['captcha'])){
         $form = new Form;
         $form->sendMessageHelp($_POST['email'],$_POST['object'],$_POST['message'], $_POST['captcha']);
-        echo "test";
     }
+
     echo $twig->render("help.twig", [
-        "values" => getFieldsValue(),
+        "values" => $utils->getFieldsValue(),
         "errors" => $session->getMessage("errors"),
         "success" => $session->getMessage("success")
     ]);

@@ -155,4 +155,27 @@ Ceci est un mail automatique, merci de ne pas y répondre.';
         return 0;
     }
 
+    function getList($where = 0, $people = 0){
+        $list = new AccomodationList();
+        if($people){
+            $listHouse = $list->getByPeople($people);
+        }elseif($where) {
+            $listHouse = $list->getByPlace($where);
+        }elseif ($where && $people){
+            $listHouse = $list->getByPlacePeople($where, $people);
+        }else{
+            $listHouse = $list->getAll();
+        }
+
+        $newList= [];
+        foreach ($listHouse as $house){
+            $place = new Place();
+            $info = $place->getPlace($house['id_place']);
+            $house['infoplace'] = $info;
+            $newList[] = $house;
+
+        }
+        return $newList;
+    }
+
 }
