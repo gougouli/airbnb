@@ -26,7 +26,7 @@ $twig->addGlobal('session', $_SESSION);
 //$twig->addGlobal('server', $_SERVER);
 
 $accomodationList = new AccomodationList();
-$session = new Session();
+$session = Session::getInstance();
 $user = new User();
 $utils = new Utils();
 
@@ -34,7 +34,7 @@ if(!$session->isConnected()){
     if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
         if ($id = $user->exist($_COOKIE['email'], $_COOKIE['password'], 0)) {
             $data=[$_COOKIE['email'], $_COOKIE['password'], 1];
-            connect($data, $id, 0);
+            $session->connect($data, $id, 0);
         }
     }
 }

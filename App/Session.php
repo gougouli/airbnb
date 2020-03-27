@@ -6,6 +6,15 @@ namespace App;
 
 class Session
 {
+    private static $instance;
+
+    public static function getInstance() {
+
+        if(is_null(self::$instance)) {
+            self::$instance = new Session();
+        }
+        return self::$instance;
+    }
     public function isConnected(): int{
         if(isset($_SESSION['state']) && $_SESSION['state'] == "connected"){
             return TRUE;
