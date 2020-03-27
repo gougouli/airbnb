@@ -17,40 +17,10 @@ function getFieldsValue(){
 
 
 
-function getAccomodationByUser($id){
-    $db = Mysql::getInstance();
-    $stmt = $db->prepare("SELECT * FROM gaccomodation WHERE id_seller = ?");
-    $stmt->execute([$id]);
-    //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-function getAccomodationById($id){
-    $db = Mysql::getInstance();
-    $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
-    $stmt->execute([$id]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $result['place'] = getPlaceInfoById($id);
-    //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
-    return $result;
-}
-
-function getPlaceId($lat, $lon){
-    $db = Mysql::getInstance();
-    $stmt = $db->prepare("SELECT * FROM place WHERE lat = $lat");
-    $stmt->execute([$lat]);
-
-    $stmt = $stmt->fetch();
-    return $stmt['id'];
-
-}
 
 
-function newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end){
-    $db = Mysql::getInstance();
-    $req = $db->prepare("INSERT INTO accomodation (title, content, size, id_seller, animal, handicap, breakfast, dinner, single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
-    return $req;
-}
+
+
 
 function forgotpass($email){
     $db = Mysql::getInstance();
