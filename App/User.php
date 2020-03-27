@@ -50,5 +50,5 @@ class User
 
         }
         return 0;
-    }g
+    }
 }

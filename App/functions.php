@@ -15,13 +15,6 @@ function getFieldsValue(){
     return FALSE;
 }
 
-
-
-
-
-
-
-
 function forgotpass($email){
     $db = Mysql::getInstance();
     if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){$_SESSION['errors'][] = "Votre email est incorrect.";return;}
