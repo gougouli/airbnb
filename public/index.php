@@ -4,7 +4,7 @@ require_once "../vendor/autoload.php";
 
 use App\Accomodation;
 use App\AccomodationList;
-use App\Form;
+use App\Form;g
 use App\Session;
 use App\User;
 use App\Utils;
@@ -51,7 +51,7 @@ if($page == "login"){
                         $keep = true;
                     }
                     $data = [$_POST['email'], $_POST['pass'], $keep];
-                    connect($data, $id);
+                    $session->connect($data, $id);
                 }
             }
         }
@@ -188,10 +188,11 @@ elseif($page == "list-detail") {
         if(isset($_GET['pl'])){$where = $_GET['pl'];}else{$where=0;}
         if(isset($_GET['pe'])){$people = $_GET['pe'];}else{$people=0;}
     }
+    $search = new Form();
     echo $twig->render("list-detail.twig", [
         "errors" => $session->getMessage("errors"),
         "id" => $parameter,
-        "accolist" => $accomodationList->getList($where, $people),
+        "accolist" => $search->getList($where, $people),
         "values" => $utils->getFieldsValue()
     ]);
 }

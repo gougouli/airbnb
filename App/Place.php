@@ -4,6 +4,8 @@
 namespace App;
 
 
+use PDO;
+
 class Place
 {
 
