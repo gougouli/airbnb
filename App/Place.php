@@ -6,42 +6,31 @@ namespace App;
 
 class Place
 {
-    private $id;
 
-    public function __construct($country, $city, $address, $sub_address, $zip,$lat,$long)
-    {
-        $this->country = $country;
-        $this->city = $city;
-        $this->address = $address;
-        $this->sub_address = $sub_address;
-        $this->zip = $zip;
-        $this->lat = $lat;
-        $this->long = $long;
-    }
-    public function getId()
+    public function getId($lat, $long)
     {
         $db = Mysql::getInstance();
         $req = $db->prepare("SELECT * FROM place WHERE lat = :lat AND long = :long");
-        $req->execute(["lat" => $this->lat,"long" => $this->long]);
-        $this->id = $req;
-        return $req;
+        $req->execute(["lat" => $lat,"long" => $long]);
+        $req = $req->fetch();
+        return $req['id'];
     }
 
-    function addAdress()
+    function addAdress($country, $city, $address, $sub_address, $zip, $lat, $long)
     {
         $db = Mysql::getInstance();
         $req = $db->prepare("INSERT INTO place (country, city, address, sub_address, zip, lat, lon) VALUES (?,?,?,?,?,?,?)");
-        $req->execute([$this->country, $this->city, $this->address, $this->sub_address, $this->zip, $this->lat, $this->long]);
+        $req->execute([$country, $city, $address, $sub_address, $zip, $lat, $long]);
         if($req){
             return 1;
         }
         return 0;
     }
 
-    function getCoords()
+    function getCoords($address, $city, $zip)
     {
         //https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q=7+place+de+la+resistance+vourles+69390&format=json
-        $url = 'https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q='.$this->address .'+'.$this->city.'+'.$this->zip.'&format=json';
+        $url = 'https://eu1.locationiq.com/v1/search.php?key=f539d8ca0e50b6&q='.$address .'+'.$city.'+'.$zip.'&format=json';
         $page ='';
         $fh = fopen($url,'r') or die("Erreur avec API");
         while (! feof($fh)) {
@@ -58,16 +47,12 @@ class Place
         return $coords;
     }
 
-    public function getPlace()
+    public function getPlace($id)
     {
-        if($this->id){
-            $db = Mysql::getInstance();
-            $stmt = $db->prepare("SELECT * FROM place WHERE id = ?");
-            $stmt->execute([$this->id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }else{
-            throw new \Exception("ID of place is not defined");
-        }
+        $db = Mysql::getInstance();
+        $stmt = $db->prepare("SELECT * FROM place WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
 

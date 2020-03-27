@@ -52,20 +52,6 @@ function getInfoUser($id, $acco = 1){
 }
 
 
-
-
-
-function getPlaceId($lat, $lon){
-    $db = Mysql::getInstance();
-    $stmt = $db->prepare("SELECT * FROM place WHERE lat = $lat");
-    $stmt->execute([$lat]);
-
-    $stmt = $stmt->fetch();
-    return $stmt['id'];
-
-}
-
-
 function newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end){
     $db = Mysql::getInstance();
     $req = $db->prepare("INSERT INTO accomodation (title, content, size, id_seller, animal, handicap, breakfast, dinner, single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
