@@ -4,8 +4,11 @@ require_once "../vendor/autoload.php";
 require_once "../App/functions.php";
 require_once "../App/log.php";
 
+use App\Accomodation;
 use App\AccomodationList;
+use App\Form;
 use App\Session;
+use App\User;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -25,10 +28,11 @@ $twig->addGlobal('session', $_SESSION);
 
 $accomodationList = new AccomodationList();
 $session = new Session();
+$user = new User();
 
 if(!$session->isConnected()){
     if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
-        if ($id = exist($_COOKIE['email'], $_COOKIE['password'], 0)) {
+        if ($id = $user->exist($_COOKIE['email'], $_COOKIE['password'], 0)) {
             $data=[$_COOKIE['email'], $_COOKIE['password'], 1];
             connect($data, $id, 0);
         }
@@ -40,7 +44,7 @@ if($page == "login"){
     if(!$session->isConnected()){
         if(!empty($_POST)) {
             if (isset($_POST['email']) && isset($_POST['pass'])) {
-                if ($id = exist($_POST['email'], $_POST['pass'])) {
+                if ($id = $user->exist($_POST['email'], $_POST['pass'])) {
                     if(empty($_POST['keep_pass'])){
                         $keep = FALSE;
                     }else{
@@ -52,7 +56,7 @@ if($page == "login"){
             }
         }
         echo $twig->render("login.twig",[
-            "errors" => $session->$session->getMessage("errors"),
+            "errors" => $session->getMessage("errors"),
             "values" => getFieldsValue()
         ]);
     }
@@ -62,7 +66,8 @@ elseif($page == "register") {
     if(!$session->isConnected()){
         if (!empty($_POST)) {
             if (isset($_POST['lname']) && isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['repass'])) {
-                if (register($_POST['lname'], $_POST['fname'], $_POST['email'], $_POST['pass'], $_POST['repass'])) {
+                $form = new Form();
+                if ($form->register($_POST['lname'], $_POST['fname'], $_POST['email'], $_POST['pass'], $_POST['repass'])) {
                     header("Location: /");
                 }
             }
@@ -89,7 +94,7 @@ elseif($page == "account"){
         echo $twig->render("account.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
-            "info" => getInfoUser($_SESSION['id'])
+            "info" => $user->getInfoUser($_SESSION['id'])
         ]);
     }else{
         header('Location: /');
@@ -103,7 +108,8 @@ elseif($page == "forgot-pass"){
     if(!$session->isConnected()) {
         if(!empty($_POST['email'])){
             $email = $_POST['email'];
-            forgotpass($email);
+            $form = new Form();
+            $form->forgotpass($email);
         }
         echo $twig->render("forgot-pass.twig",[
             "errors" => $session->getMessage("errors")
@@ -125,7 +131,8 @@ elseif($page == "new-pass") {
             $pass = $_POST['pass'];
             $repass = $_POST['repass'];
             $id = $_POST['idtoken'];
-            newpass($id, $pass, $repass);
+            $form = new Form();
+            $form->newpass($id, $pass, $repass);
         }
         echo $twig->render("new-pass.twig", [
             "errors" => $session->getMessage("errors"),
@@ -139,7 +146,8 @@ elseif($page == "new-pass") {
 
 elseif($page == "detail") {
     if ($parameter) {
-        $infoAcco = getAccomodationById($parameter);
+        $acco = new Accomodation();
+        $infoAcco = $acco->getAccomodationById($parameter);
         echo $twig->render("detail.twig", [
             "acco" => $infoAcco,
             "errors" => $session->getMessage("errors"),
@@ -194,7 +202,8 @@ elseif($page == "list-detail") {
 
 elseif($page == "help") {
     if(isset($_POST['email']) && isset($_POST['object']) && isset($_POST['message']) && isset($_POST['captcha'])){
-        sendMessageHelp($_POST['email'],$_POST['object'],$_POST['message'], $_POST['captcha']);
+        $form = new Form;
+        $form->sendMessageHelp($_POST['email'],$_POST['object'],$_POST['message'], $_POST['captcha']);
         echo "test";
     }
     echo $twig->render("help.twig", [
