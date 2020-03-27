@@ -1,6 +1,7 @@
 <?php
 
 use App\Mysql;
+use App\Session;
 use App\Token;
 
 function exist($email, $pass, $hash=1): int{
@@ -34,7 +35,8 @@ function exist($email, $pass, $hash=1): int{
 
 
 function connect(array $data, int $id, $hash = 1): void{
-    if(!isConnected()){
+    $session = new Session();
+    if($session->isConnected()){
         $email = $data[0];
         $pass = $data[1];
         if($hash){
@@ -55,7 +57,8 @@ function connect(array $data, int $id, $hash = 1): void{
 }
 
 function logout(): void{
-    if(isConnected()){
+    $session = new Session();
+    if($session->isConnected()){
         session_unset();
         session_destroy();
         setcookie('email', '', 0);
