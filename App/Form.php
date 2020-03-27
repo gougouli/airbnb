@@ -49,11 +49,12 @@ Ceci est un mail automatique, merci de ne pas y répondre.';
     public function newpass($id, $pass, $repass){
         $db = Mysql::getInstance();
         if(!empty($pass) && $pass == $repass){
-            $info = getInfoUser($id, 0);
+            $user = new User();
+            $info = $user->getInfoUser($id, 0);
             if($info['isActive'] == 3){
                 $req = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
                 $req->execute([sha1($pass), $id]);
-                validate($id);
+                $user->validate($id);
                 $_SESSION['success'][] =  "Le mot de passe a bien été changé.";
                 header('Location: /');
                 return 1;
