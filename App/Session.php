@@ -33,7 +33,7 @@ class Session
 
     function connect(array $data, int $id, $hash = 1): void{
         $session = new Session();
-        if($session->isConnected()){
+        if(!$session->isConnected()){
             $email = $data[0];
             $pass = $data[1];
             if($hash){
