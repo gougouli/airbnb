@@ -4,6 +4,7 @@
 namespace App;
 
 use App\Mysql;
+use PDO;
 
 class Accomodation {
 
@@ -24,13 +25,6 @@ class Accomodation {
 //               hour_start = ?, hour_end = ?");
 //        $req = $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
 //    }
-
-    public function getById($id){
-        $db = Mysql::getInstance();
-        $req = $db->prepare("SELECT * FROM `accomodation` WHERE `id` = ?");
-        $req->execute([$id]);
-        return $req->fetchAll(PDO::FETCH_ACCOC);
-    }
 
     public function disable():void { //  FUNCTION BDD////
         $db = Mysql::getInstance();
@@ -53,11 +47,12 @@ class Accomodation {
     }
 
     public function getAccomodationById($id){
+        $place = new Place();
         $db = Mysql::getInstance();
         $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
         $stmt->execute([$id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $result['place'] = getPlaceInfoById($id);
+        $result['place'] = $place->getPlace($id);
         //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
         return $result;
     }

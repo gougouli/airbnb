@@ -4,6 +4,8 @@
 namespace App;
 
 
+use PDO;
+
 class User
 {
     public function getInfoUser($id, $acco = 1){

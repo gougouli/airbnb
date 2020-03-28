@@ -203,10 +203,13 @@ elseif($page == "list-detail") {
 
 //====================== DEBUT Partie RESERVE ======================
 elseif($page == "reserve"){
-    if(isConnected()){
+    if($session->isConnected() && $parameter){
+        $acco = new Accomodation();
         echo $twig->render("reserve.twig",[
-            "errors" => getMessage("errors"),
-            "success" => getMessage("success"),
+            "errors" => $session->getMessage("errors"),
+            "success" => $session->getMessage("success"),
+            "userinfo" => $user->getInfoUser($_SESSION['id']),
+            "accoinfo" => $acco->getAccomodationById($parameter)
         ]);
     }else{
         header('Location: /login');
