@@ -4,7 +4,7 @@ require_once "../vendor/autoload.php";
 
 use App\Accomodation;
 use App\AccomodationList;
-use App\Form;g
+use App\Form;
 use App\Session;
 use App\User;
 use App\Utils;
