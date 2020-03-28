@@ -57,6 +57,8 @@ class Session
         if($this->isConnected()){
             setcookie("email","");
             setcookie("password","");
+            $_SESSION['state'] = "";
+            $_SESSION['id'] = "";
             $_SESSION['success'] = [];
             $_SESSION['success'][] = "Vous vous êtes bien déconnecté !";
             header('Location: /');
