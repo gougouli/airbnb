@@ -59,6 +59,9 @@ if($page == "login"){
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
+    }else{
+        $_SESSION['errors'][] = "Vous êtes déjà connecté.";
+        header('Location: /');
     }
 
 }
@@ -76,6 +79,9 @@ elseif($page == "register") {
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
+    }else{
+        $_SESSION['errors'][] = "Vous êtes déjà connecté.";
+        header('Location: /');
     }
 
 }
@@ -83,6 +89,7 @@ elseif($page == "logout"){
     if($session->isConnected()) {
         $session->disconnect();
     }else{
+        $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
         header('Location: /');
     }
 }
@@ -97,6 +104,7 @@ elseif($page == "account"){
             "info" => $user->getInfoUser($_SESSION['id'])
         ]);
     }else{
+        $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
         header('Location: /');
     }
 }
@@ -116,6 +124,7 @@ elseif($page == "forgot-pass"){
         ]);
 
     }else{
+        $_SESSION['errors'][] = "Vous devez vous déconnecter.";
         header('Location: /');
     }
 }
@@ -138,6 +147,9 @@ elseif($page == "new-pass") {
             "errors" => $session->getMessage("errors"),
             "id" => $parameter
         ]);
+    }else{
+        $_SESSION['errors'][] = "Vous devez être déconnecté.";
+        header('Location: /');
     }
 }
 //====================== FIN Partie NEW PASS ======================
@@ -170,6 +182,7 @@ elseif($page == "host"){
             "success" => $session->getMessage("success"),
         ]);
     }else{
+        $_SESSION['errors'][] = "Vous devez être connecté.";
         header('Location: /');
     }
 }
@@ -212,7 +225,8 @@ elseif($page == "reserve"){
             "accoinfo" => $acco->getAccomodationById($parameter)
         ]);
     }else{
-        header('Location: /login');
+        $_SESSION['errors'][] = "Vous devez être connecté.";
+        header('Location: /');
     }
 }
 
@@ -238,8 +252,7 @@ elseif($page == "help") {
 
 
 //====================== DEBUT Partie ACCUEIL ======================
-
-else {
+else{
     echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
@@ -247,4 +260,6 @@ else {
         "success" => $session->getMessage("success"),
     ]);
 }
+
 //====================== FIN Partie ACCUEIL ======================
+
