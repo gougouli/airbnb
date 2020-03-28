@@ -1,6 +1,8 @@
 <?php
 
+use App\Accomodation;
 use App\Mysql;
+use App\Place;
 
 if(!empty($_POST)){
 
@@ -47,10 +49,12 @@ if(!empty($_POST)){
     $req = $db->prepare("SELECT * FROM users WHERE id = ? AND password = ?");
     $req->execute([$id_seller, sha1($password)]);
     if($req->rowCount() == 1){
-        $coords = getCoords($address, $city, $zip);
-        newAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
-        $place_id = getPlaceId($coords[0],$coords[1]);
-        newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
+        $place = new Place();
+        $coords = $place->getCoords($address, $city, $zip);
+        $place->addAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
+        $place_id = $place->getId($coords[0],$coords[1]);
+        $acco = new Accomodation();
+        $acco->newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
         $_SESSION['success'][] = "Votre hebergement a bien été crée !";
     }else{$_SESSION['errors'][] = "votre mot de passe est incorrect !";}
 }

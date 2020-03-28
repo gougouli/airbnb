@@ -10,7 +10,7 @@ page annexe:
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
 faire que des fichier classe
-
+autocompletion
 
 faire un fichier class pour les session genre, isConnected alors a chaque fois je dois instancie un ojbjet pour creer et genre faire
 $session = new Session

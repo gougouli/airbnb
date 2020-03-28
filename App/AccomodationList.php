@@ -19,7 +19,8 @@ class AccomodationList{
         $results = $req->fetchAll(PDO::FETCH_ASSOC);
         $newList = [];
         foreach ($results as $result){
-            $result['place'] = getPlaceInfoById($result['id']);
+            $place = new Place();
+            $result['place'] = $place->getPlace($result['id']);
             $newList[] = $result;
         }
         return $newList;
