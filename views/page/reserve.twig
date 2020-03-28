@@ -106,4 +106,20 @@
         </div>
     </div>
 </div>
+
+<div class="container-fluid">
+<br>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Votre choix :</h5>
+            <h6 class="card-text">{{accoinfo.title}}</h6>
+            <p class="card-text"> {{accoinfo.place.address}}</p>
+            <p class="card-text">{{accoinfo.place.country}} - {{accoinfo.place.city}} - {{accoinfo.place.zip}}</p>
+            <h6 class="card-text"> Hébergeur</h6>
+            <p class="card-text"> {{userinfo.fullname}}</p>
+            <a href="#" class="btn btn-info">Changer</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
