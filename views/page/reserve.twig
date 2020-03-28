@@ -67,29 +67,13 @@
                 </div>
                 </br>
                 <div class="form-group">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Adulte(s)
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">1</a>
-                            <a class="dropdown-item" href="#">2</a>
-                            <a class="dropdown-item" href="#">3</a>
-                            <a class="dropdown-item" href="#">4</a>
-                            <a class="dropdown-item" href="#">5</a>
-                        </div>
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Enfant(s)
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">1</a>
-                            <a class="dropdown-item" href="#">2</a>
-                            <a class="dropdown-item" href="#">3</a>
-                            <a class="dropdown-item" href="#">4</a>
-                            <a class="dropdown-item" href="#">5</a>
-                        </div>
+                    <div class="input_field adult font-weight-bold">
+                        <label for="adult">Adulte(s): </label><input min="0" max="10" value="0" type="number" name="adult">
                     </div>
-                        </br>
+                        <div class="input_field child font-weight-bold">
+                        <label for="child">Enfant(s): </label><input min="0" max="10" value="0" type="number" name="child">
+                        </div>
+                </div></br>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Suggestion</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
