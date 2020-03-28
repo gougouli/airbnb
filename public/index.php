@@ -4,7 +4,7 @@ require_once "../vendor/autoload.php";
 
 use App\Accomodation;
 use App\AccomodationList;
-use App\Form;g
+use App\Form;
 use App\Session;
 use App\User;
 use App\Utils;
@@ -189,10 +189,13 @@ elseif($page == "list-detail") {
         if(isset($_GET['pe'])){$people = $_GET['pe'];}else{$people=0;}
     }
     $search = new Form();
+    $list = $search->getList($where, $people);
+    require_once "../App/setCursorMaps.php";
+
     echo $twig->render("list-detail.twig", [
         "errors" => $session->getMessage("errors"),
         "id" => $parameter,
-        "accolist" => $search->getList($where, $people),
+        "accolist" => $list,
         "values" => $utils->getFieldsValue()
     ]);
 }
