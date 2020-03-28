@@ -9,7 +9,8 @@
     ],
     "require": {
         "twig/twig": "^3.0",
-        "opencage/geocode": "^2.1"
+        "opencage/geocode": "^2.1",
+      "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {

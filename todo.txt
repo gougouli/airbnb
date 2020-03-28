@@ -1,1 +1,18 @@
 modification of information of account in account.twig without JS as possible in branch "account"
+table with image of different hebergment and user
+page reserve
+page annexe:
+-   a propos (page de blabla)
+-   contribueurs (jsp encore)
+-   politique de confidentialité (lorem ipsum)
+-   contactez-nous (link -> help) fait
+-   carte (grosse map)
+faire recherche recente: footer
+Recherche par tag, nouvelle table avec des tags
+faire que des fichier classe
+autocompletion
+
+faire un fichier class pour les session genre, isConnected alors a chaque fois je dois instancie un ojbjet pour creer et genre faire
+$session = new Session
+$session->Isconnected() ?
+Psk du coup vaut mieux faire un isConnected() simple qui retourne l'etat de la session non
