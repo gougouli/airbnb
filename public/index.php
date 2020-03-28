@@ -201,6 +201,21 @@ elseif($page == "list-detail") {
 }
 //====================== FIN Partie NEW PASS ======================
 
+//====================== DEBUT Partie RESERVE ======================
+elseif($page == "reserve"){
+    if(isConnected()){
+        echo $twig->render("reserve.twig",[
+            "errors" => getMessage("errors"),
+            "success" => getMessage("success"),
+        ]);
+    }else{
+        header('Location: /login');
+    }
+}
+
+//====================== fin Partie HOST ======================
+
+
 
 //====================== DEBUT Partie help ======================
 
