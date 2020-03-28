@@ -1,0 +1,109 @@
+{% extends "../default.twig" %}
+
+
+{% block title %}Sakado - Réserver{% endblock %}
+
+{% block css%}
+<link rel="stylesheet" href="/css/reserve.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+{% endblock %}
+
+{% block nav %}
+<li><a href="/">Accueil</a></li>
+<li><a href="/account">Mon compte</a></li>
+<li><a href="/host">Devenez Hote</a></li>
+<li><a href="/list-detail">Reserver un séjour</a></li>
+<li><a href="/logout">Se déconnecter</a></li>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	$(document).ready(function(){
+		var date_input=$('input[name="date"]');
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'dd/mm/yyyy',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		})
+	})
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Ma réservation</h1>
+    </br>
+    <div class="row">
+        <div class="col-md-5">
+            <form action="https://formden.com/post/MlKtmY4x/" class="form-horizontal" method="post">
+                <div class="form-group ">
+                    <div class="col-sm-10">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-calendar-alt">
+                                </i>
+                            </div>
+                            <input class="form-control" id="date" name="date" placeholder="Date d'arrivée" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-sm-10">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-calendar-alt">
+                                </i>
+                            </div>
+                            <input class="form-control" id="date" name="date" placeholder="Date de départ" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                <div class="form-group">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Adulte(s)
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">1</a>
+                            <a class="dropdown-item" href="#">2</a>
+                            <a class="dropdown-item" href="#">3</a>
+                            <a class="dropdown-item" href="#">4</a>
+                            <a class="dropdown-item" href="#">5</a>
+                        </div>
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Enfant(s)
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">1</a>
+                            <a class="dropdown-item" href="#">2</a>
+                            <a class="dropdown-item" href="#">3</a>
+                            <a class="dropdown-item" href="#">4</a>
+                            <a class="dropdown-item" href="#">5</a>
+                        </div>
+                    </div>
+                        </br>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Suggestion</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    </br>
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input name="_honey" style="display:none" type="text"/>
+                        <button class="btn btn-info " name="submit" type="submit">
+                        Réserver
+                        </button>               
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
