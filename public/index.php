@@ -251,6 +251,13 @@ elseif($page == "help") {
 }
 //====================== FIN Partie help ======================
 
+//====================== DEBUT Partie maps ======================
+
+elseif($page == "maps") {
+    echo $twig->render("maps.twig");
+}
+//====================== FIN Partie maps ======================
+
 
 //====================== DEBUT Partie ACCUEIL ======================
 else{
