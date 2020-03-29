@@ -21,7 +21,7 @@ $loader = new FilesystemLoader('../views/page/');
 $twig = new Environment($loader, [
     'cache' => false //'../tmp',
 ]);
-
+$twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
 $twig->addGlobal('session', $_SESSION);
 //$twig->addGlobal('server', $_SERVER);
 
@@ -221,6 +221,7 @@ elseif($page == "reserve"){
         echo $twig->render("reserve.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
+            "values" => $utils->getFieldsValue(),
             "userinfo" => $user->getInfoUser($_SESSION['id']),
             "accoinfo" => $acco->getAccomodationById($parameter)
         ]);
