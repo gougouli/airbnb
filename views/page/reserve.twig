@@ -26,6 +26,11 @@
 			container: container,
 			todayHighlight: true,
 			autoclose: true,
+            startDate: new Date(),
+            immediateUpdates: true
+            datesDisabled: [
+                "01/04/2020"
+            ]
 		})
 	})
 </script>
@@ -35,7 +40,7 @@
 
 
 {% block content %}
-    <div class="page-content col-5">
+    <div class="page-content col-md-5 col-sm-12">
         <h1>Formulaire de réservation</h1>
         <div class="col-md-12">
             <form class="form-horizontal" method="post">

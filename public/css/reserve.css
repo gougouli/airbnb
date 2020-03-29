@@ -5,3 +5,9 @@ main {display: flex;justify-content: center;text-align: center;}
 h1 {margin-bottom: 40px;}
 .page-content {min-height:500px;border: solid 1px black; border-radius: 10px;padding: 20px 10px;margin-top: 30px;}
 .card {position: absolute; right: 40px;top:150px;}
+
+@media all and (max-width: 1400px){
+    main {flex-direction: column;align-items: center;}
+    .page-content {margin: 50px 10px;border-radius: 0;border-left: 0;border-right: 0;background-color: #bab9b2;}
+    .card {position: relative;right:0;top:0;}
+}
