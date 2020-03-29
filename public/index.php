@@ -21,7 +21,7 @@ $loader = new FilesystemLoader('../views/page/');
 $twig = new Environment($loader, [
     'cache' => false //'../tmp',
 ]);
-
+$twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
 $twig->addGlobal('session', $_SESSION);
 //$twig->addGlobal('server', $_SERVER);
 
@@ -59,6 +59,9 @@ if($page == "login"){
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
+    }else{
+        $_SESSION['errors'][] = "Vous êtes déjà connecté.";
+        header('Location: /');
     }
 
 }
@@ -76,6 +79,9 @@ elseif($page == "register") {
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
+    }else{
+        $_SESSION['errors'][] = "Vous êtes déjà connecté.";
+        header('Location: /');
     }
 
 }
@@ -83,6 +89,7 @@ elseif($page == "logout"){
     if($session->isConnected()) {
         $session->disconnect();
     }else{
+        $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
         header('Location: /');
     }
 }
@@ -97,6 +104,7 @@ elseif($page == "account"){
             "info" => $user->getInfoUser($_SESSION['id'])
         ]);
     }else{
+        $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
         header('Location: /');
     }
 }
@@ -116,6 +124,7 @@ elseif($page == "forgot-pass"){
         ]);
 
     }else{
+        $_SESSION['errors'][] = "Vous devez vous déconnecter.";
         header('Location: /');
     }
 }
@@ -138,6 +147,9 @@ elseif($page == "new-pass") {
             "errors" => $session->getMessage("errors"),
             "id" => $parameter
         ]);
+    }else{
+        $_SESSION['errors'][] = "Vous devez être déconnecté.";
+        header('Location: /');
     }
 }
 //====================== FIN Partie NEW PASS ======================
@@ -170,6 +182,7 @@ elseif($page == "host"){
             "success" => $session->getMessage("success"),
         ]);
     }else{
+        $_SESSION['errors'][] = "Vous devez être connecté.";
         header('Location: /');
     }
 }
@@ -189,14 +202,37 @@ elseif($page == "list-detail") {
         if(isset($_GET['pe'])){$people = $_GET['pe'];}else{$people=0;}
     }
     $search = new Form();
+    $list = $search->getList($where, $people);
+    require_once "../App/setCursorMaps.php";
+
     echo $twig->render("list-detail.twig", [
         "errors" => $session->getMessage("errors"),
         "id" => $parameter,
-        "accolist" => $search->getList($where, $people),
+        "accolist" => $list,
         "values" => $utils->getFieldsValue()
     ]);
 }
 //====================== FIN Partie NEW PASS ======================
+
+//====================== DEBUT Partie RESERVE ======================
+elseif($page == "reserve"){
+    if($session->isConnected() && $parameter){
+        $acco = new Accomodation();
+        echo $twig->render("reserve.twig",[
+            "errors" => $session->getMessage("errors"),
+            "success" => $session->getMessage("success"),
+            "values" => $utils->getFieldsValue(),
+            "userinfo" => $user->getInfoUser($_SESSION['id']),
+            "accoinfo" => $acco->getAccomodationById($parameter)
+        ]);
+    }else{
+        $_SESSION['errors'][] = "Vous devez être connecté.";
+        header('Location: /');
+    }
+}
+
+//====================== fin Partie HOST ======================
+
 
 
 //====================== DEBUT Partie help ======================
@@ -224,8 +260,7 @@ elseif($page == "maps") {
 
 
 //====================== DEBUT Partie ACCUEIL ======================
-
-else {
+else{
     echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
@@ -233,4 +268,6 @@ else {
         "success" => $session->getMessage("success"),
     ]);
 }
+
 //====================== FIN Partie ACCUEIL ======================
+
