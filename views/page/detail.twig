@@ -12,7 +12,7 @@
      <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
      <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
 {% else %}
-     <li><a class="nav-item nav-link" href="/login">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
      <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
      <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
      <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
@@ -43,7 +43,7 @@
                                    <div class="card-body">
                                         <div class="content">
                                              <p class="font-weight-bold"> {{acco.place.country}} - {{acco.place.city}} - {{acco.place.zip}} </p>
-                                             <button id="singlebutton" name="singlebutton" class="btn btn-primary float-right">Reserver</button> 
+                                             <a href="/reserve/{{ acco.id }}"id="singlebutton" name="singlebutton" class="btn btn-primary float-right">Reserver</a>
                                         </div>
                                         <p> {{acco.place.address}} </p>
                                         <ul class="list-group list-group-flush">

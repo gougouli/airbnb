@@ -55,7 +55,7 @@ if($page == "login"){
                 }
             }
         }
-        echo $twig->render("login.twig",[
+        echo $twig->render("form/login.twig",[
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
@@ -75,7 +75,7 @@ elseif($page == "register") {
                 }
             }
         }
-        echo $twig->render("register.twig", [
+        echo $twig->render("form/register.twig", [
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
@@ -98,7 +98,7 @@ elseif($page == "logout"){
 //====================== DEBUT Partie ACCOUNT ======================
 elseif($page == "account"){
     if($session->isConnected()) {
-        echo $twig->render("account.twig",[
+        echo $twig->render("connected/account.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
             "info" => $user->getInfoUser($_SESSION['id'])
@@ -119,7 +119,7 @@ elseif($page == "forgot-pass"){
             $form = new Form();
             $form->forgotpass($email);
         }
-        echo $twig->render("forgot-pass.twig",[
+        echo $twig->render("form/forgot-pass.twig",[
             "errors" => $session->getMessage("errors")
         ]);
 
@@ -143,7 +143,7 @@ elseif($page == "new-pass") {
             $form = new Form();
             $form->newpass($id, $pass, $repass);
         }
-        echo $twig->render("new-pass.twig", [
+        echo $twig->render("form/new-pass.twig", [
             "errors" => $session->getMessage("errors"),
             "id" => $parameter
         ]);
@@ -177,7 +177,7 @@ elseif($page == "detail") {
 elseif($page == "host"){
     require_once "../App/create_acco.php";
     if($session->isConnected()) {
-        echo $twig->render("host.twig",[
+        echo $twig->render("connected/host.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
         ]);
@@ -218,7 +218,7 @@ elseif($page == "list-detail") {
 elseif($page == "reserve"){
     if($session->isConnected() && $parameter){
         $acco = new Accomodation();
-        echo $twig->render("reserve.twig",[
+        echo $twig->render("connected/reserve.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
             "values" => $utils->getFieldsValue(),
@@ -243,7 +243,7 @@ elseif($page == "help") {
         $form->sendMessageHelp($_POST['email'],$_POST['object'],$_POST['message'], $_POST['captcha']);
     }
 
-    echo $twig->render("help.twig", [
+    echo $twig->render("form/help.twig", [
         "values" => $utils->getFieldsValue(),
         "errors" => $session->getMessage("errors"),
         "success" => $session->getMessage("success")
@@ -254,7 +254,7 @@ elseif($page == "help") {
 //====================== DEBUT Partie maps ======================
 
 elseif($page == "maps") {
-    echo $twig->render("maps.twig");
+    echo $twig->render("annexe/maps.twig");
 }
 //====================== FIN Partie maps ======================
 

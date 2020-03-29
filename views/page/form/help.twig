@@ -5,10 +5,18 @@
 {% block css%}<link rel="stylesheet" href="/css/form.css">{% endblock %}
 
 {% block nav %}
-    <li><a href="/">Accueil</a></li>
-    <li><a href="/host">Devenez Hote</a></li>
-    <li><a href="/list-detail">Reserver un séjour</a></li>
-    <li><a href="/register">Inscription</a></li>
+    <li><a class="nav-item nav-link" href="/">Accueil</a></li>
+    {% if session.state %}
+        <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
+        <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
+        <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+        <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+    {% else %}
+        <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+        <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+        <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
+        <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
+    {% endif %}
 {% endblock %}
 
 
