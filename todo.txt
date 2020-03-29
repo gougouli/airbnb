@@ -11,4 +11,5 @@ Recherche par tag, nouvelle table avec des tags
 faire que des fichier classe
 autocompletion
 
-dans le fichier detail.twig, changer les if else en if ternaire
+form reserve
+upload image

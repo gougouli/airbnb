@@ -12,6 +12,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 
+
 $url = $_GET['url'];
 $url = explode("/",trim($url, "/"));
 $page = isset($url['0']) ? $url['0'] : "/";
@@ -29,6 +30,7 @@ $accomodationList = new AccomodationList();
 $session = Session::getInstance();
 $user = new User();
 $utils = new Utils();
+
 
 if(!$session->isConnected()){
     if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
@@ -61,7 +63,7 @@ if($page == "login"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous êtes déjà connecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 
 }
@@ -81,7 +83,7 @@ elseif($page == "register") {
         ]);
     }else{
         $_SESSION['errors'][] = "Vous êtes déjà connecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 
 }
@@ -90,7 +92,7 @@ elseif($page == "logout"){
         $session->disconnect();
     }else{
         $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 }
 //====================== FIN Partie Connexion / Incription / Deconnexion ======================
@@ -105,7 +107,7 @@ elseif($page == "account"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 }
 //====================== FIN Partie ACCOUNT ======================
@@ -125,14 +127,13 @@ elseif($page == "forgot-pass"){
 
     }else{
         $_SESSION['errors'][] = "Vous devez vous déconnecter.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 }
 
 //====================== fin Partie FORGOT PASS ======================
 
 //====================== DEBUT Partie NEW PASS ======================
-//http://localhost/new-pass/'.urlencode($id).'
 
 elseif($page == "new-pass") {
     if (!$session->isConnected() && $parameter) {
@@ -149,7 +150,7 @@ elseif($page == "new-pass") {
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être déconnecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 }
 //====================== FIN Partie NEW PASS ======================
@@ -167,7 +168,7 @@ elseif($page == "detail") {
         ]);
     }
     else {
-        header("location:/");
+        header("location:/$_SESSION[page]");
     }
 }
 //====================== FIN Partie detail ======================
@@ -183,7 +184,7 @@ elseif($page == "host"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être connecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 }
 
@@ -227,7 +228,7 @@ elseif($page == "reserve"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être connecté.";
-        header('Location: /');
+        header("Location: /$_SESSION[page]");
     }
 }
 
@@ -271,3 +272,4 @@ else{
 
 //====================== FIN Partie ACCUEIL ======================
 
+$_SESSION['page'] = $page;

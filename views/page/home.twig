@@ -24,8 +24,24 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="js/carousel.js" charset="utf-8"></script>
+{#<script src="https://code.jquery.com/jquery-1.12.4.js"></script>#}
+{#<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>#}
 <script src="js/home.js" charset="utf-8"></script>
+<script src="js/auto_complete.js" charset="utf-8"></script>
+     <script>
+          var liste = [
+               "Draggable",
+               "Droppable",
+               "Resizable",
+               "Selectable",
+               "Sortable"
+          ];
+          // alert('test');
+          $('#place').autocomplete({
+               source : liste,
+               minLength : 3
+          });
+     </script>
 {% endblock %}
 
 {% block content %}
@@ -58,7 +74,7 @@
                               </div>
                               <div class="col-md-2 col-sm-12">
                                    <label style="opacity: 0;"for="">.</label>
-                                   <button type="submit"  class="btn btn-success form-control" placeholder="Last name"><i class="fas fa-search"></i>  Rechercher </button>
+                                   <button type="submit" class="btn btn-success form-control"><i class="fas fa-search"></i>  Rechercher </button>
                               </div>
                          </div>
                     </form>

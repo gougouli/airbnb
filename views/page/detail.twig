@@ -64,10 +64,10 @@
                                                             <p>Lit(s) double(s) : {{acco.double_bed}} </p>
                                                        </div>
                                                        <div class="col-md-6">
-                                                            <p>Animal : {% if acco.animal == 1 %} Oui {% else %} Non {% endif %}</p>
-                                                            <p>Accès handicapé : {% if acco.handicap == 1 %} Oui {% else %} Non {% endif %}</p>
-                                                            <p>Petit déjeuner : {% if acco.breakfast == 1 %} Oui {% else %} Non {% endif %}</p>
-                                                            <p>Diner : {% if acco.dinner == 1 %} Oui {% else %} Non {% endif %} </p>
+                                                            <p>Animal : {{ acco.animal ? "Oui" : "Non"  }} </p>
+                                                            <p>Accès handicapé : {{ acco.handicap ? "Oui" : "Non"  }}</p>
+                                                            <p>Petit déjeuner : {{ acco.breakfast ? "Oui" : "Non"  }}</p>
+                                                            <p>Diner : {{ acco.dinner ? "Oui" : "Non"  }} </p>
                                                        </div>
                                                   </div>
 
