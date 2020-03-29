@@ -19,15 +19,29 @@
 {% block scripts %}
 <script>
 	$(document).ready(function(){
+
+        $.fn.datepicker.dates['en'] = {
+            days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+            daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+            daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+            months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
+            monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jui", "Aou", "Sep", "Oct", "Nov", "Dec"],
+            today: "Aujourd'hui",
+            clear: "Effacer",
+            format: "mm/dd/yyyy",
+            titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+            weekStart: 0
+        };
+
 		var date_input=$('input#date');
 		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 		date_input.datepicker({
-			format: 'dd/mm/yyyy',
+			format: 'DD dd MM yyyy',
 			container: container,
 			todayHighlight: true,
 			autoclose: true,
             startDate: new Date(),
-            immediateUpdates: true
+            immediateUpdates: true,
             datesDisabled: [
                 "01/04/2020"
             ]
@@ -105,7 +119,4 @@
             <a href="#" class="btn btn-info">Changer</a>
         </div>
     </div>
-
-
-
 {% endblock %}
