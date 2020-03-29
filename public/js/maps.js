@@ -1,4 +1,4 @@
-macarte = L.map('map');
+
 navigator.geolocation.getCurrentPosition(function(position) {
 	const lat = position.coords.latitude;
 	const lon = position.coords.longitude;
@@ -6,7 +6,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 	// Fonction d'initialisation de la carte
 	function initMap() {
 		// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-		L.map('map').setView([lat, lon],13);
+		macarte = L.map('map').setView([lat, lon],13);
 		// Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
 		L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
 			// Il est toujours bien de laisser le lien vers la source des données
@@ -15,16 +15,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
 			maxZoom: 20
 		}).addTo(macarte);
 	}
-
-
 	window.onload = function(){
 		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
 		initMap();
 		L.marker([position.coords.latitude, position.coords.longitude]).addTo(macarte).bindPopup("<b>Votre position.").openPopup();
-
-
 	};
-
 
 });
 

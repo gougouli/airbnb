@@ -263,7 +263,7 @@ elseif($page == "maps") {
 //====================== DEBUT Partie A propos ======================
 
 elseif($page == "about-us") {
-    echo $twig->render("aboutus.twig");
+    echo $twig->render("annexe/aboutus.twig");
 }
 //====================== FIN Partie A propos ======================
 
@@ -271,7 +271,7 @@ elseif($page == "about-us") {
 //====================== DEBUT Partie Politiques ======================
 
 elseif($page == "politics") {
-    echo $twig->render("politics.twig");
+    echo $twig->render("annexe/politics.twig");
 }
 //====================== FIN Partie Politiques ======================
 
