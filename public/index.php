@@ -260,6 +260,22 @@ elseif($page == "maps") {
 //====================== FIN Partie maps ======================
 
 
+//====================== DEBUT Partie A propos ======================
+
+elseif($page == "about-us") {
+    echo $twig->render("aboutus.twig");
+}
+//====================== FIN Partie A propos ======================
+
+
+//====================== DEBUT Partie Politiques ======================
+
+elseif($page == "politics") {
+    echo $twig->render("politics.twig");
+}
+//====================== FIN Partie Politiques ======================
+
+
 //====================== DEBUT Partie ACCUEIL ======================
 else{
     echo $twig->render("home.twig", [

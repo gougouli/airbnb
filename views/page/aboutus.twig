@@ -1,0 +1,30 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sakado - A propos de nous{% endblock %}
+
+{% block css%}
+{% endblock %}
+
+{% block nav %}
+    {% if session.state %}
+        <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
+        <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
+        <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+        <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+    {% else %}
+        <li><a class="nav-item nav-link" href="/login">Devenez Hote</a></li>
+        <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+        <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
+        <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
+    {% endif %}
+    {% if session.state %}
+        <li><a class="nav-item nav-link" href="/logout">Se déconnecter</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
