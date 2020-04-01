@@ -268,6 +268,13 @@ elseif($page == "about-us") {
 //====================== FIN Partie A propos ======================
 
 
+//====================== DEBUT Partie CONTRIB ======================
+
+elseif($page == "contrib") {
+    echo $twig->render("annexe/contrib.twig");
+}
+//====================== FIN Partie CONTRIBs ======================
+
 //====================== DEBUT Partie Politiques ======================
 
 elseif($page == "politics") {
