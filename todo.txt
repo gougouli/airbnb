@@ -17,3 +17,4 @@ responsive host
 refonte page account
 
 cours tableau fonction
+ecrire le nom de lit simple/double par annonce
