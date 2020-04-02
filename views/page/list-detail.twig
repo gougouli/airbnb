@@ -32,26 +32,39 @@
 {% block content %}
 <div class="left">
      <div class="filter">
-          <div class="container">
-               <div class="row">
-                    <form  method="get" class="col">
-                         <div class="form-row mt-4">
-                              <div class="col-md-5 col-sm-12">
-                                   <label for="place">Où</label>
-                                   <input type="text" name="pl" id="place" class="form-control" value="{{ values.pl }}" placeholder="Partout">
-                              </div>
-                              <div class="col-md-5 col-sm-3">
-                                   <label for="people">Voyageurs</label>
-                                   <input type="number" name="pe" id="people" class="form-control" value="{{ values.pe }}" placeholder="Nombres de personnes" min="0" max="99999">
-                              </div>
-                              <div class="col-md-2 col-sm-12">
-                                   <label style="opacity: 0;"for="">.</label>
-                                   <button type="submit" class="btn btn-success form-control" placeholder="Last name"><i class="fas fa-search"></i>  Rechercher </button>
-                              </div>
-                         </div>
-                    </form>
+          <form method="get" class="col p-2">
+               <div class="form-row">
+                    <div class="col-md-9 col-sm-12">
+                         <label for="place">Où</label>
+                         <input type="text" name="pl" id="place" class="form-control" placeholder="Partout">
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                         <label for="people">Voyageurs</label>
+                         <input type="number" name="pe" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
+                    </div>
                </div>
-          </div>
+               <div class="form-row">
+                    <div class="col-md-2 col-sm-6">
+                         <label for="price_min">Prix minimum (en €)</label>
+                         <input type="number" name="prmi" id="price_min" class="form-control" value="0" min="0" max="99999">
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                         <label for="price_max">Prix maximum (en €)</label>
+                         <input type="number" name="prma" id="price_max" class="form-control" min="0" max="99999">
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                         <label for="date_from">Date d'arrivée</label>
+                         <input type="date" name="da" id="date_from" class="form-control" value="{{ "now"|date("m/d/Y") }}">
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                         <label for="date_to">Date de départ</label>
+                         <input type="date" name="dr" id="date_to" class="form-control">
+                    </div>
+                    <div class="col-md-4 col-sm-12 align-self-end mt-3">
+                         <button type="submit" class="btn btn-success form-control"><i class="fas fa-search"></i>  Rechercher </button>
+                    </div>
+               </div>
+          </form>
 
      </div>
      <div class="item-list">
