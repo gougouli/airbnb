@@ -9,11 +9,11 @@ use PDO;
 class Place
 {
 
-    public function getId($lat, $long)
+    public function getId($lat)
     {
         $db = Mysql::getInstance();
-        $req = $db->prepare("SELECT * FROM place WHERE lat = :lat AND long = :long");
-        $req->execute(["lat" => $lat,"long" => $long]);
+        $req = $db->prepare("SELECT * FROM place WHERE lat = :lat");
+        $req->execute(["lat" => $lat]);
         $req = $req->fetch();
         return $req['id'];
     }

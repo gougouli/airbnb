@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-     <form class="form-create-acco" method="post">
+     <form class="form-create-acco" method="post" enctype="multipart/form-data">
           <div class="top">
                <div class="left">
                     <div class="block">
@@ -23,31 +23,31 @@
 
                               <div class="sub_left">
                                    <div class="input_field title">
-                                        <label for="title">Intitulé de l'hébergement <i>(50 caractères): </i></label><input type="text" name="title">
+                                        <label for="title">Intitulé de l'hébergement <i>(50 caractères): </i></label><input type="text" value="{{ values.title }}" name="title">
                                    </div>
                                    <div class="input_field size">
-                                        <label for="size">Nombre de place disponible: </label><input min="1" max="100" type="number" name="size">
+                                        <label for="size">Nombre de place disponible: </label><input min="1" max="100" type="number" value="{{ values.size }}" name="size">
                                    </div>
                                    <div class="number_bed">
                                         <div class="input_field single_bed">
-                                             <label for="single_bed">Nombre de lit simple: </label><input min="0" max="100" value="0" type="number" name="single_bed">
+                                             <label for="single_bed">Nombre de lit simple: </label><input min="0" max="100" type="number" value="{{ values.single_bed }}" name="single_bed">
                                         </div>
                                         <div class="input_field double_bed">
-                                             <label for="double_bed">Nombre de lit double: </label><input min="0" max="100" value="0" type="number" name="double_bed">
+                                             <label for="double_bed">Nombre de lit double: </label><input min="0" max="100" type="number" value="{{ values.double_bed }}" name="double_bed">
                                         </div>
                                    </div>
                                    <div class="hours">
                                         <div class="input_field time_arrive">
-                                             <label for="time_arrive">Heure minimale d'arrivée</label><input type="time" name="time_arrive" min="00:00" max="23:59">
+                                             <label for="time_arrive">Heure minimale d'arrivée</label><input type="time" value="{{ values.time_arrive }}" name="time_arrive" min="00:00" max="23:59">
                                         </div>
                                         <div class="input_field time_go">
-                                             <label for="time_go">Heure maximale du départ</label><input type="time" name="time_go" min="00:00" max="23:59">
+                                             <label for="time_go">Heure maximale du départ</label><input type="time" value="{{ values.time_go }}" name="time_go" min="00:00" max="23:59">
                                         </div>
                                    </div>
                               </div>
                               <div class="sub_right">
                                    <div class="input_field desc">
-                                        <label for="desc">Description de l'annonce: </label><textarea name="description"></textarea>
+                                        <label for="desc">Description de l'annonce: </label><textarea name="description">{{ values.description }}</textarea>
                                    </div>
                               </div>
                          </div>
@@ -56,16 +56,16 @@
                          <h3>Options de votre hébergements:</h3>
                          <div class="options sub_block">
                               <div class="input_field animal">
-                                   <label for="animal">Animaux acceptés ? </label><input type="checkbox" name="animal">
+                                   <label for="animal">Animaux acceptés ? </label><input type="checkbox" {{ values.animal ? 'checked'}} name="animal">
                               </div>
                               <div class="input_field handicap">
-                                   <label for="handicap">Accès handicapé ? </label><input type="checkbox" name="handicap">
+                                   <label for="handicap">Accès handicapé ? </label><input type="checkbox" {{ values.handicap ? 'checked'}} name="handicap">
                               </div>
                               <div class="input_field breakfast">
-                                   <label for="breakfast">Petit déjeuner possible ? </label><input type="checkbox" name="breakfast">
+                                   <label for="breakfast">Petit déjeuner possible ? </label><input type="checkbox" {{ values.breakfast ? 'checked'}} name="breakfast">
                               </div>
                               <div class="input_field diner">
-                                   <label for="diner">Diner (soir) possible ? </label><input type="checkbox" name="dinner">
+                                   <label for="diner">Diner (soir) possible ? </label><input type="checkbox" {{ values.dinner ? 'checked'}} name="dinner">
                               </div>
                               <p>Autre ? Préciser dans la rubrique 'précisions'</p>
                          </div>
@@ -75,29 +75,29 @@
                          <div class="place sub_block">
                               <div class="first">
                                    <div class="input_field country">
-                                        <label for="country">Pays:</label><input type="text" name="country">
+                                        <label for="country">Pays:</label><input type="text" value="{{ values.country }}" name="country">
                                    </div>
                                    <div class="input_field city">
-                                        <label for="city">Ville:</label><input type="text" name="city">
+                                        <label for="city">Ville:</label><input type="text" value="{{ values.city }}" name="city">
                                    </div>
                                    <div class="input_field zip">
-                                        <label for="zip">Code postal:</label><input min="" type="number" name="zip">
+                                        <label for="zip">Code postal:</label><input min="" type="number" value="{{ values.zip }}" name="zip">
                                    </div>
                               </div>
                               <div class="input_field address">
-                                   <label for="adress">Adresse:</label><input type="text" name="address">
+                                   <label for="adress">Adresse:</label><input type="text" value="{{ values.address }}" name="address">
                               </div>
                               <div class="input_field sub_address">
-                                   <label for="sub_address">Complément d'adresse:</label><input type="text" name="sub_address">
+                                   <label for="sub_address">Complément d'adresse:</label><input type="text" value="{{ values.sub_address }}" name="sub_address">
                               </div>
 
                          </div>
                     </div>
                     <div class="input_field price">
-                         <label for="price">Prix par nuit (euro): </label><input min="0" type="number" name="price"><label for="price">€</label>
+                         <label for="price">Prix par nuit (euro): </label><input min="0" type="number" value="{{ values.price }}" name="price"><label for="price">€</label>
                     </div>
                     <div class="input_field other">
-                         <label for="other">Précisions: </label><textarea name="other" ></textarea>
+                         <label for="other">Précisions: </label><textarea name="other" >{{ values.other }}</textarea>
                     </div>
                </div>
                <div class="right">
@@ -106,7 +106,7 @@
 
                          </div>
                          <div class="include">
-                              <button type="button" name="picture">Ajouter des photos</button>
+                              <input type="file" value="{{ values.picture }}" name="picture[]" multiple>
                          </div>
                     </div>
 
