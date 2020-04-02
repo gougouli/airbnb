@@ -65,7 +65,7 @@ if(!empty($_POST)){
 
             for($i = 0; $i < sizeof($pictures['error']); $i++) {
                 $filename = $pictures['name'][$i];
-                $destination = __DIR__."/../public/img/" . $filename;
+                $destination = __DIR__."/../public/img/upload/" . $filename;
                 if (!move_uploaded_file($pictures['tmp_name'][$i], $destination)) {
                     $erreur++;
                 }
