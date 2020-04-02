@@ -3,8 +3,8 @@
 
 if($list){
     foreach ($list as $acco)
-    $lat = $acco['infoplace']['lat'];
-    $long = $acco['infoplace']['lon'];
+    $lat = $acco['place']['lat'];
+    $long = $acco['place']['lon'];
     ?>
     <script>
     window.setInterval(function(){

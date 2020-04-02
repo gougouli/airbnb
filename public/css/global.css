@@ -13,7 +13,7 @@ button:focus {outline: none;}
 .popup {display:block;font-weight: bold;border-radius: 5px;padding: 7px 15px;position: fixed;top:100px;right:100px;height: auto;max-width: 550px;border: solid 1px;font-size: 18px;word-wrap: break-word;}
 .no {border-color: rgb(154, 12, 12);color: rgb(154, 12, 12);background-color: rgba(255, 129, 129, 0.7);}
 .yes {border-color: rgb(12, 154, 12);color: rgb(12, 154, 12);background-color: rgba(129, 255, 129, 0.7);}
-
+main {min-height: 500px;}
 @font-face {
      font-family: 'Alata';
      src: url("../fonts/alata-regular.ttf");

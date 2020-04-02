@@ -4,6 +4,8 @@
 namespace App;
 
 
+use PDO;
+
 class Form
 {
     public function forgotpass($email){
@@ -155,23 +157,26 @@ Ceci est un mail automatique, merci de ne pas y répondre.';
         return 0;
     }
 
-    function getList($where = 0, $people = 0){
-        $list = new AccomodationList();
-        if($people){
-            $listHouse = $list->getByPeople($people);
-        }elseif($where) {
-            $listHouse = $list->getByPlace($where);
-        }elseif ($where && $people){
-            $listHouse = $list->getByPlacePeople($where, $people);
-        }else{
-            $listHouse = $list->getAll();
+    function Search($price_min, $price_max, $where, $size, $from, $to){
+        $db = Mysql::getInstance();
+        $query = "SELECT * FROM accomodation WHERE isActive = 1 AND price BETWEEN :price_min AND :price_max";
+        $val = ['price_min' => $price_min,'price_max' => $price_max];
+        if($size != ""){
+            $query .= " AND size >= :size";
+            $val['size'] = $size;
         }
-
+        if($where != ""){
+            $query .= " AND id_place IN (SELECT id FROM place WHERE city LIKE :where OR country LIKE :where)";
+            $val['where'] = "%$where%";
+        }
+        $stmt = $db->prepare($query);
+        $stmt->execute($val);
+        $listHouse = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $newList= [];
         foreach ($listHouse as $house){
             $place = new Place();
             $info = $place->getPlace($house['id_place']);
-            $house['infoplace'] = $info;
+            $house['place'] = $info;
             $newList[] = $house;
 
         }

@@ -196,14 +196,13 @@ elseif($page == "host"){
 //http://localhost/new-pass/'.urlencode($id).'
 
 elseif($page == "list-detail") {
-    $where =$people= 0;
-
-    if(isset($_GET['pl']) || isset($_GET['pe'])){
-        if(isset($_GET['pl'])){$where = $_GET['pl'];}else{$where=0;}
-        if(isset($_GET['pe'])){$people = $_GET['pe'];}else{$people=0;}
+    if(isset($_GET['pl']) && isset($_GET['pe']) && isset($_GET['prmi']) && isset($_GET['prma']) && isset($_GET['da']) && isset($_GET['dr'])){
+        $search = new Form();
+        $list = $search->Search($_GET['prmi'], $_GET['prma'], $_GET['pl'], $_GET['pe'], $_GET['da'], $_GET['dr']);
+    }else{
+        $accolist = new AccomodationList();
+        $list = $accolist->getAll();
     }
-    $search = new Form();
-    $list = $search->getList($where, $people);
     require_once "../App/setCursorMaps.php";
 
     echo $twig->render("list-detail.twig", [
