@@ -53,21 +53,19 @@
                                              </li>
                                              <li class="list-group-item">
                                                   <h2 class="card-title">Sur place <span class="sub_text">Ce que nous proposons</span></h2>
-
                                                   <div class="row">
-
                                                        <div class="col-md-6">
-                                                            <p>Heure d'arrivée : {{acco.hour_start}} </p>
-                                                            <p>Heure de départ : {{acco.hour_end}} </p>
-                                                            <p>Nombre de lit(s) : {{acco.size}} </p>
-                                                            <p>Lit(s) simple(s) : {{acco.single_bed}} </p>
-                                                            <p>Lit(s) double(s) : {{acco.double_bed}} </p>
+                                                            <p>Heure d'arrivée: <b>{{acco.hour_start}}</b> </p>
+                                                            <p>Heure de départ: <b>{{acco.hour_end}}</b> </p>
+                                                            <p>Nombre de personne(s) adapté: <b>{{acco.size}}</b> </p>
+                                                            <p>Lit(s) simple(s): <b>{{acco.single_bed}}</b> </p>
+                                                            <p>Lit(s) double(s): <b>{{acco.double_bed}}</b> </p>
                                                        </div>
                                                        <div class="col-md-6">
-                                                            <p>Animal : {{ acco.animal ? "Oui" : "Non"  }} </p>
-                                                            <p>Accès handicapé : {{ acco.handicap ? "Oui" : "Non"  }}</p>
-                                                            <p>Petit déjeuner : {{ acco.breakfast ? "Oui" : "Non"  }}</p>
-                                                            <p>Diner : {{ acco.dinner ? "Oui" : "Non"  }} </p>
+                                                            <p>Animal : <b>{{ acco.animal ? "Oui" : "Non"  }}</b> </p>
+                                                            <p>Accès handicapé : <b>{{ acco.handicap ? "Oui" : "Non"  }}</b></p>
+                                                            <p>Petit déjeuner : <b>{{ acco.breakfast ? "Oui" : "Non"  }}</b></p>
+                                                            <p>Diner : <b>{{ acco.dinner ? "Oui" : "Non"  }}</b> </p>
                                                        </div>
                                                   </div>
 
@@ -76,7 +74,7 @@
                                                   <h2 class="card-title">L'hébergeur <span class="sub_text">Informations personnelles</span></h2>
                                                   <p>Identité: {{userinfo.fullname}} </p>
                                                   <p>Email: {{userinfo.email}} </p>
-                                                  <p>Description personnel:s {{userinfo.bio}} </p>
+                                                  <p>Description personnelle: {{userinfo.bio}} </p>
                                              </li>
                                         </ul>
                                    </div>

@@ -1,11 +1,5 @@
 modification of information of account in account.twig without JS as possible in branch "account"
 table with image of different hebergment and user
-page annexe:
--   a propos (page de blabla)
--   contribueurs (jsp encore)
--   politique de confidentialité (lorem ipsum)
--   contactez-nous (link -> help) fait
--   carte (grosse map) FAIT
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
 faire que des fichier classe
@@ -15,6 +9,3 @@ form reserve
 upload image
 responsive host
 refonte page account
-
-cours tableau fonction
-ecrire le nom de lit simple/double par annonce
