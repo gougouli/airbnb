@@ -28,7 +28,7 @@ class AccomodationList{
         $newList = [];
         foreach ($results as $result){
             $place = new Place();
-            $result['place'] = $place->getPlace($result['id']);
+            $result['place'] = $place->getPlace($result['id_place']);
             $newList[] = $result;
         }
         return $newList;

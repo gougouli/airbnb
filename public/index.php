@@ -286,9 +286,10 @@ elseif($page == "politics") {
 
 //====================== DEBUT Partie ACCUEIL ======================
 else{
+//    var_dump($accomodationList->getRandom(10));
     echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
-        "accomodations_top" => $accomodationList->getTop(6),
+//        "accomodations_top" => $accomodationList->getTop(6),
         "errors" => $session->getMessage("errors"),
         "success" => $session->getMessage("success"),
     ]);

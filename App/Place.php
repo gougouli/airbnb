@@ -52,6 +52,7 @@ class Place
     public function getPlace($id)
     {
         $db = Mysql::getInstance();
+//        echo $id."-";
         $stmt = $db->prepare("SELECT * FROM place WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
