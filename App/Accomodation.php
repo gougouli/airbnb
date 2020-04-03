@@ -9,22 +9,23 @@ use PDO;
 class Accomodation {
 
 
-    function newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end){
-        $db = Mysql::getInstance();
-        $req = $db->prepare("INSERT INTO accomodation (title, content, size, id_seller, animal, handicap, breakfast, dinner, single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
-        return $req;
-    }
-
-//    public function addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end): void{
+//    function newAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end){
 //        $db = Mysql::getInstance();
-//        $req = $db->prepare("INSERT INTO accomodation SET
-//               title = ?, content = ?, size = ?,  id_seller = ?,
-//               animal = ?, handicap = ?, breakfast = ?, dinner = ?,
-//               single_bed = ?, double_bed = ?, other = ?, id_place = ?,price = ?,
-//               hour_start = ?, hour_end = ?");
-//        $req = $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
+//        $req = $db->prepare("INSERT INTO accomodation (title, content, size, id_seller, animal, handicap, breakfast, dinner, single_bed, double_bed, other, id_place, price, hour_start, hour_end) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+//        $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
+//        return $req;
 //    }
+
+    public function addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end): void{
+        $db = Mysql::getInstance();
+        $req = $db->prepare("INSERT INTO accomodation SET
+               title = ?, content = ?, size = ?,  id_seller = ?,
+               animal = ?, handicap = ?, breakfast = ?, dinner = ?,
+               single_bed = ?, double_bed = ?, other = ?, id_place = ?,price = ?,
+               hour_start = ?, hour_end = ?");
+        $req= $req->execute([$title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$id_place,$price,$hour_start,$hour_end]);
+
+    }
 
     public function disable():void { //  FUNCTION BDD////
         $db = Mysql::getInstance();
@@ -42,7 +43,6 @@ class Accomodation {
         $db = Mysql::getInstance();
         $stmt = $db->prepare("SELECT * FROM gaccomodation WHERE id_seller = ?");
         $stmt->execute([$id]);
-        //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -53,7 +53,6 @@ class Accomodation {
         $stmt->execute([$id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $result['place'] = $place->getPlace($id);
-        //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
         return $result;
     }
 

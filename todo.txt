@@ -1,11 +1,9 @@
 modification of information of account in account.twig without JS as possible in branch "account"
-table with image of different hebergment and user
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
 faire que des fichier classe
 autocompletion
 
 form reserve
-upload image
 responsive host
 refonte page account

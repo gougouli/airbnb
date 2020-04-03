@@ -178,9 +178,11 @@ elseif($page == "detail") {
 elseif($page == "host"){
     require_once "../App/create_acco.php";
     if($session->isConnected()) {
+
         echo $twig->render("connected/host.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
+            "values" => $utils->getFieldsValue(),
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être connecté.";
