@@ -78,10 +78,10 @@ if(!empty($_POST)){
                 $coords = $place->getCoords($address, $city, $zip);
                 $place->addAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
                 $place_id = $util->lastInsertId('place');
-                var_dump($place_id);
+//                var_dump($place_id);
                 $acco->addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
                 $id_acco = $util->lastInsertId('accomodation');
-                var_dump($id_acco);
+//                var_dump($id_acco);
                 for($i = 0; $i < sizeof($pictures['error']); $i++) {
                     $filename = $pictures['name'][$i];
 //                    $req = $db->prepare("INSERT INTO img SET id_acco = ?, SET name = ?");
