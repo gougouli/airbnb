@@ -4,9 +4,11 @@
 namespace App;
 
 
+use PDO;
+
 class Utils
 {
-    function getFieldsValue(){
+    public function getFieldsValue(){
         if(!empty($_POST)){
             $values =$_POST;
             if($_FILES){
@@ -21,4 +23,11 @@ class Utils
         }
         return FALSE;
     }
+
+    public function lastInsertId($table){
+        $db = Mysql::getInstance();
+        $req = $db->query("SELECT id FROM $table ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+        return $req['id'];
+    }
+
 }

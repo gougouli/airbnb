@@ -71,12 +71,27 @@ if(!empty($_POST)){
                 }
             }
             if($erreur == 0){
+                $util = new \App\Utils();
                 $place = new Place();
+                $acco = new Accomodation();
+
                 $coords = $place->getCoords($address, $city, $zip);
                 $place->addAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
-                $place_id = $place->getId($coords[0]);
-                $acco = new Accomodation();
+                $place_id = $util->lastInsertId('place');
+                var_dump($place_id);
                 $acco->addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
+                $id_acco = $util->lastInsertId('accomodation');
+                var_dump($id_acco);
+                for($i = 0; $i < sizeof($pictures['error']); $i++) {
+                    $filename = $pictures['name'][$i];
+//                    $req = $db->prepare("INSERT INTO img SET id_acco = ?, SET name = ?");
+                    $req = $db->prepare("INSERT INTO img (id_acco, name) VALUES (?,?)");
+                    $req->execute([$id_acco, $filename]);
+                }
+
+
+                echo "oui";
+                return;
                 $_SESSION['success'][] = "Votre hebergement a bien été crée !";
                 header('Location: /');
             }else{

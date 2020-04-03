@@ -38,14 +38,28 @@ class Mysql extends PDO{
         return $this->PDOInstance->query($query);
     }
 
-    public function prepare($query, $options = NULL)
+    public function prepare($query, $options = NULL): \PDOStatement
     {
         return $this->PDOInstance->prepare($query);
     }
 
-    public function execute($query)
+    public function execute($query): \PDOStatement
     {
         return $this->PDOInstance->execute($query);
     }
+
+//    public function destroy()
+//    {
+//        self::$instance = Null;
+//        return self::$instance;
+//    }
+//
+//    public function renew()
+//    {
+//        $this->destroy();
+//        return Mysql::getInstance();
+//    }
+
+
 
 }

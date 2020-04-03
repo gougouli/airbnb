@@ -9,14 +9,14 @@ use PDO;
 class Place
 {
 
-    public function getId($lat)
-    {
-        $db = Mysql::getInstance();
-        $req = $db->prepare("SELECT * FROM place WHERE lat = :lat");
-        $req->execute(["lat" => $lat]);
-        $req = $req->fetch();
-        return $req['id'];
-    }
+//    public function getId($lat)
+//    {
+//        $db = Mysql::getInstance();
+//        $req = $db->prepare("SELECT * FROM place WHERE lat = :lat");
+//        $req->execute(["lat" => $lat]);
+//        $req = $req->fetch();
+//        return $req['id'];
+//    }
 
     function addAdress($country, $city, $address, $sub_address, $zip, $lat, $long)
     {
