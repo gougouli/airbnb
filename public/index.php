@@ -20,9 +20,11 @@ $parameter = isset($url['1']) ? $url['1'] : FALSE;
 
 $loader = new FilesystemLoader('../views/page/');
 $twig = new Environment($loader, [
-    'cache' => false //'../tmp',
+    'cache' => false, //'../tmp',
+    'debug' => true,
 ]);
 $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 $twig->addGlobal('session', $_SESSION);
 //$twig->addGlobal('server', $_SERVER);
 
@@ -286,10 +288,11 @@ elseif($page == "politics") {
 
 //====================== DEBUT Partie ACCUEIL ======================
 else{
-//    var_dump($accomodationList->getRandom(10));
+    $list = $accomodationList->getRandom(10);
+//    var_dump($list['0']['img']);
     echo $twig->render("home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
-//        "accomodations_top" => $accomodationList->getTop(6),
+        "accomodations_top" => $accomodationList->getTop(6),
         "errors" => $session->getMessage("errors"),
         "success" => $session->getMessage("success"),
     ]);

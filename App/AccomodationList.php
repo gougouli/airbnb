@@ -24,11 +24,13 @@ class AccomodationList{
     public function getRandom(int $length): array{
         $db = Mysql::getInstance();
         $req = $db->query("SELECT * FROM accomodation ORDER BY rand() LIMIT $length");
-        $results = $req->fetchAll(PDO::FETCH_ASSOC);
+        $results = $req->fetchAll();
         $newList = [];
         foreach ($results as $result){
             $place = new Place();
+            $utils = new Utils();
             $result['place'] = $place->getPlace($result['id_place']);
+            $result['img'] = $utils->getImage($result['id'], "acco");
             $newList[] = $result;
         }
         return $newList;

@@ -45,6 +45,7 @@
 {% endblock %}
 
 {% block content %}
+{#     {{ accomodation.id }}-{{ test }}#}
      <div class="container">
           <div class="row mb-5 mt-5 ">
                {% if success %}
@@ -99,16 +100,17 @@
                </div>
           </div>
           <div class="row">
-          {% for accomodation in accomodations_random %}
-               <figure class="accomodation-item">
-                    <a href="/detail/{{ accomodation.id }}">
-                         <img src="/img/house-5.jpg" alt="" class="border border-white ">
-                         <figcaption class="info">
-                              <h6>{{ accomodation.place.city }} - {{ accomodation.price }}€ / nuit / pers.</h6>
-                         </figcaption>
-                    </a>
-               </figure>
-          {% endfor %}
+               {% for accomodation in accomodations_random %}
+                    <figure class="accomodation-item">
+                         <a href="/detail/{{ accomodation.id }}">
+{#                              {{ dump(accomodation.img.0.name) }}#}
+                              <img src="/img/upload/{{ accomodation.id }}-{{ accomodation.img.0.name }}"  class="border border-white ">
+                              <figcaption class="info">
+                                   <h6>{{ accomodation.place.city }} - {{ accomodation.price }}€ / nuit / pers.</h6>
+                              </figcaption>
+                         </a>
+                    </figure>
+               {% endfor %}
           </div>
      </div>
 {% endblock %}

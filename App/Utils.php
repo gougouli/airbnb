@@ -29,5 +29,11 @@ class Utils
         $req = $db->query("SELECT id FROM $table ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
         return $req['id'];
     }
+    public function getImage($id, $type){
+        $db = Mysql::getInstance();
+        $type = "id_".$type;
+        $img =  $db->query("SELECT * FROM img WHERE $type = $id");
+        return $img->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }

@@ -61,39 +61,36 @@ if(!empty($_POST)){
     $req->execute([$id_seller, sha1($password)]);
     if(!$_SESSION['errors']){
         if($req->rowCount() == 1){
-            $erreur=0;
+            $util = new \App\Utils();
+            $place = new Place();
+            $acco = new Accomodation();
 
+            $coords = $place->getCoords($address, $city, $zip);
+            $place->addAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
+            $place_id = $util->lastInsertId('place');
+//                var_dump($place_id);
+            $acco->addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
+            $id_acco = $util->lastInsertId('accomodation');
+//                var_dump($id_acco);
             for($i = 0; $i < sizeof($pictures['error']); $i++) {
-                $filename = $_SESSION['id']."-".$pictures['name'][$i];
-                $destination = __DIR__."/../public/img/upload/" . $filename;
-                if (!move_uploaded_file($pictures['tmp_name'][$i], $destination)) {
+                $filename = $pictures['name'][$i];
+                $req = $db->prepare("INSERT INTO img (id_acco, name) VALUES (?,?)");
+                $req->execute([$id_acco, $filename]);
+                $filename = $_SESSION['id'] . "-" . $pictures['name'][$i];
+                if (move_uploaded_file($pictures['tmp_name'][$i], $destination)) {
                     $erreur++;
                 }
+                $filename = $pictures['name'][$i];
             }
             if($erreur == 0){
-                $util = new \App\Utils();
-                $place = new Place();
-                $acco = new Accomodation();
-
-                $coords = $place->getCoords($address, $city, $zip);
-                $place->addAdress($country, $city, $address, $sub_address, $zip,$coords[0],$coords[1]);
-                $place_id = $util->lastInsertId('place');
-//                var_dump($place_id);
-                $acco->addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
-                $id_acco = $util->lastInsertId('accomodation');
-//                var_dump($id_acco);
-                for($i = 0; $i < sizeof($pictures['error']); $i++) {
-                    $filename = $pictures['name'][$i];
-//                    $req = $db->prepare("INSERT INTO img SET id_acco = ?, SET name = ?");
-                    $req = $db->prepare("INSERT INTO img (id_acco, name) VALUES (?,?)");
-                    $req->execute([$id_acco, $filename]);
-                }
-
                 $_SESSION['success'][] = "Votre hebergement a bien été crée !";
                 header('Location: /');
             }else{
-                $_SESSION['errors'][] = "Il semblerait qu'il y ait eu des erreurs dans le transfert de votre fichier.";
+                $_SESSION['errors'][] = "Une erreur a eu lieu !";
             }
+
+
+
         }else{$_SESSION['errors'][] = "Votre mot de passe est incorrect !";}
     }
 
