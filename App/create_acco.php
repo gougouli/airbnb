@@ -64,7 +64,7 @@ if(!empty($_POST)){
             $erreur=0;
 
             for($i = 0; $i < sizeof($pictures['error']); $i++) {
-                $filename = $pictures['name'][$i];
+                $filename = $_SESSION['id']."-".$pictures['name'][$i];
                 $destination = __DIR__."/../public/img/upload/" . $filename;
                 if (!move_uploaded_file($pictures['tmp_name'][$i], $destination)) {
                     $erreur++;
@@ -89,9 +89,6 @@ if(!empty($_POST)){
                     $req->execute([$id_acco, $filename]);
                 }
 
-
-                echo "oui";
-                return;
                 $_SESSION['success'][] = "Votre hebergement a bien été crée !";
                 header('Location: /');
             }else{

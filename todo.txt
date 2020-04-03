@@ -7,3 +7,7 @@ autocompletion
 form reserve
 responsive host
 refonte page account
+
+
+Pb:
+nom de fichier qui peuvent avoir le meme nom
