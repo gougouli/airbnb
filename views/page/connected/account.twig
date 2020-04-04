@@ -80,7 +80,7 @@
                               {% for acco in info.accomodation %}
                                    <a href="{{ acco.link }}">
                                         <figure>
-                                             <img src="img/house-1.jpg" alt="">
+                                             <img src="img/house-1.jpg{# /img/upload/ {{ accomodation.id }}-{{ accomodation.img.0.name }}#}" alt="">
                                              <figcaption>{{ acco.price }}€<br>{{ acco.title }}</figcaption>
                                         </figure>
                                    </a>
