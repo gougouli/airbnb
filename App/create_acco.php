@@ -72,15 +72,18 @@ if(!empty($_POST)){
             $acco->addAcco($title,$content,$size,$id_seller,$animal,$handicap,$breakfast,$dinner,$single_bed,$double_bed,$other,$place_id,$price,$hour_start,$hour_end);
             $id_acco = $util->lastInsertId('accomodation');
 //                var_dump($id_acco);
+//            var_dump($_FILES);
             for($i = 0; $i < sizeof($pictures['error']); $i++) {
+
                 $filename = $pictures['name'][$i];
                 $req = $db->prepare("INSERT INTO img (id_acco, name) VALUES (?,?)");
                 $req->execute([$id_acco, $filename]);
                 $filename = $_SESSION['id'] . "-" . $pictures['name'][$i];
-                if (move_uploaded_file($pictures['tmp_name'][$i], $destination)) {
+                $destination = __dir__ ."/../public/img/upload/" . $filename;
+                echo __dir__;
+                if (!move_uploaded_file($pictures['tmp_name'][$i], $destination)) {
                     $erreur++;
                 }
-                $filename = $pictures['name'][$i];
             }
             if($erreur == 0){
                 $_SESSION['success'][] = "Votre hebergement a bien été crée !";
