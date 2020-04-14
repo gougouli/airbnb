@@ -36,7 +36,7 @@
                <div class="form-row">
                     <div class="col-md-9 col-sm-12">
                          <label for="place">Où</label>
-                         <input type="text" name="pl" id="place" class="form-control" placeholder="Partout">
+                         <input type="text" name="pl" id="place" class="form-control" value="{{ values.pl ? values.pl }}" placeholder="Partout">
                     </div>
                     <div class="col-md-3 col-sm-12">
                          <label for="people">Voyageurs</label>
@@ -46,15 +46,15 @@
                <div class="form-row">
                     <div class="col-md-2 col-sm-6">
                          <label for="price_min">Prix minimum (en €)</label>
-                         <input type="number" name="prmi" id="price_min" class="form-control" value="0" min="0" max="99999">
+                         <input type="number" name="prmi" id="price_min" class="form-control" value="{{ values.prmi ? values.prmi : 0 }}" min="0" max="99999">
                     </div>
                     <div class="col-md-2 col-sm-6">
                          <label for="price_max">Prix maximum (en €)</label>
-                         <input type="number" name="prma" id="price_max" class="form-control" value="9999" min="0" max="99999">
+                         <input type="number" name="prma" id="price_max" class="form-control" value="{{ values.prma ? values.prma : 9999 }}" min="0" max="99999">
                     </div>
                     <div class="col-md-2 col-sm-6">
                          <label for="date_from">Date d'arrivée</label>
-                         <input type="date" name="da" id="date_from" class="form-control" value="{{ "now"|date("m/d/Y") }}">
+                         <input type="date" name="da" id="date_from" class="form-control" value="{{ "now"|date("d/m/Y") }}">
                     </div>
                     <div class="col-md-2 col-sm-6">
                          <label for="date_to">Date de départ</label>
@@ -77,11 +77,7 @@
                          <div class="text">
                               <div class="price">
                                    <p>{{ acco.place.city }} - {{ acco.price }} €</p>
-                                   {% if acco.rating > 0 %}
-                                        <p>Note: {{ acco.rating }} / 5</p>
-                                   {% else %}
-                                        <p>Pas encore noté</p>
-                                   {% endif %}
+                                   {{ acco.rating > 0 ? acco.rating ~ "/5" : "Pas encore noté" }}
                               </div>
                               <div class="desc">{{ acco.content }}</div>
                               <div class="button-link text-center bottom">
@@ -93,19 +89,13 @@
                {% endfor %}
           {% else %}
           <div class="alert alert-danger">
-               <p>
-                    Vos recherches n'ont données aucun résultats.
-                    {% if values.pl %}Mot clé: {{ values.pl }}{% endif %}
-                    {% if values.pe %}Mot clé: {{ values.pe }}{% endif %}
-               </p>
+               <p>Vos recherches n'ont données aucun résultats.</p>
           </div>
           {% endif %}
      </div>
 </div>
 <div class="right">
      <div id="map"></div>
-     <div class="info">
-
-     </div>
+     <div id="traveler-destinations" data-destinations="{{ accolist|json_encode|e('html_attr') }}"></div>
 </div>
 {% endblock %}

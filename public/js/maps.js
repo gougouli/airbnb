@@ -18,6 +18,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
 		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
 		initMap();
 		L.marker([position.coords.latitude, position.coords.longitude]).addTo(macarte).bindPopup("<b>Votre position.").openPopup();
+		var destinationsDiv = document.querySelector('#traveler-destinations');
+		var destinations = JSON.parse(destinationsDiv.dataset.destinations);
+		destinations.forEach(destination => {
+			L.marker([destination.place.lat, destination.place.lon]).addTo(macarte).bindPopup(destination.title);
+		});
 	};
 
 });

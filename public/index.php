@@ -207,8 +207,6 @@ elseif($page == "list-detail") {
         $accolist = new AccomodationList();
         $list = $accolist->getAll();
     }
-    require_once "../App/setCursorMaps.php";
-
     echo $twig->render("list-detail.twig", [
         "errors" => $session->getMessage("errors"),
         "id" => $parameter,
