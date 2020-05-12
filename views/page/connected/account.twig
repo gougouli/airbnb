@@ -2,7 +2,9 @@
 
 {% block title %}Sakado - Mon compte{% endblock %}
 
-{% block css%}<link rel="stylesheet" href="/css/account.css">{% endblock %}
+{% block css%}
+<link rel="stylesheet" href="/css/account.css">
+{% endblock %}
 
 {% block nav %}
      <li><a href="/">Accueil</a></li>
@@ -33,66 +35,84 @@
      </div>
 
      <form class="form-custom-info" method="post">
-          <section class="top">
-               <div class="card" style="width: 18rem;">
-               <section class="profil">
-                    <section class="picture">
-                         <button type="button" onclick="chooseFile();" class="inv" name="picture"><img src="img/user.jpg" alt=""></button>
-                    </section>
-                    <div style="height:0px;overflow:hidden">
-                       <input type="file" id="fileInput" name="fileInput" />
-                    </div>
-                    <input type="hidden" name="id" value="{{ session.id }}">
-                    <div class="card-body">
-                         <div class="info-user">
-                              <div class="user-bloc edit">
-                                   <label>{{ info.fullname }}</label>
+          <section class="top" style="width: 100%; background-color: grey;">
+               <div class="card" style="background-color: grey; border-style: none;">
+                    <section class="profil">
+                         <section class="picture">
+                              <button type="button" onclick="chooseFile();" class="inv" name="picture"><img src="img/user.jpg" alt=""></button>
+                         </section>
+                         <div style="height:0px;overflow:hidden">
+                              <input type="file" id="fileInput" name="fileInput" />
+                         </div>
+                         <input type="hidden" name="id" value="{{ session.id }}">
+                         <div class="card-body">
+                              <div class="info-user">
+                                   <div class="user-bloc edit">
+                                        <label>{{ info.fullname }}</label>
+                                   </div>
                               </div>
                          </div>
-                    </div>
-               </section>
+                         <section class="settings">
+                              <p> Mes infos </p>
+                              <div class="email-bloc edit">Email: <label for="email-profil">{{ info.email }}</label></div>
+                                   <div class="phone-bloc edit">Téléphone: <label for="phone-profil">{{ info.phone }}</label></div>
+                                        <div class="id-bloc edit">Pièce d'identité:
+                                             {% if picture %}
+                                                  <label for="id-card-profil" class="yes">A jour</label>
+                                             {% else %}
+                                                  <label for="id-card-profil" class="no">Mettre à jour</label>
+                                             {% endif %}
+                                        </div>
+                         </section>
+                    </section>
                </div>
-               <section class="settings">
-                    <div class="email-bloc edit">Email: <label for="email-profil">{{ info.email }}</label></div>
-                    <div class="phone-bloc edit">Téléphone: <label for="phone-profil">{{ info.phone }}</label></div>
-                    <div class="id-bloc edit">Pièce d'identité:
-                    {% if picture %}
-                         <label for="id-card-profil" class="yes">A jour</label>
-                    {% else %}
-                         <label for="id-card-profil" class="no">Mettre à jour</label>
-                    {% endif %}
-                    </div>
-               </section>
           </section>
 
           <section class="bottom">
                <section class="info">
-                    <div class="item">
-                         <i class="fas fa-quote-right"></i>
-                    </div>
                     <div class="info-bloc edit">
+                         <p>Ma bio</p>
                          <p>{{ info.bio }}</p>
                     </div>
                </section>
-               <section class="acco">
-                    <div class="title">
-                         <h3>Mes hébergements</h3>
-                    </div>
-                    <div class="list">
-                         <div class="item">
-                              {% for acco in info.accomodation %}
-                                   <a href="{{ acco.link }}">
-                                        <figure>
-                                             <img src="img/house-1.jpg{# /img/upload/ {{ accomodation.id }}-{{ accomodation.img.0.name }}#}" alt="">
-                                             <figcaption>{{ acco.price }}€<br>{{ acco.title }}</figcaption>
-                                        </figure>
-                                   </a>
-                              {% endfor %}
-                         </div>
-                         <div class="move">
-                    </div>
-               </section>
+
           </section>
+
+          <section class="reserve" style="background-color: grey;">
+               <div class="container">
+                    <div class="row">
+                         <div class="col-sm">
+                              <section class="acco">
+                                   <div class="title">
+                                        <h3>Mes hébergements</h3>
+                                   </div>
+                                   <div class="list">
+                                        <div class="item">
+                                             {% for acco in info.accomodation %}
+                                                  <a href="{{ acco.link }}">
+                                                       <figure>
+                                                            <img src="img/house-1.jpg{# /img/upload/ {{ accomodation.id }}-{{ accomodation.img.0.name }}#}" alt="">
+                                                            <figcaption>{{ acco.price }}€<br>{{ acco.title }}</figcaption>
+                                                       </figure>
+                                                  </a>
+                                             {% endfor %}
+                                        </div>
+                                        <div class="move">
+                                        </div>
+                                   </div>
+                              </section>
+                         </div>
+                         <div class="col-sm">
+                              <section class="myacco">
+                                   <div class="title">
+                                        <h3>Mes réservations</h3>
+                                   </div>
+                              </section>
+                         </div>
+                    </div>
+               </div>
+          </section>
+
           <div class="edit-button">
                <button type="submit" class="custom"><i class="fas fa-pen"></i><span> Modifier vos informations</span></button>
                <!-- {% if errors %}
