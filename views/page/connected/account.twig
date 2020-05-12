@@ -57,6 +57,23 @@
           </section>
 
           <section class="bottom">
+          <div class="card" style="background-color: grey; border-style: none;">
+                    <section class="profil">
+                         <section class="picture">
+                              <button type="button" onclick="chooseFile();" class="inv" name="picture"><img src="img/user.jpg" alt=""></button>
+                         </section>
+                         <div style="height:0px;overflow:hidden">
+                              <input type="file" id="fileInput" name="fileInput" />
+                         </div>
+                              <input type="hidden" name="id" value="{{ session.id }}">
+                         <div class="card-body">
+                              <div class="info-user">
+                                   <div class="user-bloc edit">
+                                        <label>{{ info.fullname }}</label>
+                                   </div>
+                              </div>
+                         </div>
+                         </div>
                <section class="info">
                     <div class="info-bloc edit">
                          <p>Ma bio</p>
