@@ -91,9 +91,6 @@ if(!empty($_POST)){
             }else{
                 $_SESSION['errors'][] = "Une erreur a eu lieu !";
             }
-
-
-
         }else{$_SESSION['errors'][] = "Votre mot de passe est incorrect !";}
     }
 

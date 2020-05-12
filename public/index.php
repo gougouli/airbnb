@@ -161,8 +161,7 @@ elseif($page == "new-pass") {
 
 elseif($page == "detail") {
     if ($parameter) {
-        $acco = new Accomodation();
-        $infoAcco = $acco->getAccomodationById($parameter);
+        $infoAcco = $accomodationList->getById($parameter);
         echo $twig->render("detail.twig", [
             "acco" => $infoAcco,
             "errors" => $session->getMessage("errors"),
@@ -201,8 +200,7 @@ elseif($page == "host"){
 
 elseif($page == "list-detail") {
     if(isset($_GET['pl']) && isset($_GET['pe']) && isset($_GET['prmi']) && isset($_GET['prma']) && isset($_GET['da']) && isset($_GET['dr'])){
-        $search = new Form();
-        $list = $search->Search($_GET['prmi'], $_GET['prma'], $_GET['pl'], $_GET['pe'], $_GET['da'], $_GET['dr']);
+        $list = $accomodationList->getByterms($_GET['prmi'], $_GET['prma'], $_GET['pl'], $_GET['da'], $_GET['dr'], $_GET['pe']);
     }else{
         $accolist = new AccomodationList();
         $list = $accolist->getAll();

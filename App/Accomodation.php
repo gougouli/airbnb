@@ -39,23 +39,6 @@ class Accomodation {
         $req->execute([$this->token]);
     }
 
-    public function getAccomodationByUser($id){
-        $db = Mysql::getInstance();
-        $stmt = $db->prepare("SELECT * FROM gaccomodation WHERE id_seller = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getAccomodationById($id){
-        $place = new Place();
-        $db = Mysql::getInstance();
-        $stmt = $db->prepare("SELECT * FROM accomodation WHERE id = ?");
-        $stmt->execute([$id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $result['place'] = $place->getPlace($id);
-        return $result;
-    }
-
 
 
 

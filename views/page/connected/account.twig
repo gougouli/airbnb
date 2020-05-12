@@ -34,7 +34,6 @@
 
      <form class="form-custom-info" method="post">
           <section class="top">
-               <div class="card" style="width: 18rem;">
                <section class="profil">
                     <section class="picture">
                          <button type="button" onclick="chooseFile();" class="inv" name="picture"><img src="img/user.jpg" alt=""></button>
@@ -43,15 +42,13 @@
                        <input type="file" id="fileInput" name="fileInput" />
                     </div>
                     <input type="hidden" name="id" value="{{ session.id }}">
-                    <div class="card-body">
-                         <div class="info-user">
-                              <div class="user-bloc edit">
-                                   <label>{{ info.fullname }}</label>
-                              </div>
+                    <div class="info-user">
+                         <div class="user-bloc edit">
+                              <label>{{ info.fullname }}</label>
                          </div>
                     </div>
                </section>
-               </div>
+
                <section class="settings">
                     <div class="email-bloc edit">Email: <label for="email-profil">{{ info.email }}</label></div>
                     <div class="phone-bloc edit">Téléphone: <label for="phone-profil">{{ info.phone }}</label></div>
@@ -90,6 +87,7 @@
                               {% endfor %}
                          </div>
                          <div class="move">
+
                     </div>
                </section>
           </section>
