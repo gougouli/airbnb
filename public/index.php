@@ -218,7 +218,6 @@ elseif($page == "list-detail") {
 //====================== DEBUT Partie RESERVE ======================
 elseif($page == "reserve"){
     if(isset($_POST['adult']) && isset($_POST['child']) && isset($_POST['date']) && isset($_POST['date2'])){
-        var_dump($_POST);
         $person = $_POST['adult']+$_POST['child'];
         $booking = new Booking($_SESSION['id'], $parameter, $_POST['date'], $_POST['date2'], $person);
         if($booking->correctDate()) {
