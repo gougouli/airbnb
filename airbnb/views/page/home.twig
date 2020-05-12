@@ -1,0 +1,101 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sakado - Accueil{% endblock %}
+
+{% block css%}
+     <link rel="stylesheet" href="/css/home.css">
+{% endblock %}
+
+{% block nav %}
+{% if session.state %}
+     <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
+     <li><a class="nav-item nav-link" href="/myreserve">Mes réservations</a></li>
+     <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+{% else %}
+     <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
+     <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+     <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
+     <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
+{% endif %}
+{% if session.state %}
+     <li><a class="nav-item nav-link" href="/logout">Se déconnecter</a></li>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{#<script src="https://code.jquery.com/jquery-1.12.4.js"></script>#}
+{#<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>#}
+<script src="js/home.js" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+
+     <div class="container">
+          <h1 class="offset-5 col-7 text-white text-right">Sakado vous aide à trouver l'hébergement de vos rêves !</h1>
+          <div class="row mb-5 mt-5 ">
+               {% if success %}
+                    <div class="alert alert-success col-12 text-center">
+                         {% for message in success %}
+                              <p>{{ message }}</p>
+                         {% endfor %}
+                    </div>
+               {% endif %}
+               {% if errors %}
+                    <div class="alert alert-danger col-12 text-center">
+                         {% for message in errors %}
+                              <p>{{ message }}</p>
+                         {% endfor %}
+                    </div>
+               {% endif %}
+               <div class="col-md-12 bg-light p-3 rounded">
+                    <form method="get" action="/list-detail">
+                         <div class="form-row">
+                              <div class="col-md-9 col-sm-12">
+                                   <label for="place">Où</label>
+                                   <input type="text" name="pl" id="place" class="form-control" placeholder="Partout">
+                              </div>
+                              <div class="col-md-3 col-sm-12">
+                                   <label for="people">Voyageurs</label>
+                                   <input type="number" name="pe" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
+                              </div>
+                         </div>
+                         <div class="form-row">
+                              <div class="col-md-2 col-sm-6">
+                                   <label for="price_min">Prix minimum (en €)</label>
+                                   <input type="number" name="prmi" id="price_min" class="form-control" value="0" min="0" max="99999">
+                              </div>
+                              <div class="col-md-2 col-sm-6">
+                                   <label for="price_max">Prix maximum (en €)</label>
+                                   <input type="number" name="prma" id="price_max" class="form-control" value="9999" min="0" max="99999">
+                              </div>
+                              <div class="col-md-2 col-sm-6">
+                                   <label for="date_from">Date d'arrivée</label>
+                                   <input type="date" name="da" id="date_from" class="form-control" value="{{ "now"|date("m/d/Y") }}">
+                              </div>
+                              <div class="col-md-2 col-sm-6">
+                                   <label for="date_to">Date de départ</label>
+                                   <input type="date" name="dr" id="date_to" class="form-control">
+                              </div>
+                              <div class="col-md-4 col-sm-12 align-self-end mt-3">
+                                   <button type="submit" class="btn btn-success form-control"><i class="fas fa-search"></i>  Rechercher </button>
+                              </div>
+                         </div>
+
+                    </form>
+               </div>
+          </div>
+          <div class="row list-acco">
+               {% for accomodation in accomodations_random %}
+                    <figure class="accomodation-item">
+                         <a href="/detail/{{ accomodation.id }}">
+                              <img src="/img/upload/{{ accomodation.img.0.name }}"  class="border border-white ">
+                              <figcaption class="info">
+                                   <h6>{{ accomodation.place.city }} - {{ accomodation.price }}€ / nuit / pers.</h6>
+                              </figcaption>
+                         </a>
+                    </figure>
+               {% endfor %}
+          </div>
+     </div>
+{% endblock %}

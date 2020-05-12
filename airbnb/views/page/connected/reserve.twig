@@ -1,0 +1,122 @@
+{% extends "../default.twig" %}
+
+
+{% block title %}Sakado - Réservation - Sélection de la date{% endblock %}
+
+{% block css%}
+<link rel="stylesheet" href="/css/reserve.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+{% endblock %}
+
+{% block nav %}
+<li><a href="/">Accueil</a></li>
+<li><a href="/account">Mon compte</a></li>
+<li><a href="/host">Devenez Hote</a></li>
+<li><a href="/list-detail">Reserver un séjour</a></li>
+<li><a href="/logout">Se déconnecter</a></li>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	$(document).ready(function(){
+
+        $.fn.datepicker.dates['en'] = {
+            days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+            daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+            daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+            months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
+            monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jui", "Aou", "Sep", "Oct", "Nov", "Dec"],
+            today: "Aujourd'hui",
+            clear: "Effacer",
+            format: "mm/dd/yyyy",
+            titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+            weekStart: 0
+        };
+
+		var date_input=$('input#date');
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'DD dd MM yyyy',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+            startDate: new Date(),
+            immediateUpdates: true,
+            datesDisabled: [
+                "01/04/2020"
+            ]
+		})
+	})
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="page-content col-md-5 col-sm-12">
+        <h1>Formulaire de réservation</h1>
+        <div class="col-md-12">
+            <form class="form-horizontal" method="post">
+                <div class="form-group form-row">
+                    <div class="row col-12 justify-content-center">
+                        <div class="input-group-prepend col-6">
+                            <div class="input-group-text">
+                                <i class="fa fa-calendar-alt"></i>
+                            </div>
+                            <input class="form-control" id="date" name="date" value="{{ values.date }}" placeholder="Date d'arrivée" type="text"/>
+                        </div>
+                        <div class="input-group-prepend col-6">
+                            <div class="input-group-text">
+                                <i class="fa fa-calendar-alt"></i>
+                            </div>
+                            <input class="form-control" id="date" name="date2" value="{{ values.date2 }}" placeholder="Date de retour" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row justify-content-around mt-5">
+                    <div class="form-group">
+                        <div class="input_field adult font-weight-bold">
+                            <label for="adult">Adulte(s): </label><input min="0" max="10" value="{{ values.adult ? values.adult: 0 }}" type="number" name="adult">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input_field child font-weight-bold">
+                            <label for="child">Enfant(s): </label><input min="0" max="10" value="{{ values.child ? values.child : 0 }}" type="number" name="child">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Commentaire(s)</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="col-12 justify-content-center">
+{#                        <input name="_honey" style="display:none" type="text"/>#}
+                    <button class="btn btn-info " name="submit" type="submit">Réserver</button>
+                </div>
+            </form>
+            {% if errors %}
+                <div class="alert alert-danger">
+                    {% for error in errors %}
+                        <li>Erreur: {{ error }}</li>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://mars-metcdn-com.global.ssl.fastly.net/content/uploads/sites/18/2015/07/12140648/800x400.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Votre choix :</h5>
+            <h6 class="card-text">{{accoinfo.title}}</h6>
+            <p class="card-text"> {{accoinfo.place.address}}</p>
+            <p class="card-text">{{accoinfo.place.country}} - {{accoinfo.place.city}} - {{accoinfo.place.zip}}</p>
+            <h6 class="card-text"> Hébergeur</h6>
+            <p class="card-text"> {{userinfo.fullname}}</p>
+            <a href="#" class="btn btn-info">Changer</a>
+        </div>
+    </div>
+{% endblock %}

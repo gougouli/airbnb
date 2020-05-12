@@ -1,0 +1,138 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sakado - Devenez hote{% endblock %}
+
+{% block css%}<link rel="stylesheet" href="css/host.css">{% endblock %}
+
+{% block nav %}
+<li><a href="/">Accueil</a></li>
+<li><a href="/account">Mon compte</a></li>
+<li><a href="/myreserve">Mes réservations</a></li>
+<li><a href="/list-detail">Reserver un séjour</a></li>
+<li><a href="/logout">Se déconnecter</a></li>
+{% endblock %}
+
+{% block content %}
+     <form class="form-create-acco" method="post" enctype="multipart/form-data">
+          <div class="top">
+               <div class="left">
+                    <div class="block">
+                         <h3>Informations principales de votre bien:</h3>
+                         <div class="main_info sub_block">
+                              <input type="hidden" name="id_seller" value="{{ session.id }}"> <!-- id vendeur -->
+
+                              <div class="sub_left">
+                                   <div class="input_field title">
+                                        <label for="title">Intitulé de l'hébergement <i>(50 caractères): </i></label><input type="text" value="{{ values.title }}" name="title">
+                                   </div>
+                                   <div class="input_field size">
+                                        <label for="size">Nombre de place disponible: </label><input min="1" max="100" type="number" value="{{ values.size }}" name="size">
+                                   </div>
+                                   <div class="number_bed">
+                                        <div class="input_field single_bed">
+                                             <label for="single_bed">Nombre de lit simple: </label><input min="0" max="100" type="number" value="{{ values.single_bed }}" name="single_bed">
+                                        </div>
+                                        <div class="input_field double_bed">
+                                             <label for="double_bed">Nombre de lit double: </label><input min="0" max="100" type="number" value="{{ values.double_bed }}" name="double_bed">
+                                        </div>
+                                   </div>
+                                   <div class="hours">
+                                        <div class="input_field time_arrive">
+                                             <label for="time_arrive">Heure minimale d'arrivée</label><input type="time" value="{{ values.time_arrive }}" name="time_arrive" min="00:00" max="23:59">
+                                        </div>
+                                        <div class="input_field time_go">
+                                             <label for="time_go">Heure maximale du départ</label><input type="time" value="{{ values.time_go }}" name="time_go" min="00:00" max="23:59">
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="sub_right">
+                                   <div class="input_field desc">
+                                        <label for="desc">Description de l'annonce: </label><textarea name="description">{{ values.description }}</textarea>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="block">
+                         <h3>Options de votre hébergements:</h3>
+                         <div class="options sub_block">
+                              <div class="input_field animal">
+                                   <label for="animal">Animaux acceptés ? </label><input type="checkbox" {{ values.animal ? 'checked'}} name="animal">
+                              </div>
+                              <div class="input_field handicap">
+                                   <label for="handicap">Accès handicapé ? </label><input type="checkbox" {{ values.handicap ? 'checked'}} name="handicap">
+                              </div>
+                              <div class="input_field breakfast">
+                                   <label for="breakfast">Petit déjeuner possible ? </label><input type="checkbox" {{ values.breakfast ? 'checked'}} name="breakfast">
+                              </div>
+                              <div class="input_field diner">
+                                   <label for="diner">Diner (soir) possible ? </label><input type="checkbox" {{ values.dinner ? 'checked'}} name="dinner">
+                              </div>
+                              <p>Autre ? Préciser dans la rubrique 'précisions'</p>
+                         </div>
+                    </div>
+                    <div class="block">
+                         <h3>Lieu de votre hébergement:</h3>
+                         <div class="place sub_block">
+                              <div class="first">
+                                   <div class="input_field country">
+                                        <label for="country">Pays:</label><input type="text" value="{{ values.country }}" name="country">
+                                   </div>
+                                   <div class="input_field city">
+                                        <label for="city">Ville:</label><input type="text" value="{{ values.city }}" name="city">
+                                   </div>
+                                   <div class="input_field zip">
+                                        <label for="zip">Code postal:</label><input min="" type="number" value="{{ values.zip }}" name="zip">
+                                   </div>
+                              </div>
+                              <div class="input_field address">
+                                   <label for="adress">Adresse:</label><input type="text" value="{{ values.address }}" name="address">
+                              </div>
+                              <div class="input_field sub_address">
+                                   <label for="sub_address">Complément d'adresse:</label><input type="text" value="{{ values.sub_address }}" name="sub_address">
+                              </div>
+
+                         </div>
+                    </div>
+                    <div class="input_field price">
+                         <label for="price">Prix par nuit (euro): </label><input min="0" type="number" value="{{ values.price }}" name="price"><label for="price">€</label>
+                    </div>
+                    <div class="input_field other">
+                         <label for="other">Précisions: </label><textarea name="other" >{{ values.other }}</textarea>
+                    </div>
+               </div>
+               <div class="right">
+                    <div class="photo">
+                         <div class="list">
+
+                         </div>
+                         <div class="include">
+                              <input type="file" value="{{ values.picture }}" name="picture[]" multiple>
+                         </div>
+                    </div>
+
+                    <div class="recap">
+                         <h3 >Récapitulatif de votre offre:</h3>
+                         {% if errors %}
+                              <ul class="alert alert-danger col-11 p-2">
+                                   {% for message in errors %}
+                                        <li>{{ message }}</li>
+                                   {% endfor %}
+                              </ul>
+                         {% endif %}
+                    </div>
+               </div>
+          </div>
+          <div class="bottom">
+               <div class="input_field okey">
+                    <input type="checkbox" name="okey"><label for="okey">En cochant cette case, j'acceptes les conditions de ventes.</label>
+               </div>
+               <div class="input_field password">
+                    <label for="password">Votre mot de passe (sécurité):</label><input type="password" name="password">
+               </div>
+               <button type="submit">Publier l'annonce de l'hébergement</button>
+               <a href="#forgot-pass" class="modal-js">Mot de passe oublié ?</a>
+          </div>
+          <p class="state_message"></p>
+
+     </form>
+{% endblock %}

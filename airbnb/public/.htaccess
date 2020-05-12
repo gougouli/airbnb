@@ -1,0 +1,7 @@
+#ErrorDocument 404 /views/404.twig
+#ErrorDocument 504 /views/504.twig
+#ErrorDocument 403 /views/403.twig
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

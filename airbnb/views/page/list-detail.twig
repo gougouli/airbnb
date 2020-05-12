@@ -1,0 +1,101 @@
+{% extends "../default.twig" %}
+
+{% block title %}Sakado - Réserver un séjour{% endblock %}
+
+{% block css%}
+<link rel="stylesheet" href="/css/list-detail.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+{% endblock %}
+
+{% block nav %}
+<li><a href="/">Accueil</a></li>
+
+{% if session.state %}
+     <li><a href="/account">Mon compte</a></li>
+     <li><a href="/myreserve">Mes réservations</a></li>
+     <li><a href="/host">Devenez hote</a></li>
+{% else %}
+     <li><a href="/host">Devenez Hote</a></li>
+     <li><a href="/login">Connexion</a></li>
+     <li><a href="/register">Inscription</a></li>
+{% endif %}
+{% if session.state %}
+     <li><a href="/logout">Se déconnecter</a></li>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<script src="/js/maps.js" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+<div class="left">
+     <div class="filter">
+          <form method="get" class="col p-2">
+               <div class="form-row">
+                    <div class="col-md-9 col-sm-12">
+                         <label for="place">Où</label>
+                         <input type="text" name="pl" id="place" class="form-control" value="{{ values.pl ? values.pl }}" placeholder="Partout">
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                         <label for="people">Voyageurs</label>
+                         <input type="number" name="pe" id="people" class="form-control" placeholder="Nombres de personnes" min="0" max="99999">
+                    </div>
+               </div>
+               <div class="form-row">
+                    <div class="col-md-2 col-sm-6">
+                         <label for="price_min">Prix minimum (en €)</label>
+                         <input type="number" name="prmi" id="price_min" class="form-control" value="{{ values.prmi ? values.prmi : 0 }}" min="0" max="99999">
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                         <label for="price_max">Prix maximum (en €)</label>
+                         <input type="number" name="prma" id="price_max" class="form-control" value="{{ values.prma ? values.prma : 9999 }}" min="0" max="99999">
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                         <label for="date_from">Date d'arrivée</label>
+                         <input type="date" name="da" id="date_from" class="form-control" value="{{ "now"|date("d/m/Y") }}">
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                         <label for="date_to">Date de départ</label>
+                         <input type="date" name="dr" id="date_to" class="form-control">
+                    </div>
+                    <div class="col-md-4 col-sm-12 align-self-end mt-3">
+                         <button type="submit" class="btn btn-success form-control"><i class="fas fa-search"></i>  Rechercher </button>
+                    </div>
+               </div>
+          </form>
+
+     </div>
+     <div class="item-list">
+          {% if accolist is not empty  %}
+               {% for acco in accolist %}
+                    <div class="item">
+                         <div class="picture">
+                              <img src="img/4x2.png{# /img/upload/ {{ accomodation.id }}-{{ accomodation.img.0.name }}#}" alt="">
+                         </div>
+                         <div class="text">
+                              <div class="price">
+                                   <p>{{ acco.place.city }} - {{ acco.price }} €</p>
+                                   {{ acco.rating > 0 ? acco.rating ~ "/5" : "Pas encore noté" }}
+                              </div>
+                              <div class="desc">{{ acco.content }}</div>
+                              <div class="button-link text-center bottom">
+                                   <p>Place: {{ acco.size }}</p>
+                                   <a href="/detail/{{ acco.id }}" class=" btn btn-primary">Voir l'hebergement</a>
+                              </div>
+                         </div>
+                    </div>
+               {% endfor %}
+          {% else %}
+          <div class="alert alert-danger">
+               <p>Vos recherches n'ont données aucun résultats.</p>
+          </div>
+          {% endif %}
+     </div>
+</div>
+<div class="right">
+     <div id="map"></div>
+     <div id="traveler-destinations" data-destinations="{{ accolist|json_encode|e('html_attr') }}"></div>
+</div>
+{% endblock %}

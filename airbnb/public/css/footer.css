@@ -1,0 +1,24 @@
+footer {margin-top:50px;display: flex;background-color: #26272B;justify-content: center;padding: 20px;color: #616162;}
+footer h5 {color:white;}
+footer a {color: #616162;}
+footer ul {list-style: none;padding: 0;}
+footer .centered {width: 60%;}
+footer .centered .top, footer .centered .bottom {display: flex;justify-content:space-between;}
+footer .centered .top .about-us {width: 50%;}
+footer hr {background-color:gray;}
+footer .centered .top .search h5, footer .centered .top .quick h5{text-align: center;}
+footer .centered .bottom .contact {display: flex;list-style: none;}
+footer .centered .bottom .contact a {border-radius:25px;width:30px;padding: 10px;margin: 0 5px;transition: all 0.3s;}
+
+footer .bottom a {color:#818A91;background-color: #33353D;}
+footer .linkedin:hover {background-color: #2C4762;color:white;}
+footer .github:hover {background-color: #FF6600;color:white;}
+footer .facebook:hover {background-color: #3b5998;color:white;}
+footer .instagram:hover {background-color: #987068;color:white;}
+
+@media all and (max-width: 1400px) {
+    footer .centered {width: 100%;}
+    footer .centered .top {flex-direction: column;text-align: center;align-items: center;}
+    footer .centered .top .about-us {width: 100%;}
+    footer .centered .bottom {flex-direction: column;align-items: center;}
+}

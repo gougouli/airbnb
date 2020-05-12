@@ -1,0 +1,11 @@
+body {overflow-x: hidden;background: url('../img/background2.jpg');background-size: cover;background-attachment: fixed;background-repeat: no-repeat; }
+
+
+h1 {font-size: 60px;margin: 100px 0;}
+.list-acco {display: flex;justify-content: center;}
+.accomodation-item {transition: all 0.3s;width: 350px;margin: 20px;}
+.accomodation-item:hover {transform: scale(1.05);}
+.accomodation-item:hover a {text-decoration: none;}
+.accomodation-item figcaption h6 {margin-left:10px; margin-top:-25px;color: white;font-weight: bold;background: rgba(0,0,0,0.5);border: white;transition: 0.3s all;}
+.accomodation-item:hover figcaption h6 {color: red;}
+.accomodation-item img {height: 230px;}
