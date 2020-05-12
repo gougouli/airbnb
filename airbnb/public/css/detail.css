@@ -8,3 +8,6 @@ width: auto;
 }
 .sub_text {color: gray;font-size: 13px;}
 .Row {display: flex;}
+
+.img-figure {height: 280px;}
+.img-figure img {height: 100%;}
