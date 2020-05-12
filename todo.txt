@@ -11,3 +11,4 @@ refonte page account
 
 Pb:
 nom de fichier qui peuvent avoir le meme nom
+verifier a la reservartion que la date d'arrivée soit avant la date de retour

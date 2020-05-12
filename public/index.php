@@ -4,6 +4,7 @@ require_once "../vendor/autoload.php";
 
 use App\Accomodation;
 use App\AccomodationList;
+use App\Booking;
 use App\Form;
 use App\Session;
 use App\User;
@@ -216,14 +217,27 @@ elseif($page == "list-detail") {
 
 //====================== DEBUT Partie RESERVE ======================
 elseif($page == "reserve"){
+    if(isset($_POST['adult']) && isset($_POST['child']) && isset($_POST['date']) && isset($_POST['date2'])){
+        var_dump($_POST);
+        $person = $_POST['adult']+$_POST['child'];
+        $booking = new Booking($_SESSION['id'], $parameter, $_POST['date'], $_POST['date2'], $person);
+        if($booking->correctDate()) {
+            if ($booking->available()) {
+                echo "tu peux reserver";
+            }else{
+                echo "tu ne peux pas reserver";
+            }
+        }else{
+            echo "date dans le mauvais ordre";
+        }
+    }
     if($session->isConnected() && $parameter){
-        $acco = new Accomodation();
         echo $twig->render("connected/reserve.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
             "values" => $utils->getFieldsValue(),
             "userinfo" => $user->getInfoUser($_SESSION['id']),
-            "accoinfo" => $acco->getAccomodationById($parameter)
+            "accoinfo" => $accomodationList->getById($parameter)
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être connecté.";
