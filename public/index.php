@@ -27,7 +27,6 @@ $twig = new Environment($loader, [
 $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 $twig->addGlobal('session', $_SESSION);
-//$twig->addGlobal('server', $_SERVER);
 
 $accomodationList = new AccomodationList();
 $session = Session::getInstance();
@@ -66,7 +65,7 @@ if($page == "login"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous êtes déjà connecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /");
     }
 
 }
@@ -86,7 +85,7 @@ elseif($page == "register") {
         ]);
     }else{
         $_SESSION['errors'][] = "Vous êtes déjà connecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /");
     }
 
 }
@@ -95,7 +94,7 @@ elseif($page == "logout"){
         $session->disconnect();
     }else{
         $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /login");
     }
 }
 //====================== FIN Partie Connexion / Incription / Deconnexion ======================
@@ -110,7 +109,7 @@ elseif($page == "account"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous n'êtes pas connecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /login");
     }
 }
 //====================== FIN Partie ACCOUNT ======================
@@ -130,7 +129,7 @@ elseif($page == "forgot-pass"){
 
     }else{
         $_SESSION['errors'][] = "Vous devez vous déconnecter.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /");
     }
 }
 
@@ -153,7 +152,7 @@ elseif($page == "new-pass") {
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être déconnecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /");
     }
 }
 //====================== FIN Partie NEW PASS ======================
@@ -188,7 +187,7 @@ elseif($page == "host"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être connecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /login");
     }
 }
 
@@ -240,7 +239,7 @@ elseif($page == "reserve"){
         ]);
     }else{
         $_SESSION['errors'][] = "Vous devez être connecté.";
-        header("Location: /$_SESSION[page]");
+        header("Location: /login");
     }
 }
 
