@@ -218,15 +218,28 @@ elseif($page == "list-detail") {
 elseif($page == "reserve"){
     if(isset($_POST['adult']) && isset($_POST['child']) && isset($_POST['date']) && isset($_POST['date2'])){
         $person = $_POST['adult']+$_POST['child'];
-        $booking = new Booking($_SESSION['id'], $parameter, $_POST['date'], $_POST['date2'], $person);
+        $booking = new Booking($_SESSION['id'], $parameter, $_POST['date'], $_POST['date2'], $person, $parameter);
         if($booking->correctDate()) {
-            if ($booking->available()) {
-                echo "tu peux reserver";
+            if($booking->nmbrPerson()){
+                if ($booking->available()){
+                    $user = new User();
+                    if($user->enoughMoney($booking->calculPrice(), $_SESSION['id'])){
+                        $user->removeMoney($booking->calculPrice(), $_SESSION['id']);
+                        $booking->reserve();
+                        $_SESSION['success'] = "Vous venez de reserver votre hebergement !";
+                        header("Location: /account");
+                    }else{
+                        $_SESSION['errors'][] = "Vous n'avez pas assez d'argent !";
+                    }
+                }else{
+                    $_SESSION['errors'][] = "Cette période n'est pas disponible.";
+                }
             }else{
-                echo "tu ne peux pas reserver";
+                $_SESSION['errors'][] = "Il doit y avoir au moins une personne.";
             }
+
         }else{
-            echo "date dans le mauvais ordre";
+            $_SESSION['errors'][] = "Les dates de réservations ne sont pas dans le bon ordre.";
         }
     }
     if($session->isConnected() && $parameter){

@@ -8,6 +8,8 @@ use PDO;
 
 class User
 {
+    private $money = 0;
+
     public function getInfoUser($id, $acco = 1){
         $db = Mysql::getInstance();
         $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
@@ -53,4 +55,23 @@ class User
         }
         return 0;
     }
+
+    public function enoughMoney($money, $id)
+    {
+        $this->money = $this->getInfoUser($id)['money'];
+        if($this->money >= $money){
+            return true;
+        }
+        return false;
+    }
+
+    public function removeMoney($money, $id)
+    {
+        $this->money = $this->money - $money;
+        $db = Mysql::getInstance();
+        $stmt = $db->prepare("UPDATE users SET money = ? WHERE id = ?");
+        $stmt->execute([$this->money,$id]);
+    }
+
+
 }
