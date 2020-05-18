@@ -278,33 +278,10 @@ elseif($page == "help") {
 
 //====================== DEBUT Partie maps ======================
 
-elseif($page == "maps") {
-    echo $twig->render("annexe/maps.twig");
-}
-//====================== FIN Partie maps ======================
-
-
-//====================== DEBUT Partie A propos ======================
-
-elseif($page == "about-us") {
-    echo $twig->render("annexe/aboutus.twig");
+elseif($page == "maps" or $page == "contrib" or $page == "aboutus" or $page == "politics") {
+    echo $twig->render("annexe/$page.twig");
 }
 //====================== FIN Partie A propos ======================
-
-
-//====================== DEBUT Partie CONTRIB ======================
-
-elseif($page == "contrib") {
-    echo $twig->render("annexe/contrib.twig");
-}
-//====================== FIN Partie CONTRIBs ======================
-
-//====================== DEBUT Partie Politiques ======================
-
-elseif($page == "politics") {
-    echo $twig->render("annexe/politics.twig");
-}
-//====================== FIN Partie Politiques ======================
 
 
 //====================== DEBUT Partie ACCUEIL ======================
