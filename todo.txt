@@ -1,7 +1,6 @@
 modification of information of account in account.twig without JS as possible in branch "account"
 faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
-faire que des fichier classe
 autocompletion
 
 form reserve
@@ -11,4 +10,3 @@ refonte page account
 
 Pb:
 nom de fichier qui peuvent avoir le meme nom
-verifier a la reservartion que la date d'arrivée soit avant la date de retour
