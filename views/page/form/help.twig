@@ -10,18 +10,13 @@
         <li><a class="nav-item nav-link" href="/account">Mon compte</a></li>
         <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
         <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
+        <li><a class="nav-item nav-link" href="/logout">Se déconnecter</a></li>
     {% else %}
         <li><a class="nav-item nav-link" href="/host">Devenez Hote</a></li>
         <li><a class="nav-item nav-link" href="/list-detail">Reserver un séjour</a></li>
         <li><a class="nav-item nav-link" href="/login">Connexion</a></li>
         <li><a class="nav-item nav-link" href="/register">Inscription</a></li>
     {% endif %}
-{% endblock %}
-
-
-{% block scripts %}
-{#    <script src="js/account.js" charset="utf-8"></script>#}
-{#    <script src="js/scroll.js" charset="utf-8"></script>#}
 {% endblock %}
 
 {% block content %}
