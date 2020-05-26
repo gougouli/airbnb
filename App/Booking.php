@@ -41,7 +41,6 @@ class Booking
         ]);
     }
 
-
     public function correctDate()
     {
         if($this->start < $this->end){
