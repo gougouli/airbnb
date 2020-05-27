@@ -7,7 +7,7 @@ use PDO;
 
 class Mysql extends PDO{
 
-    private $host = "localhost:3308";
+    private $host = "localhost";
     private $dbname = "webproject";
     private $user = "root";
     private $pass = "";
