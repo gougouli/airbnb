@@ -56,7 +56,17 @@ class AccomodationList{
         $db = Mysql::getInstance();
         $req = $db->prepare("SELECT * FROM accomodation WHERE id_seller = ?");
         $req->execute([$id]);
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+        $listHouse = $req->fetchAll(PDO::FETCH_ASSOC);
+        $newList= [];
+        $utils = new Utils();
+        foreach ($listHouse as $house){
+            $place = new Place();
+            $info = $place->getPlace($house['id_place']);
+            $house['place'] = $info;
+            $house['img'] = $utils->getImage($house['id'], "acco", 1);
+            $newList[] = $house;
+        }
+        return $negwList;
     }
     public function getByterms($min, $max, $place, $start, $end, $people){
         $db = Mysql::getInstance();

@@ -78,8 +78,9 @@
                          <div class="item">
                               {% for acco in info.accomodation %}
                                    <a href="{{ acco.link }}">
+
                                         <figure>
-                                             <img src="img/house-1.jpg{# /img/upload/ {{ accomodation.id }}-{{ accomodation.img.0.name }}#}" alt="">
+                                             <img src="/img/upload/{{ acco.img.0.name}}" alt="">
                                              <figcaption>{{ acco.price }}€<br>{{ acco.title }}</figcaption>
                                         </figure>
                                    </a>
@@ -92,16 +93,13 @@
           </section>
           <div class="edit-button">
                <button type="submit" class="custom"><i class="fas fa-pen"></i><span> Modifier vos informations</span></button>
-               <!-- {% if errors %}
-               <div class="error">
-                    <p>Oups, il semblerait qu'il y ait une erreur:</p>
-                    <ul>
+               {% if errors %}
                          {% for error in errors %}
                               <li>{{ error }}</li>
                          {% endfor %}
                     </ul>
                </div>
-               {% endif %} -->
+               {% endif %}
           </div>
      </form>
 </div>
