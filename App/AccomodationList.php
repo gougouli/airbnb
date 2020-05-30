@@ -66,7 +66,7 @@ class AccomodationList{
             $house['img'] = $utils->getImage($house['id'], "acco", 1);
             $newList[] = $house;
         }
-        return $negwList;
+        return $newList;
     }
     public function getByterms($min, $max, $place, $start, $end, $people){
         $db = Mysql::getInstance();
@@ -102,5 +102,23 @@ class AccomodationList{
         }
         return $newList;
 
+    }
+    public function getReserve($id){
+        $db = Mysql::getInstance();
+        $stmt = $db->prepare("SELECT * FROM booking WHERE id_user = ?");
+        $stmt->execute([$id]);
+        $listHouse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $newList= [];
+        $utils = new Utils();
+        foreach ($listHouse as $house){
+            $acco = new AccomodationList();
+            $house["info"] = $acco->getById($house['id_accomodation']);
+            $place = new Place();
+            $info = $place->getPlace($house['info']['id_place']);
+            $house['place'] = $info;
+            $house['img'] = $utils->getImage($house['id_accomodation'], "acco", 1);
+            $newList[] = $house;
+        }
+        return $newList;
     }
 }

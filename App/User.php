@@ -18,6 +18,7 @@ class User
         if($acco){
             $accolist = new AccomodationList();
             $info['accomodation'] = $accolist->getBySeller($id);
+            $info['booking'] = $accolist->getReserve($id);
         }
         //var_dump($info);
         return $info;
