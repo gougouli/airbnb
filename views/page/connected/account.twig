@@ -78,8 +78,7 @@
                     <div class="list">
                          <div class="item">
                               {% for acco in info.accomodation %}
-                                   <a href="{{ acco.link }}">
-
+                                   <a href="/detail/{{ acco.id }}">
                                         <figure>
                                              <img src="/img/upload/{{ acco.img.0.name}}" alt="">
                                              <figcaption>{{ acco.price }}€<br>{{ acco.title }}</figcaption>
@@ -96,7 +95,7 @@
                     <div class="list">
                          <div class="item">
                               {% for booking in info.booking %}
-                                   <a href="{{ booking.link }}">
+                                   <a href="/detail/{{ booking.id_accomodation }}">
                                         <figure>
                                              <img src="/img/upload/{{ booking.img.0.name}}" alt="">
                                              <figcaption>{{ booking.info.title }}<br>Du {{ booking.start_date }} à {{ booking.end_date }}</figcaption>
