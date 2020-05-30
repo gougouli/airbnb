@@ -59,7 +59,7 @@ if($page == "login"){
                 }
             }
         }
-        echo $twig->render("mail/form/login.twig",[
+        echo $twig->render("page/form/login.twig",[
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
@@ -79,7 +79,7 @@ elseif($page == "register") {
                 }
             }
         }
-        echo $twig->render("form/register.twig", [
+        echo $twig->render("page/form/register.twig", [
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
@@ -123,7 +123,7 @@ elseif($page == "forgot-pass"){
             $form = new Form();
             $form->forgotpass($email);
         }
-        echo $twig->render("form/forgot-pass.twig",[
+        echo $twig->render("page/form/forgot-pass.twig",[
             "errors" => $session->getMessage("errors")
         ]);
 
@@ -146,7 +146,7 @@ elseif($page == "new-pass") {
             $form = new Form();
             $form->newpass($id, $pass, $repass);
         }
-        echo $twig->render("form/new-pass.twig", [
+        echo $twig->render("page/form/new-pass.twig", [
             "errors" => $session->getMessage("errors"),
             "id" => $parameter
         ]);
@@ -162,7 +162,7 @@ elseif($page == "new-pass") {
 elseif($page == "detail") {
     if ($parameter) {
         $infoAcco = $accomodationList->getById($parameter);
-        echo $twig->render("detail.twig", [
+        echo $twig->render("page/detail.twig", [
             "acco" => $infoAcco,
             "errors" => $session->getMessage("errors"),
             "userinfo" => $user->getInfoUser($infoAcco['id_seller'])
@@ -180,7 +180,7 @@ elseif($page == "host"){
     require_once "../App/create_acco.php";
     if($session->isConnected()) {
 
-        echo $twig->render("connected/host.twig",[
+        echo $twig->render("page/connected/host.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
             "values" => $utils->getFieldsValue(),
@@ -205,7 +205,7 @@ elseif($page == "list-detail") {
         $accolist = new AccomodationList();
         $list = $accolist->getAll();
     }
-    echo $twig->render("list-detail.twig", [
+    echo $twig->render("page/list-detail.twig", [
         "errors" => $session->getMessage("errors"),
         "id" => $parameter,
         "accolist" => $list,
@@ -243,7 +243,7 @@ elseif($page == "reserve"){
         }
     }
     if($session->isConnected() && $parameter){
-        echo $twig->render("connected/reserve.twig",[
+        echo $twig->render("page/connected/reserve.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
             "values" => $utils->getFieldsValue(),
@@ -268,7 +268,7 @@ elseif($page == "help") {
         $form->sendMessageHelp($_POST['email'],$_POST['object'],$_POST['message'], $_POST['captcha']);
     }
 
-    echo $twig->render("form/help.twig", [
+    echo $twig->render("page/form/help.twig", [
         "values" => $utils->getFieldsValue(),
         "errors" => $session->getMessage("errors"),
         "success" => $session->getMessage("success")
@@ -279,7 +279,7 @@ elseif($page == "help") {
 //====================== DEBUT Partie maps ======================
 
 elseif($page == "maps" or $page == "contrib" or $page == "aboutus" or $page == "politics") {
-    echo $twig->render("annexe/$page.twig");
+    echo $twig->render("page/annexe/$page.twig");
 }
 //====================== FIN Partie A propos ======================
 
@@ -288,7 +288,7 @@ elseif($page == "maps" or $page == "contrib" or $page == "aboutus" or $page == "
 else{
     $list = $accomodationList->getRandom(10);
 //    var_dump($list['0']['img']);
-    echo $twig->render("home.twig", [
+    echo $twig->render("page/home.twig", [
         "accomodations_random" => $accomodationList->getRandom(10),
         "accomodations_top" => $accomodationList->getTop(6),
         "errors" => $session->getMessage("errors"),
