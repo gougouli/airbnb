@@ -3,9 +3,7 @@ faire recherche recente: footer
 Recherche par tag, nouvelle table avec des tags
 autocompletion
 
-form reserve
 responsive host
-refonte page account
 
 
 Pb:
