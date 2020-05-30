@@ -19,7 +19,7 @@ $url = explode("/",trim($url, "/"));
 $page = isset($url['0']) ? $url['0'] : "/";
 $parameter = isset($url['1']) ? $url['1'] : FALSE;
 
-$loader = new FilesystemLoader('../views/page/');
+$loader = new FilesystemLoader('../views/');
 $twig = new Environment($loader, [
     'cache' => false, //'../tmp',
     'debug' => true,
@@ -59,7 +59,7 @@ if($page == "login"){
                 }
             }
         }
-        echo $twig->render("form/login.twig",[
+        echo $twig->render("mail/form/login.twig",[
             "errors" => $session->getMessage("errors"),
             "values" => $utils->getFieldsValue()
         ]);
@@ -102,7 +102,7 @@ elseif($page == "logout"){
 //====================== DEBUT Partie ACCOUNT ======================
 elseif($page == "account"){
     if($session->isConnected()) {
-        echo $twig->render("connected/account.twig",[
+        echo $twig->render("page/connected/account.twig",[
             "errors" => $session->getMessage("errors"),
             "success" => $session->getMessage("success"),
             "info" => $user->getInfoUser($_SESSION['id'])
