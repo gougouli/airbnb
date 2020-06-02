@@ -44,6 +44,8 @@ class AccomodationList{
         $req->execute([$id]);
         $home = $req->fetch(PDO::FETCH_ASSOC);
         $home['img'] = $utils->getImage($home['id'], "acco", 3);
+        $place = new Place();
+        $home['place'] = $place->getPlace($home['id']);
         return $home;
     }
 
